@@ -1,0 +1,147 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 11-Nov-2016, 15:25:06
+    Author     : Ryan.Blake
+*/
+
+footer {
+    
+    .menu-item {
+        display: block;
+        
+        a{
+            margin:0;
+            padding:0;  
+            
+        }
+    }
+
+}
+
+
+.footer{
+
+    background:#fff;
+    border-top: 5px solid #01bcb3;
+    padding:35px 0;
+    margin:0;
+    
+    input{
+       background: #efefef none repeat scroll 0 0;
+       border: 1px solid #efefef;
+       font-size: 13px;
+       text-indent: 10px;
+       width: 210px;
+
+    }
+
+    button{
+       background: $brand-color;
+       height: 37px;   
+       text-transform: uppercase;
+    }    
+
+    
+}
+
+
+
+.copyright{
+    font-size:rem-calc(12);
+}
+
+
+.social{
+    
+    clear:both;
+    margin:10px 0;
+    img{
+        margin: 0 0 0 3px;
+    }
+    
+}
+
+
+/**
+* Small & Up Styles
+*/
+@media #{$small-up} {
+    
+    
+}
+
+/**
+* Small Only
+*/
+@media #{$small-only} {
+    
+    
+}
+/**
+* Medium & Up Styles
+*/
+@media #{$medium-up} {
+
+    
+    #inner-footer .large-1{
+        padding-top: 6px;
+    }    
+    
+}
+
+/**
+* Medium Only
+*/
+@media #{$medium-only} {
+    
+    
+}
+
+
+/**
+* Large & Up Styles
+*/
+@media #{$large-up} {
+  
+    
+    
+}
+
+/**
+* Large Only
+*/
+@media #{$xlarge-only} {
+    
+    
+}
+
+
+/**
+* xLarge & Up Styles
+*/
+@media #{$xlarge-up} {
+
+    
+}
+
+/**
+* xLarge Only
+*/
+@media #{$xlarge-only} {
+    
+    
+}
+
+
+/**
+* xLarge & Up Styles
+*/
+@media #{$xxlarge-up} {
+
+    
+}
+

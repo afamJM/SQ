@@ -1,0 +1,634 @@
+.auction-page{		 
+    .auction-buy-panel h2{		
+        font-size: 1.5rem;		 
+    }		
+    .white-house{		
+        background: white;
+        display: inline-block;
+    }		
+    .message-the-studio-large, .message-the-studio-small{		
+        text-align: center;		
+        outline: 1px solid #e1e1e1;		
+    }		
+    .message-the-studio-small {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+    h3{		
+        font-size: 1.4rem;		
+    }		
+    a{		
+        color: $brand-color;		
+    }
+    .increment a{    
+        color: white;        
+    }   		
+    .auction-on-next-large{		
+        .on-now{		
+            background-color: $brand-color;		
+            color: white;		
+            height: 100%;		
+            display: inline-block;		
+            font-size: 1rem;		
+            line-height: 5rem;		
+            text-align: center;		
+            position: relative;		
+            &:after{		
+                content: '';		
+                position: absolute;		
+                right: -1.19rem;		
+                top: 0;		
+                width: 0;		
+                height: 0;		
+                border-top: 2.5rem solid transparent;		
+                border-bottom: 2.5rem solid transparent;		
+                border-left: 1.2rem solid $brand-color;		
+            }		
+        & + .columns{padding: 0.5rem 0 0 1.5rem;}		
+        }		
+    }
+    .row{
+        margin-top: $foundation-padding-large;
+    }		
+}
+
+.product-gallery{
+    .main-photo-wrap{
+        @include breakpoint(large up) {
+            padding: 0;
+        }
+        .main-photo{
+        	padding-top: 60%;
+    		background-size: cover;
+    		background-position: center center;
+        }
+    }
+    .thumb-photos{
+        ul{
+            list-style-type: none;
+            margin: 0;
+            li{
+                padding: 4px 0;
+                div{
+                    width: 100%;
+                    height: 64px;
+                    background-size: cover;
+                    background-position: center center;
+                }
+            }
+        }
+    }
+    .mobile-gallery-blobs{
+        text-align: center;
+        span{
+            width: 10px;
+            height: 10px;
+            background: white;
+            border: 1px solid #00bcb4;
+            display: inline-block;
+            border-radius: 10px;
+            margin: 10px 2px;
+            &.highlight{
+                background: #00bcb4;
+            }
+        }
+    }
+    .product-gallery-mob{
+        position: relative;
+    }
+}
+
+.main-photo-wrap{
+    .main-photo{
+        background-size: cover;
+        background-position: center center;
+    }
+}
+
+.circularButtonUp, .circularButtonDown{
+	border-radius: 1rem;
+	height: 2rem;
+	width: 2rem;
+	border: 2px solid white;
+	line-height: 3rem;
+	text-align: center;
+	background-size: 44%;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-color: $brand-color;
+	cursor: pointer;
+	margin: 0 auto;
+	margin-bottom: 5px;
+}
+.circularButtonUp{
+	background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D\'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg\'%20viewBox%3D\'0%200%2044%2044\'%3E%3Cpath%20transform%3D%22translate%282%2010%29%20rotate%28-270%2C%2021.9492%2C%2020%29%22%20d%3D\'M0%2C22L22%2C0l2.1%2C2.1L4.2%2C22l19.9%2C19.9L22%2C44L0%2C22L0%2C22L0%2C22z\'%20fill%3D\'%23ffffff\'%2F%3E%3C%2Fsvg%3E");
+}
+.circularButtonDown{
+	background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D\'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg\'%20viewBox%3D\'0%200%2044%2044\'%3E%3Cpath%20transform%3D%22translate%28-2%20-3%29%20rotate%28-90%2C%2021.9492%2C%2020%29%22%20d%3D\'M0%2C22L22%2C0l2.1%2C2.1L4.2%2C22l19.9%2C19.9L22%2C44L0%2C22L0%2C22L0%2C22z\'%20fill%3D\'%23ffffff\'%2F%3E%3C%2Fsvg%3E");
+}
+
+.tabber{
+    max-width: 100%;
+}
+.tabber-tab{
+    &:not(.lower){
+        width: auto;
+        padding-right: 1rem;
+        margin-right: 1rem;
+    }
+    &.lower{
+        margin-bottom: 1.3rem;
+    }
+        font-family: 'CeraPRO-Bold';
+        display: inline-block;
+        float: left;
+        height: 40px;
+        line-height: 40px;
+        text-transform: uppercase;
+        position: relative;
+    &:first-child{
+        border-right: 1px solid #e1e1e1;
+    }
+    &:not(.active){
+        color: $brand-color;
+        cursor: pointer;
+        .down-arrow{
+            display: none;
+        }
+    }
+    .down-arrow{
+        display: initial;
+        position: absolute;
+        bottom: 0px;
+        left: 50%;
+        margin-left: -12px;
+    }
+    .down-arrow{
+        width: 0; 
+        height: 0; 
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-top: 6px solid black;
+    }
+}
+.tabber.is-active{
+    .tabber-content{
+        margin-top: 5px;
+        &.active{
+            display: inline-block;
+        }
+        &:not(.active){
+            display: none;
+        }
+    }
+}
+
+.prodThumb{
+	cursor: pointer;
+}
+
+
+
+
+
+.product-code span {
+  font-weight: 800;
+}
+
+.auction-buy-panel {
+  h4 {
+    font-size: 1.7rem;
+  }
+  .buy-panel-buttons .create-account {
+    margin: 8px 0;
+  }
+  .add-to-basket {
+    width: 100%;
+  }
+  position: relative;
+  .triangle:after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    border-top: 3.3rem solid transparent;
+    border-bottom: 3.3rem solid transparent;
+    border-right: 3.3rem solid white;
+    top: 0;
+    left: -3.25rem;
+    position: absolute;
+    z-index: 1;
+  }
+}
+
+.tv-wrap{
+    padding-left: 0;
+    @include breakpoint(medium down) {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+.no-padding-left {
+  padding-left: 0;
+}
+
+.no-padding-right {
+  padding-right: 0;
+}
+
+.main-photo {
+  position: relative;
+  border: 1px solid #e1e1e1;
+  padding-top: 90% !important;
+  .enlarge {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.5);
+    color: black;
+    padding: 0.1rem 0;
+  }
+}
+
+.auction-page{
+    .auction-buy-panel {
+      .price-qty-row {
+        margin-top: 0;
+        margin-bottom: 0;
+        @include breakpoint(medium) {
+            margin: 1rem 0;
+        }
+        @include breakpoint(small) {
+            margin: 0.5rem 0 1rem 0;
+        }
+        h4 {
+            margin: 0;
+            font-family: 'CeraPRO-Bold', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
+        }
+      }
+      .title-row {
+        margin-bottom: 0;
+        .product-code{margin-bottom: 0.4rem;}
+      }
+      .product-gallery {
+        padding-top: 0.5rem;
+      }
+    }
+}
+
+.on-now-box {
+  h4, p {
+    margin: 0;
+  }
+}
+
+.message-the-studio-large {
+  padding: 1.5rem 0;
+}
+
+.description-wrap {
+    width: 100%;
+    display: inline-block;
+    padding: 1.5rem 0;
+    background: white;
+}
+
+.breadcrumbs {
+  padding-top: 1rem;
+}
+
+.h1.auction-title {
+  margin-bottom: 1rem;
+}
+
+h3 {
+  font-size: 1.4rem;
+  margin-bottom: 1.4rem;
+  color: #00bcb4;
+}
+
+.message-the-studio-large h3, .message-the-studio-small h3 {
+  color: #192332;
+  margin-bottom: 0.5rem;
+}
+
+.message-the-studio-large, .message-the-studio-small {
+  background: white;
+  outline: none !important;
+}
+
+.on-now-small {
+  background: #00bcb4;
+  background-image: url('/wp-content/themes/Ibiza-Theme/assets/images/on-next-bg.png');
+  background-size: 100% 100%;
+  padding: 10px 0;
+  color: white;
+  font-weight: 800;
+  @include breakpoint(small only) {
+    background-image: url('/wp-content/themes/Ibiza-Theme/assets/images/on-next-mob.png');
+    min-height: 69px;
+    line-height: 69px;
+  }
+}
+
+.back-button{
+    text-align: center;
+    background: #00bcb4;
+    display: inline-block;
+    padding: 0.2rem 0.8rem;
+    color: white;
+    cursor: pointer;
+}
+
+.header-row{
+    .back-button{
+        margin: 1rem 0 0.5rem 0;
+        font-size: 0.9rem;
+    }
+}
+
+.message-the-studio-small {
+  padding: 1rem 0;
+}
+
+.auction-on-next-small, .message-the-studio-small {
+  text-align: center;
+  margin-top: 0.9375rem;
+  margin-bottom: 0.9375rem;
+  background: white;
+}
+
+@include breakpoint(small only) {
+    .auction-on-next-small{
+            background: none;
+        & > div{
+                margin-bottom: 5px;
+                background: white;
+        }
+    }
+}
+
+.todays-items-row {
+    .white-house{
+        padding: 3rem 0;
+        position: relative;
+    }
+    .todays-product {
+        margin-bottom: 2.5rem;
+        p.title {
+            margin: 1rem 0 0.3rem 0;
+            a {
+                font-size: 1rem;
+                line-height: 1rem;
+                color: #192332;
+            }
+            color: #192332;
+        }
+        .price {
+            font-weight: 800;
+        }
+    }
+    .white-panel{
+        z-index: -2;
+        position: absolute;
+        height: 100%;
+        width: 200%;
+        background: white;
+        top: 0;
+        @include breakpoint(medium up) {
+            &.left{
+                right: 100%;
+            }
+            &.right{
+                left: 100%;
+            }
+        }
+    }
+    .newsletter{
+        display: inline-block;
+        border: 1px #00bcb4 solid;
+        margin-top: 2.5rem;
+        position: relative;
+        .header-area{
+            position: absolute;
+            transform: translateY(-50%);
+            background: white;
+            padding: 0 0.8rem;
+            h3{
+                display: inline-block;
+                margin: 0;
+                font-size: 1.2rem;
+            }
+        }
+        p{
+            margin-top: 1.5rem;
+        }
+        .button{
+            vertical-align: top;
+            background: #00bcb4;
+            text-transform: uppercase;
+            display: block;
+            margin-top: 0.6em;
+            padding: 0.5rem 1rem;
+            margin-bottom: 1.4rem;
+        }
+        label{
+            font-family: 'CeraPRO-Regular';
+            color: #192332;
+            font-weight: 400;
+            font-size: 1rem;
+            line-height: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+        #emailSignup{
+            height: 37px;
+            width: 100%;
+            border: 1px solid #e1e1e1;
+            padding: 0 1rem;
+        }
+    }
+}
+
+.tabber-content {
+  margin-top: 1rem;
+  p {
+    text-align: left;
+    line-height: 1.4rem;
+  }
+}
+
+h3, h4{
+    font-family: 'CeraPRO-Regular', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
+}
+
+@include breakpoint(medium down) {
+    .tabber-tab{
+        &:not(.lower){
+            float: none;
+            margin: 0 auto;
+            &:first-child{
+                margin: 0 1rem 0 auto;
+            }
+        }
+    }
+    .tab-house{text-align: center;}
+
+    .hide-for-medium-down{
+        display: none !important;
+    }
+}
+
+@include breakpoint(large up) {
+    .hide-for-large-up{
+        display: none;
+    }
+}
+
+@include breakpoint(small only) {
+    .tabber-tab{
+        line-height: 26px;
+    }
+}
+
+.programme-guide{
+    width: 100%;
+    border: 1px solid #e1e1e1;
+    display: inline-block;
+    padding: 1rem 0;
+    .programme-guide-title{
+        text-align: center;
+    img{
+        vertical-align: sub;
+    }
+    h3{
+        display: inline-block;
+    }
+    }
+    .programme-guide-switcher{
+        display: inline-block;
+        width: 100%;
+        text-align: center;
+        margin-bottom: 1rem;
+        h4{
+            font-weight: 400;
+            font-size: 1.4rem;
+            margin: 0;
+        }
+        small{
+            font-size: 100%;
+        }
+        .swiper-button-next, .swiper-button-prev{
+            position: relative;
+            margin: 0;
+            margin-top: 10px;
+        }
+    }
+    .programme-guide-slot{
+        border-top: 1px dotted #e1e1e1;
+        padding: 1rem 0;
+    .show-time{
+        font-family: 'CeraPRO-Regular', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
+        font-weight: regular;
+    }
+    .show-title{
+        font-family: 'CeraPRO-Bold', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
+        font-weight: regular;
+    }
+    .show-details{
+        margin-top: 0.2rem;
+        display: inline-block;
+    }
+    .show-details-content{
+        display: none;
+    }
+    }
+    .programme-guide-ad{
+        padding: 0.5rem 0;
+        border-top: 1px #e1e1e1 dotted;
+        border-bottom: 1px #e1e1e1 dotted;
+    }
+}
+
+.auction-off-canvas{
+    padding: 2rem;
+    display: none;
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+    h2{
+        font-size: 1.5rem;
+        font-family: 'CeraPRO-Regular', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
+        font-weight: normal;
+        font-style: normal;
+        color: inherit;
+        text-rendering: optimizeLegibility;
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+        line-height: 1.4;
+    }
+    h4{
+        margin: 0;
+        font-family: 'CeraPRO-Bold', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
+        font-size: 1.7rem;
+        
+    }
+    .hideOnLogin{
+        margin: 1rem 0;
+        display: inline-block;
+    }
+    a{
+        color: #00bcb4;
+    }
+}
+
+.spec-house{
+    margin: 0.5rem 0;
+    .spec-name{
+        font-family: 'CeraPRO-Bold';
+    }
+}
+
+.show-auction-off-canvas{
+    #menu-main{
+        display: none;
+    }
+    .auction-off-canvas{
+        display: inline-block;
+        width: 100%;
+        margin: 0;
+        .add-to-basket{
+            width: 100%;
+            margin: 1.5rem 0;
+        }
+    }
+    .price-qty-row {
+        margin-bottom: 1rem;
+    }
+}
+
+.page-template-template-auction{
+    #off-canvas{
+        border-right: 1px solid #e1e1e1;
+        background: white;
+    }
+}
+
+.page-template-template-auction{
+    .js-off-canvas-exit{
+        z-index: 11;
+    }
+}
+
+.login-to-buy{
+    background: #EA516C;
+    border: none;
+    color: white;
+    font-family: 'CeraPRO-Medium';
+    font-size: 1.2rem;
+    padding: 0.6rem 1rem;
+    cursor: pointer;
+    width: 100%
+}

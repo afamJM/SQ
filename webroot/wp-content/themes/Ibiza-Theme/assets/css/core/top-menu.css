@@ -1,0 +1,304 @@
+/******************************************************************
+
+Stylesheet: Login Stylesheet
+
+This stylesheet is loaded is only on the login page. This way you can style
+the login page. It won't affect any other page, admin or front-end.
+
+Make sure functions/admin.php is activated in your functions.php file.
+
+This stylesheet is turned off by default.
+
+For more info, check out the codex:
+http://codex.wordpress.org/Creating_Admin_Themes
+
+******************************************************************/
+/* Liams aution/watch styles  */
+/* Liams home styles  */
+/*|L*/
+.add-to-basket {
+  background: #EA516C;
+  border: none;
+  color: white;
+  font-family: 'CeraPRO-Medium';
+  font-size: 1.2rem;
+  padding: 0.6rem 1rem; }
+
+#menu-main-1 li {
+  flex-grow: 1;
+  text-transform: uppercase; }
+  #menu-main-1 li a {
+    color: #1a2433;
+    display: block;
+    line-height: 12px !important; }
+
+.menus.row {
+  padding: 30px 30px 0 0;
+  border-top: 2px solid #00bcb4;
+  min-height: 650px; }
+
+.top-bar {
+  padding: 0 !important; }
+
+.top-bar .menu:first-child a:hover + .ibiza-menu {
+  display: block;
+  z-index: 4101; }
+.top-bar .menu:first-child a:hover {
+  position: relative;
+  z-index: 9999999; }
+
+/*
+.top-bar ul.menu li:hover > a {
+    background-color: #fff;
+    position:relative;
+    z-index: 9999999;
+    color:#000!important;
+}
+*/
+.top-bar, .top-bar ul {
+  background-color: #fff !important; }
+
+#menu-main-1 > .menu-item > a:first-child {
+  height: 56px;
+  font-size: 1.125rem;
+  font-family: 'CeraPRO-Medium';
+  position: relative; }
+
+.ibiza-menu > ul > li > ul > li.menu-item a {
+  border-left: 5px solid #000;
+  height: auto;
+  margin: 0 10px 10px 0;
+  padding-left: 7px; }
+
+.ibiza-menu > ul > li > ul > li.menu-item .menu-item a {
+  border-left: none;
+  font-weight: normal; }
+
+.menu-item #tri {
+  left: 0;
+  right: 50%;
+  margin-left: auto; }
+
+#tri {
+  border-color: transparent transparent #e95968;
+  border-style: solid;
+  border-width: 0 23px 25px;
+  height: 0;
+  width: 23px;
+  z-index: -1;
+  margin-top: 8px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto; }
+
+.ibiza-menu > .menus > .menu-item-has-children > a:first-child {
+  font-weight: bold;
+  color: #fff !important;
+  display: inline-block !important;
+  width: auto !important;
+  margin-bottom: 10px;
+  background: #00bcb4;
+  padding: 10px;
+  -webkit-transition: background-color 100ms linear;
+  -moz-transition: background-color 100ms linear;
+  -o-transition: background-color 100ms linear;
+  -ms-transition: background-color 100ms linear;
+  transition: background-color 100ms linear; }
+  .ibiza-menu > .menus > .menu-item-has-children > a:first-child:hover {
+    background: #e95968; }
+
+.ibiza-menu {
+  border-top: 2px solid #e95968;
+  display: none;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  margin-left: auto;
+  margin-right: auto;
+  position: absolute;
+  top: 79px;
+  width: 1334px;
+  padding: 20px;
+  background: #fff;
+  z-index: 999999; }
+  .ibiza-menu ul {
+    list-style: none;
+    margin-left: 0; }
+    .ibiza-menu ul ul a {
+      font-weight: normal;
+      background: #fff;
+      font-size: 14px; }
+    .ibiza-menu ul .menu-item-has-children {
+      margin-bottom: 10px; }
+      .ibiza-menu ul .menu-item-has-children .menu-item-has-children {
+        margin-bottom: 60px; }
+  .ibiza-menu:hover {
+    display: block; }
+  .ibiza-menu column:last-child:not(:first-child), .ibiza-menu .ibiza-menu .columns:last-child:not(:first-child) {
+    float: left; }
+  .ibiza-menu li.large-3, .ibiza-menu li.medium-3 {
+    width: 15%; }
+
+.top-bar .ibiza-menu .row {
+  margin: 0 auto !important;
+  max-width: 84rem; }
+
+.large-push-1 .header-container {
+  z-index: 9999; }
+
+.header-container {
+  height: 48px;
+  position: relative; }
+  .header-container .go-basket {
+    background: #e95968;
+    clear: both;
+    display: block;
+    height: 47.5px;
+    line-height: 47.5px;
+    margin: 0 auto;
+    width: 96%;
+    color: #fff; }
+  .header-container #basket-con {
+    display: none;
+    background: #fff none repeat scroll 0 0;
+    border-top: 2px solid #e95968;
+    height: auto;
+    padding-bottom: 15px;
+    padding-top: 25px; }
+    .header-container #basket-con .basket-data {
+      position: relative; }
+    .header-container #basket-con .increment {
+      height: 25px;
+      line-height: 25px; }
+    .header-container #basket-con p {
+      margin: 0; }
+    .header-container #basket-con .sub-total p {
+      font-size: 0.75rem;
+      margin: 0; }
+  .header-container #basket-count {
+    background: #ee7467 none repeat scroll 0 0;
+    border-radius: 25px;
+    color: #fff;
+    font-size: 11px;
+    height: 15px;
+    left: 30px;
+    line-height: 13px;
+    position: absolute;
+    text-align: center;
+    top: -2px;
+    vertical-align: middle;
+    width: 16px; }
+  .header-container #tri {
+    border-color: transparent transparent #e95968;
+    border-style: solid;
+    height: 0;
+    margin: 4px auto auto;
+    position: absolute;
+    width: 0;
+    z-index: 1; }
+  .header-container a {
+    color: #000; }
+  .header-container a.active {
+    color: #e95968; }
+  .header-container .basket-link {
+    background: transparent url(../images/Icon_Basket_Black.png) no-repeat scroll 0px 0px;
+    padding-bottom: 35px;
+    padding-left: 45px;
+    padding-top: 1px;
+    position: relative; }
+    .header-container .basket-link span {
+      position: relative; }
+    .header-container .basket-link #tri {
+      left: 0;
+      right: 0; }
+  .header-container .basket-link.active, .header-container .basket-link:hover {
+    background-image: url(../images/Icon_Basket_Raspberry.png);
+    color: #e95968; }
+  .header-container .search-link {
+    background: transparent url(../images/Icon_Search_Black.png) no-repeat scroll 0px 0px;
+    padding-bottom: 34px;
+    padding-left: 45px;
+    padding-top: 1px;
+    margin-right: 37px; }
+    .header-container .search-link #tri {
+      left: 50%;
+      right: 50%; }
+  .header-container .search-link.active, .header-container .search-link:hover {
+    background-image: url(../images/Icon_Search_Raspberry.png);
+    color: #e95968; }
+
+.main-nav__backdrop {
+  background: rgba(0, 0, 0, 0.1) none repeat scroll 0 0;
+  display: block;
+  height: 10000px;
+  left: 0;
+  position: fixed;
+  top: 0;
+  visibility: hidden;
+  width: 100%;
+  z-index: 1; }
+
+#content {
+  /*    box-shadow: 0 7px 7px -7px #313131 inset;*/ }
+
+.swiper-container-products {
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+  z-index: 1; }
+
+.large-4.small-6.columns.ng-scope {
+  height: 485px; }
+
+input.search-submit {
+  display: none; }
+
+.swiper-slide div {
+  font-weight: bold;
+  color: #333; }
+
+.header .menu a {
+  height: auto; }
+
+.header .menu a:hover {
+  color: #e95968; }
+
+#top-bar-menu {
+  margin-top: 23px; }
+
+#top-bar-menu li:hover > a {
+  color: #e95968; }
+
+#top-bar-menu li:hover > a div {
+  z-index: 1 !important; }
+
+@media screen and (max-width: 39.9375em) {
+  .header-container #basket-con {
+    left: 0;
+    position: fixed;
+    top: 109px;
+    width: 100%;
+    z-index: 999999; }
+
+  .add-basket-margin {
+    margin-top: -32px; } }
+@media screen and (min-width: 40em) and (max-width: 63.9375em) {
+  .header-container #basket-con {
+    left: 0;
+    position: fixed;
+    top: 103px;
+    width: 100%;
+    z-index: 999999; }
+
+  .add-basket-margin {
+    margin-top: -32px; } }
+@media screen and (min-width: 64em) {
+  .header-container #basket-con {
+    position: absolute;
+    left: -252px;
+    top: 49px;
+    width: 450px;
+    z-index: 999999; } }
+
+/*# sourceMappingURL=top-menu.css.map */

@@ -1,0 +1,87 @@
+{ 
+
+    "categories" : [
+        {
+            "id" : 1, 
+            "title" : "Materials", 
+            "nodes" : [
+                {
+                    "id" : 999, 
+                    "title" : "Needles", 
+                    "nodes" : [
+
+                    ]
+                }, 
+                {
+                    "id" : 11, 
+                    "title" : "Threads", 
+                    "nodes" : [
+
+                    ]
+                }, 
+                {
+                    "id" : 12, 
+                    "title" : "Fabrics", 
+                    "nodes" : [
+
+                    ]
+                }
+            ]
+        }, 
+        {
+            "id" : 2, 
+            "title" : "Tools", 
+            "nodrop" : true, 
+            "nodes" : [
+                {
+                    "id" : 21, 
+                    "title" : "Electronic tools", 
+                    "nodes" : [
+                        {
+                            "id" : 34, 
+                            "title" : "Other electronics", 
+                            "nodes" : [
+
+                            ]
+                        }, 
+                        {
+                            "id" : 33, 
+                            "title" : "Sewing machines", 
+                            "nodes" : [
+
+                            ]
+                        }
+                    ]
+                }, 
+                {
+                    "id" : 22, 
+                    "title" : "Hand tools", 
+                    "nodes" : [
+
+                    ]
+                }
+            ]
+        }, 
+        {
+            "id" : 3, 
+            "title" : "Books & DVDs", 
+            "nodes" : [
+                {
+                    "id" : 31, 
+                    "title" : "Books", 
+                    "nodes" : [
+
+                    ]
+                }, 
+                {
+                    "id" : 32 , 
+                    "title" : "DVDs", 
+                    "nodes" : [
+
+                    ]
+                }
+            ]
+        }
+    ]
+}
+

@@ -1,0 +1,77 @@
+.designer-top{
+	background-image: url('/wp-content/themes/Ibiza-Theme/assets/images/bg.png');
+	padding: 1rem;
+	.designer-top-inner{
+		width: 100%;
+		background: white;
+		display: inline-block;
+		padding: 1rem;
+		img{
+			width: 100%;
+		}
+	}
+	h1{
+		margin: 0.5rem 0;
+	}
+}
+
+.designer-bottom{
+	padding: 1.75rem 0;
+	.designer-content{
+		padding: 0;
+		@include breakpoint(small) {
+			padding: 0 1.25rem 1.25rem 1.25rem;
+		}
+	}
+	.designer-slider{
+		padding: 0;
+		.swiper-container-banner{
+			padding: 0 0 1rem 1rem;
+		}
+	}
+}
+.designer-arrow{
+	a{
+		color: black;
+	}
+	position: relative;
+	&:after{
+		content: '';
+		position: absolute;
+		right: -10px;
+		@include breakpoint(medium) {
+			right: -14px;
+		}
+		width: 0;
+		height: 0;
+		border-top: 7px solid transparent;
+		border-bottom: 7px solid transparent;
+		border-left: 7px solid black;
+		top: 43%;
+	}
+}
+
+.designers-icon{
+	background-image: url('/wp-content/themes/Ibiza-Theme/assets/images/bg.png');
+	padding: 0.75rem;
+}
+.designers-icon-inner{
+	background: white;
+	padding: 0.5rem;
+	p{
+		margin: 0.5rem 0 0.2rem 0;
+	}
+}
+.designers-blurb{
+	margin: 0 0 2rem 0;
+}
+.back-house{
+	margin: 1.5rem 0 1rem 0;
+}
+
+.header-black{
+	color: black;
+}
+.designers-icon-wrap{
+	margin-bottom: 1rem;
+}

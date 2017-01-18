@@ -1,0 +1,263 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 11-Nov-2016, 16:14:39
+    Author     : Ryan.Blake
+*/
+
+.swiper-container-banner{
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    height:295px;
+
+    img{
+        width:100%;
+    }    
+
+
+    .info{
+        color: #fff;
+        left: 70px;
+        position: absolute;
+        top: 20px;
+        width: 40%;
+    }    
+
+}
+
+.swiper-container {
+    height: 322px!important;
+}
+
+.swiper{
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+.swiper-container-products-page{
+    @extend .swiper;
+}
+
+.swiper-container-scheduled-home .home_product {
+    padding: 25px;
+}
+.swiper-container-howto{
+
+    img{
+        height:200px;
+    }
+
+    article{
+        text-align: center;
+
+    }    
+
+}
+
+span.swiper-pagination-bullet-active {
+    background: #00bcb4 none repeat scroll 0 0!important;
+    border: 1px solid #fff!important;
+    opacity: 1!important;
+}
+span.swiper-pagination-bullet {
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #00bcb4;
+    border-radius: 100%;
+    display: inline-block;
+    height: 11px;
+    opacity:1;
+    width: 11px;
+}
+
+
+.swiper-container-tv-schedule{
+
+    overflow: hidden;
+
+}
+
+
+
+.swiper-container-products {
+
+    .swiper-slide{
+        height:auto!important;   
+    }    
+
+
+}
+
+.swiper-container-products .swiper-button-prev , .swiper-container-howto-main .swiper-button-prev{
+    background-image    : url(../images/left-arrow.png);
+    width               : 28px;
+    height              : 28px;
+    background-size     : cover;
+    bottom              : 0 !important;
+
+}
+
+#howto_main .swiper-container-howto-main , #fill-me-up .swiper-container-howto-main{
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+}
+
+
+.swiper-container-howto-steps{
+        
+    .swiper-button-next ,.swiper-button-prev {
+        display:none;
+    }
+    
+}
+
+.swiper-container-horizontal{
+    
+    div.swiper-button-next ,div.swiper-button-prev {
+        display:block;
+    }
+    
+    
+}
+
+/**
+* Small & Up Styles
+*/
+@media #{$small-up} {
+
+
+    div.swiper-container-banner{
+        margin: 0 auto;
+        overflow: hidden;
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        height: auto;
+        /*padding-bottom: 100%;*/
+    }
+    div.swiper-container-banner div.swiper-slide {
+        height:100%;
+        width: 100%;
+    }    
+
+
+}
+
+/**
+* Small Only
+*/
+@media #{$small-only} {
+
+
+}
+/**
+* Medium & Up Styles
+*/
+@media #{$medium-up} {
+
+
+}
+
+/**
+* Medium Only
+*/
+@media #{$medium-only} {
+
+    .swiper-container-products  {
+
+        .swiper-button-prev{
+            left                : 37%;
+            top                 : 25px;    
+        }
+
+        .swiper-button-next{
+            bottom              : 0 !important;
+            left                : 37%;
+            top                 : auto;
+        }           
+
+
+    }
+
+
+}
+
+
+/**
+* Large & Up Styles
+*/
+@media #{$large-up} {
+
+
+    .swiper-container-banner{
+
+        .swiper-slide {
+        }        
+
+
+    }
+
+}
+
+/**
+* Large Only
+*/
+@media #{$xlarge-only} {
+
+
+}
+
+
+/**
+* xLarge & Up Styles
+*/
+@media #{$xlarge-up} {
+
+
+    .swiper-container-howto-main{
+        margin: 0 auto;
+        overflow: hidden;
+        position: relative;
+        z-index: 1;        
+    }
+
+    div.swiper-container-banner{
+        margin: 0 auto;
+        overflow: hidden;
+        position: relative;
+        z-index: 1;
+        max-height:676px;
+
+        div.swiper-slide {
+            max-height:676px;
+        }        
+
+    }    
+
+
+}
+
+/**
+* xLarge Only
+*/
+@media #{$xlarge-only} {
+
+
+}
+
+
+/**
+* xLarge & Up Styles
+*/
+@media #{$xxlarge-up} {
+
+
+}    

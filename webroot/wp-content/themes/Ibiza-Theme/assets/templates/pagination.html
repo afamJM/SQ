@@ -1,0 +1,17 @@
+<ul class="pagination">
+  
+    <li   ng-repeat="page in pages" class="arrow" ng-class="{unavailable: page.disabled, left: page.previous, right: page.next}">
+        <a ng-switch on="page.text"  ng-click="selectPage(page.number)">
+            <span ng-switch-when="Icon_WhiteArrowPrev.png">
+                <img  src='/wp-content/themes/Ibiza-Theme/assets/images/{{page.text}}' />
+            </span>
+            <span ng-switch-when="Icon_WhiteArrowNext.png">
+                <img  src='/wp-content/themes/Ibiza-Theme/assets/images/{{page.text}}' />
+            </span>
+            <span ng-switch-default class="number-pages">
+                {{page.text}}
+            </span>
+        </a>          
+    </li>
+
+</ul>

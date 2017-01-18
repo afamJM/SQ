@@ -1,0 +1,185 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 11-Nov-2016, 16:31:56
+    Author     : Ryan.Blake
+*/
+
+
+.cat-desc {
+    
+    
+    h2{
+        color: #00bcb4;
+        font-family: "CeraPRO-Regular";
+        font-weight: normal;        
+    }
+    
+    .search-container {
+        
+        background:transparent;
+        padding-top:0;
+        
+        form{
+
+            border:1px solid #ccc;
+            position: static;
+        }           
+        input.search-field {
+            background-color: transparent;
+            height: 100%;
+            position: relative;
+            vertical-align: top;
+            width: 70%;
+        }
+    } 
+    
+}
+
+.search-page-select{
+    
+    margin-top:20px;
+    
+    .columns{
+        padding:11px 0;
+    }
+    
+    div{
+        border-top:1px solid #e1e1e1;
+    }
+    
+    a{
+        font-size:rem-calc( 14 );
+        &.active{
+            color:#00bcb4;
+        }
+        
+    }
+    
+}
+
+
+/**
+* Small & Up Styles
+*/
+@media #{$small-up} {
+    
+    
+    .product-list-container #inner-content-product-list{
+        padding: 35px 0 0 0;
+    }
+    
+    
+    #main {
+        
+        
+        .small-text-center p{
+            //margin: 20px;
+            text-align: left;
+        }        
+        
+        > .row{
+            margin-bottom:30px;
+        }
+    }
+    
+    
+    .menu > li > a {
+        padding: 0.7rem 1rem;
+    }    
+    
+    
+    
+    div.cat-desc{
+        padding:0;
+        margin:0;
+        
+        
+        nav{
+            padding:10px 0 0 0;
+        }
+        
+        .search-container {
+            p{
+                
+                padding: 0;
+                margin:15px 0;
+                
+            }
+        }
+        
+    }
+    
+
+    
+}
+
+/**
+* Small Only
+*/
+@media #{$small-only} {
+    
+    
+}
+/**
+* Medium & Up Styles
+*/
+@media #{$medium-up} {
+
+    
+}
+
+/**
+* Medium Only
+*/
+@media #{$medium-only} {
+    
+
+}
+
+
+/**
+* Large & Up Styles
+*/
+@media #{$large-up} {
+
+
+    
+}
+
+/**
+* Large Only
+*/
+@media #{$xlarge-only} {
+    
+    
+}
+
+
+/**
+* xLarge & Up Styles
+*/
+@media #{$xlarge-up} {
+
+    
+}
+
+/**
+* xLarge Only
+*/
+@media #{$xlarge-only} {
+    
+    
+}
+
+
+/**
+* xLarge & Up Styles
+*/
+@media #{$xxlarge-up} {
+
+    
+}    

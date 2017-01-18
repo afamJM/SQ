@@ -1,0 +1,9 @@
+{
+  "name": "JointsWP",
+  "private": true,
+  "ignore": [],
+  "dependencies": {
+    "foundation-sites": ">=6.1",
+    "masonry": "^4.1.1"
+  }
+}
