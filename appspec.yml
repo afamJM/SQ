@@ -3,4 +3,4 @@ os: linux
 files:
   - source: /webroot/
     destination: /var/www/html/
-    overwrite: yes
+    
