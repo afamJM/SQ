@@ -1,4 +1,4 @@
 #!/bin/bash
 service httpd stop
 
-echo "code deploy stoped this shit" >> /root/stop.log
+echo "code deploy stoped this shit" >> /root/stop_date + "%m_%d_%Y".log
