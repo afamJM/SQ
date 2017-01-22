@@ -3,4 +3,14 @@ os: linux
 files:
   - source: /webroot/
     destination: /var/www/html/
+
+Hooks:
+  ApplicationStop:
+    - location: scripts/stop_httpd
+      timeout: 300
+      runas: root
+  ApplicationStart:
+    - location: scripts/start_httpd
+      timeout: 300
+      runas: root
     
