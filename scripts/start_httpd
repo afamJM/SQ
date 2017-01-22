@@ -1,4 +1,4 @@
 #!/bin/bash
 service httpd start
 
-echo "codedeploy started this shit" >> /root/start_date +"%m_%d_%Y".log
+echo "codedeploy started this shit date 'date' " >> /root/start.log
