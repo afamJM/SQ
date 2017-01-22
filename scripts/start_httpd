@@ -1,0 +1,4 @@
+#!/bin/bash
+service httpd start
+
+echo "codedeploy started this shit" >> /root/start.log
