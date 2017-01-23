@@ -20,7 +20,7 @@
 */
 
 function IbizaTvSchedule_init($file) {
-
+    
     require_once('IbizaTvSchedule_Plugin.php');
     $aPlugin = new IbizaTvSchedule_Plugin();
 

@@ -9,22 +9,13 @@ and open the template in the editor.
 */
 /* Liams aution/watch styles  */
 /* Liams home styles  */
-/*|L*/
-.add-to-basket {
-  background: #EA516C;
-  border: none;
-  color: white;
-  font-family: 'CeraPRO-Medium';
-  font-size: 1.2rem;
-  padding: 0.6rem 1rem; }
-
 #logo {
   margin: 15px 0 10px 0; }
 
 .header-outter {
-  background: #fff;
+  background: #fefefe;
   border-bottom: 0.125rem solid #00bcb4;
-  z-index: 99999999;
+  z-index: 996;
   position: relative; }
 
 .search-container {
@@ -54,21 +45,21 @@ and open the template in the editor.
   border: 0; }
 
 .site-top-bar {
-  background: #00bcb4; }
+  background: #00bcb4;
+  z-index: 998;
+  position: relative; }
   .site-top-bar strong {
     color: #fefefe;
     line-height: 2.375rem;
     font-weight: normal;
     font-size: 1rem; }
   .site-top-bar li {
-    color: #fff; }
+    color: #fefefe; }
     .site-top-bar li a {
       font-size: 1rem;
       display: inline-block;
-      padding-left: 1px;
-      padding-right: 0px;
       text-transform: uppercase;
-      color: #fff; }
+      color: #fefefe; }
       .site-top-bar li a:hover {
         text-decoration: underline; }
   .site-top-bar .tel-number {
@@ -81,7 +72,7 @@ and open the template in the editor.
 /*
  search start
 */
-#search-cancel {
+#search-cancel, .close_button {
   background: transparent url("../images/Btn_Cancel_Black.png") no-repeat scroll 10px center;
   color: white;
   cursor: pointer;
@@ -90,9 +81,18 @@ and open the template in the editor.
   text-align: left;
   text-indent: 20px;
   height: 23px; }
-  #search-cancel:hover {
+  #search-cancel:hover, .close_button:hover {
     background-image: url(../images/Btn_Cancel_hover.png);
-    color: #e95968; }
+    color: #ea516c; }
+
+.close_button {
+  background-position: left center;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  right: 10px;
+  text-indent: 0;
+  width: 23px; }
 
 input.search-field {
   background-color: transparent;
@@ -101,6 +101,7 @@ input.search-field {
   vertical-align: top;
   width: 100%; }
 
+/** // JS lib add inline styles that need overriding  **/
 .typeahead {
   float: left;
   background-color: transparent;
@@ -110,35 +111,53 @@ input.search-field {
   border-right: medium none !important;
   border-top: medium none !important;
   box-shadow: none;
-  color: #000;
+  color: #0a0a0a;
   height: 24px;
   margin: 0 0 0 0;
   padding: 0;
   top: 3px; }
 
 .typeahead::-webkit-input-placeholder {
-  color: #000;
+  color: #0a0a0a;
   opacity: 1; }
 
 .typeahead:-moz-placeholder {
   /* Firefox 18- */
-  color: #000;
+  color: #0a0a0a;
   opacity: 1; }
 
 .typeahead::-moz-placeholder {
   /* Firefox 19+ */
-  color: #000;
+  color: #0a0a0a;
   opacity: 1;
   text-transform: uppercase; }
 
 .typeahead :-ms-input-placeholder {
-  color: #000;
+  color: #0a0a0a;
   opacity: 1; }
 
 .tt-suggestion img {
   display: none; }
 .tt-suggestion:hover {
-  color: #e95968; }
+  color: #ea516c; }
+
+.tv-channel-con2 {
+  border-left: 1px solid #0a0a0a;
+  border-right: 1px solid #0a0a0a; }
+
+tv-channel-con3 {
+  position: relative;
+  bottom: 3px; }
+
+#promo_banner {
+  margin-top: 20px; }
+  #promo_banner h2 {
+    padding: 10px;
+    border-radius: 5px; }
+    #promo_banner h2 span {
+      line-height: 1; }
+      #promo_banner h2 span a, #promo_banner h2 span small {
+        color: #fefefe; }
 
 .tt-dataset {
   background: transparent url("/wp-content/themes/Ibiza-Theme/assets/images/border.gif") repeat-x scroll left bottom;
@@ -190,7 +209,7 @@ input.search-field {
   width: 100%; }
   .remove-filter:hover {
     background-image: url(../images/Btn_Cancel_hover.png);
-    color: #e95968; }
+    color: #ea516c; }
 
 select {
   background-image: url(../images/Btn_DropDownMenu_Green.png);
@@ -207,10 +226,18 @@ select {
 .menu .active > a {
   background: transparent; }
 
+#my-account {
+  height: auto;
+  width: 240px;
+  background: #fefefe;
+  border: 15px solid #eaece7;
+  text-align: center;
+  padding: 12px 15px; }
+
 #my-account-button {
   display: inline-block;
   background: #00bcb4;
-  color: #fff;
+  color: #fefefe;
   padding: 12px 25px !important;
   margin-bottom: 20px; }
 
@@ -226,17 +253,34 @@ select {
     .account-link-con:hover .sp-box {
       display: block; }
 
+.sp-box1 {
+  top: 49px; }
+
+.basket-data {
+  background: url(../images/border.png); }
+
 .sp-box {
   position: absolute;
   z-index: 999999990;
   text-align: center;
   left: -50px;
   display: none; }
+  .sp-box #my-basket {
+    width: 390px;
+    background: #fefefe;
+    border: 15px solid #eaece7;
+    text-align: left;
+    padding: 12px 15px; }
+  .sp-box .my-basket-image {
+    height: 70px;
+    background: black none repeat scroll 0% 0%;
+    width: 70px;
+    overflow: hidden; }
   .sp-box .my-basket p {
-    color: #000; }
+    color: #0a0a0a; }
   .sp-box .my-basket-link {
-    background: #E95968;
-    color: #fff;
+    background: #ea516c;
+    color: #fefefe;
     display: block;
     padding: 10px; }
 
@@ -266,7 +310,6 @@ search end
     position: static !important; }
 
   .site-top-bar li a {
-    background-position: right center !important;
     position: relative; }
 
   .tt-menu {
@@ -285,7 +328,7 @@ search end
     .tt-menu h5 {
       clear: both;
       text-indent: 5px;
-      color: #000;
+      color: #0a0a0a;
       font-size: 75%;
       font-family: 'CeraPRO-Bold'; }
     .tt-menu strong {
@@ -333,7 +376,7 @@ search end
     .tt-menu h5 {
       clear: both;
       text-indent: 5px;
-      color: #000;
+      color: #0a0a0a;
       font-size: 75%;
       font-family: 'CeraPRO-Bold'; }
     .tt-menu strong {
@@ -345,7 +388,7 @@ search end
 * Medium Only
 */
 @media screen and (min-width: 40em) and (max-width: 63.9375em) {
-  .site-top-bar li a {
+  .site-top-bar .menu li a {
     background-position: right center !important;
     position: relative; } }
 /**
@@ -353,14 +396,13 @@ search end
 */
 @media screen and (min-width: 64em) {
   .header-outter {
-    height: 81px !important; }
+    height: 81px; }
 
   .search-container form {
     position: absolute; }
 
-  .site-top-bar li a {
-    padding-left: 1px;
-    padding-right: 0px !important; } }
+  .site-top-bar .menu li a {
+    padding-right: 0px; } }
 /**
 * Large Only
 */

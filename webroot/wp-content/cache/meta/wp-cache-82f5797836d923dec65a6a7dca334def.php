@@ -1,0 +1,1 @@
+<?php die(); ?>{"headers":{"Vary":"Vary: Cookie","Content-Type":"Content-Type: text\/html; charset=UTF-8","Last-Modified":"Last-Modified: Tue, 10 Jan 2017 14:35:59 GMT"},"uri":"ibiza.com.dev\/search\/?q=fdgdfgdf&type=product","blog_id":1,"post":28384,"key":"ibiza.com.dev80\/search\/?q=fdgdfgdf&type=product"}

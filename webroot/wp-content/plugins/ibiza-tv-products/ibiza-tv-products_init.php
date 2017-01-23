@@ -20,7 +20,7 @@
 */
 
 function IbizaTvProducts_init($file) {
-
+    
     require_once('IbizaTvProducts_Plugin.php');
     $aPlugin = new IbizaTvProducts_Plugin();
 

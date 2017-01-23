@@ -14,7 +14,7 @@ angular.module('mm.foundation.pagination', [])
       this.itemsPerPage = defaultItemsPerPage;
     }
   };
-
+ 
   this.noPrevious = function() {
     return this.page === 1;
   };

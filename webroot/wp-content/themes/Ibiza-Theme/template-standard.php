@@ -40,11 +40,11 @@ function get_nav_menu_item_children( $parent_id, $nav_menu_items, $depth = true 
     <div class="row">
         <main id="main" class="large-12 medium-12 columns" role="main" >
     	<div class="large-12 medium-12 columns">
-    			<ul class="breadcrumbs show-for-medium">
-	                <li><a href="<?php get_template_directory_uri(); ?>">Home</a></li>
-	                <li class="current"><a href="<?php get_template_directory_uri(); ?>/designers/<?php echo $post->post_name; ?>"><?php echo the_title(); ?></a></li>
-                </ul>
-                <div class="back-house small-12 column show-for-small-only no-padding"><div class="back-button" onclick="window.history.back();">&lt; BACK</div></div>
+            <ul class="breadcrumbs show-for-medium">
+                <li><a href="/" title="Home page">Home</a></li>
+                <li class="current"><a <?php /*href="<?php get_template_directory_uri(); ?>/designers/<?php echo $post->post_name; ?>"*/ ?> title="<?php echo the_title(); ?> page"><?php echo the_title(); ?></a></li>
+            </ul>
+            <div class="back-house small-12 column show-for-small-only no-padding"><div class="back-button upper" onclick="window.history.back();">&lt; Back</div></div>
     	</div>
 
         <div class="large-2 medium-12 columns">
@@ -54,7 +54,7 @@ function get_nav_menu_item_children( $parent_id, $nav_menu_items, $depth = true 
                             <?php $menus =  get_nav_menu_item_children(  26896 , $nav_menu_items ); ?>
                                 <?php foreach ( $menus as $menu  ):    ?>
                                 <li <?php if($menu->title == $thisPageTitle) print 'class="designer-arrow"'; ?>>
-                                        <a href="<?php echo $menu->url; ?>">
+                                    <a href="<?php echo $menu->url; ?>" title="<?php echo  $menu->title; ?> page">
                                                 <?php echo  $menu->title; ?>
                                         </a>
                                 </li>

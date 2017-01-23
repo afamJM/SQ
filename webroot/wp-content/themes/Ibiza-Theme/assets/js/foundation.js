@@ -1,5 +1,5 @@
 'use strict';var _typeof=typeof Symbol==="function"&&typeof Symbol.iterator==="symbol"?function(obj){return typeof obj;}:function(obj){return obj&&typeof Symbol==="function"&&obj.constructor===Symbol?"symbol":typeof obj;};!function($){"use strict";var FOUNDATION_VERSION='6.2.1'; // Global Foundation object
-// This is attached to the window, or used as a module for AMD/Browserify
+// This is attached to the window, or used as a module for AMD/Browserify  
 var Foundation={version:FOUNDATION_VERSION, /**
    * Stores initialized plugins.
    */_plugins:{}, /**

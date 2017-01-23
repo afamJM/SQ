@@ -20,7 +20,7 @@
 */
 
 function IbizaPostTypePlugin_init($file) {
-
+    
     require_once('IbizaPostTypePlugin_Plugin.php');
     $aPlugin = new IbizaPostTypePlugin_Plugin();
 

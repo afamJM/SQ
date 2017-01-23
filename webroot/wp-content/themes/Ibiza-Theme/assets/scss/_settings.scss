@@ -49,28 +49,38 @@ $foundation-padding-large: 0.9375rem;
 /* Liams home styles  */
 $body-text-black: #192332;
 
+
+$brand-color:#00bcb4;
+$brand-color-alt:#ea516c;
 $global-font-size: 100%;
 $global-width: rem-calc(1366);
 $global-width2: rem-calc(1200);
 $global-lineheight: 1.5;
 $foundation-palette: (
-  primary: #3c4451,
-  secondary: #777,
+  primary: $brand-color,
+  secondary: $brand-color-alt,
   success: #3adb76,
   warning: #ffae00,
   alert: #ec5840,
 );
 
-$brand-color:#00bcb4;
-$brand-color-hover:#ea516c;
-$light-gray: #e6e6e6;
+
+$font-size-xsmall:rem-calc(10);
+$font-size-small:rem-calc(12);
+$font-size-14:rem-calc(14);
+$font-size-standard:rem-calc(16);
+$font-size-standard-header:rem-calc(18);
+$font-size-bigger-header:rem-calc(24);
+$font-size-large:rem-calc(32);
+$border:#e1e1e1;
+$light-gray: #e6e6e6; 
 $medium-gray: #cacaca;
 $dark-gray: #8a8a8a;
 $black: #0a0a0a;
 $white: #fefefe;
-$body-background:  url(../images/bg.png);
+$body-background: transparent;
 $body-font-color: $black;
-$body-font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
+$body-font-family: 'CeraPRO-Regular', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
 $body-antialiased: true;
 $global-margin: 1rem;
 $global-padding: 1rem;
@@ -80,8 +90,6 @@ $global-radius: 0;
 $global-text-direction: ltr;
 $global-flexbox: false;
 $print-transparent-backgrounds: true;
-$button-green: #01BCB5;
-$button-rasberry: #EA516C;
 
 @include add-foundation-colors;
 
@@ -205,12 +213,12 @@ $input-error-font-weight: $global-weight-bold;
 
 $accordion-background: $white;
 $accordion-plusminus: true;
-$accordion-item-color: foreground($accordion-background, $primary-color);
+//$accordion-item-color: color-pick-contrast($accordion-background, $primary-color);
 $accordion-item-background-hover: $light-gray;
 $accordion-item-padding: 1.25rem 1rem;
 $accordion-content-background: $white;
 $accordion-content-border: 1px solid $light-gray;
-$accordion-content-color: foreground($accordion-background, $primary-color);
+//$accordion-content-color: color-pick-contrast($accordion-background, $primary-color);
 $accordion-content-padding: 1rem;
 
 // 8. Accordion Menu
@@ -223,7 +231,7 @@ $accordionmenu-arrow-color: $primary-color;
 // --------
 
 $badge-background: $primary-color;
-$badge-color: foreground($badge-background);
+//$badge-color: color-pick-contrast($badge-background);
 $badge-padding: 0.3em;
 $badge-minwidth: 2.1em;
 $badge-font-size: 0.6rem;
@@ -243,20 +251,12 @@ $breadcrumbs-item-slash: true;
 // 11. Button
 // ----------
 
-/*|L*/
-.add-to-basket{
-    background: $button-rasberry;
-    border: none;
-    color: white;
-    font-family: 'CeraPRO-Medium';
-    font-size: 1.2rem;
-    padding: 0.6rem 1rem;
-}
+
 
 $button-padding: 0.85em 1em;
 $button-margin: 0 0 $global-margin 0;
 $button-fill: solid;
-$button-background: $primary-color;
+$button-background: $brand-color-alt;
 $button-background-hover: scale-color($button-background, $lightness: -15%);
 $button-color: $white;
 $button-color-alt: $black;
@@ -267,7 +267,7 @@ $button-sizes: (
   default: 0.9rem,
   large: 1.25rem,
 );
-$button-opacity-disabled: 0.25;
+$button-opacity-disabled: 1;
 
 // 12. Button Group
 // ----------------
@@ -381,7 +381,7 @@ $input-radius: $global-radius;
 // ---------
 
 $label-background: $primary-color;
-$label-color: foreground($label-background);
+//$label-color: color-pick-contrast($label-background);
 $label-font-size: 0.8rem;
 $label-padding: 0.33333rem 0.5rem;
 $label-radius: $global-radius;
@@ -399,7 +399,7 @@ $mediaobject-image-width-stacked: 100%;
 $menu-margin: 0;
 $menu-margin-nested: 1rem;
 $menu-item-padding: 0.7rem 1rem;
-$menu-item-color-active: $white;
+$menu-item-color-active: $brand-color-alt;
 $menu-item-background-active: map-get($foundation-palette, primary);
 $menu-icon-spacing: 0.25rem;
 
@@ -452,7 +452,7 @@ $pagination-item-spacing: rem-calc(1);
 $pagination-radius: $global-radius;
 $pagination-item-background-hover: $light-gray;
 $pagination-item-background-current: $primary-color;
-$pagination-item-color-current: foreground($pagination-item-background-current);
+//$pagination-item-color-current: color-pick-contrast($pagination-item-background-current);
 $pagination-item-color-disabled: $medium-gray;
 $pagination-ellipsis-color: $black;
 $pagination-mobile-items: false;
@@ -531,14 +531,14 @@ $show-header-for-stacked: false;
 
 $tab-margin: 0;
 $tab-background: $white;
-$tab-background-active: $light-gray;
-$tab-item-font-size: rem-calc(12);
+$tab-background-active: $white;
+$tab-item-font-size: $font-size-standard;
 $tab-item-background-hover: $white;
 $tab-item-padding: 1.25rem 1.5rem;
 $tab-expand-max: 6;
 $tab-content-background: $white;
 $tab-content-border: $light-gray;
-$tab-content-color: foreground($tab-background, $primary-color);
+//$tab-content-color: color-pick-contrast($tab-background, $primary-color);
 $tab-content-padding: 1rem;
 
 // 33. Thumbnail
@@ -557,7 +557,7 @@ $thumbnail-radius: $global-radius;
 $titlebar-background: $black;
 $titlebar-color: $white;
 $titlebar-padding: 0.5rem;
-$titlebar-text-font-weight: bold;
+$titlebar-text-font-weight: normal;
 $titlebar-icon-color: $white;
 $titlebar-icon-color-hover: $medium-gray;
 $titlebar-icon-spacing: 0.25rem;
@@ -579,9 +579,8 @@ $tooltip-radius: $global-radius;
 // -----------
 
 $topbar-padding: 0.5rem;
-$topbar-background: $light-gray;
+$topbar-background: $white;
 $topbar-submenu-background: $topbar-background;
 $topbar-title-spacing: 1rem;
 $topbar-input-width: 200px;
 $topbar-unstack-breakpoint: medium;
-

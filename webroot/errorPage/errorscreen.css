@@ -1,0 +1,129 @@
+
+/* @import must be at top of file, otherwise CSS will not work */
+@import url("//hello.myfonts.net/count/3266bb");
+ 
+@font-face {font-family: 'CeraPRO-Regular';
+    src: url('assets/webfonts/3266BB_9_0.eot');
+    src: url('assets/webfonts/3266BB_9_0.eot?#iefix') format('embedded-opentype'),
+         url('assets/webfonts/3266BB_9_0.woff2') format('woff2'),
+         url('assets/webfonts/3266BB_9_0.woff') format('woff'),
+         url('assets/webfonts/3266BB_9_0.ttf') format('truetype');
+}
+/*! normalize.css v3.0.2 | MIT License | git.io/normalize */
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "CeraPRO-Regular", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-weight: normal;
+  line-height: 1.2;
+  color: #0a0a0a;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h2 {
+  color: #00a3aa;
+  font-family: "CeraPRO-Regular", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  text-rendering: optimizeLegibility;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-size: 2rem;
+  line-height: 2.5rem;
+}
+
+.main{
+  text-align: center;
+  padding-top: 3em;
+}
+
+.brand-color{
+    color: #00a3aa;
+    font-weight: 600;
+}
+.brand-color a{
+    text-decoration: none;
+}
+
+.logo {
+    background-image: url('assets/Logo_SewingQuarter.png');
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    display: block;
+    height: 121px;
+    width: 255px;
+    margin-bottom: 30px;
+    margin-left: auto;
+    margin-right: auto
+}
+
+@media (-webkit-min-device-pixel-ratio: 2),
+(-o-min-device-pixel-ratio: 3 / 2),
+(min--moz-device-pixel-ratio: 2),
+(min-device-pixel-ratio: 2),
+(min-resolution: 144dppx) {
+    .logo {
+        background-image: url('assets/Logo_SewingQuarterx2.png');
+        background-size: 255px 121px;
+        background-position: 0 0;
+        height: 121px;
+        width: 255px
+    }
+}
+
+.shadow {
+    background-image: url('assets/Image_ShadowDivider.png');
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    display: block;
+    height: 25px;
+    width: 397px;
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto
+}
+
+@media (-webkit-min-device-pixel-ratio: 2),
+(-o-min-device-pixel-ratio: 3 / 2),
+(min--moz-device-pixel-ratio: 2),
+(min-device-pixel-ratio: 2),
+(min-resolution: 144dppx) {
+    .shadow {
+        background-image: url('assets/Image_ShadowDividerx2.png');
+        background-size: 397px 25px;
+        background-position: 0 0;
+        height: 25px;
+        width: 397px
+    }
+}
+
+.errorimage {
+    background-image: url('assets/Image_NeedleThread.png');
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    display: block;
+    height: 196px;
+    width: 150px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto
+}
+
+@media (-webkit-min-device-pixel-ratio: 2),
+(-o-min-device-pixel-ratio: 3 / 2),
+(min--moz-device-pixel-ratio: 2),
+(min-device-pixel-ratio: 2),
+(min-resolution: 144dppx) {
+    .errorimage {
+        background-image: url('assets/Image_NeedleThreadx2.png');
+        background-size: 150px 196px;
+        background-position: 0 0;
+        height: 196px;
+        width: 150px
+    }
+}

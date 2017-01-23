@@ -57,10 +57,9 @@ if( $slider == 1 ){
         
     
         <?php if (current_theme_supports('post-thumbnails') && $instance['show_thumbnail'] && has_post_thumbnail()) : ?>              
-              <article <?php post_class($current_post); ?>  style="background:url(<?php the_post_thumbnail_url($instance['thumb_size']); ?>); border: 1px solid #ddd;
-    padding: 17px;" >
+              <article <?php post_class($current_post.  ' widget-style'); ?>  style="background:url(<?php the_post_thumbnail_url($instance['thumb_size']); ?>);" >
         <?php else:?>
-            <article <?php post_class($current_post); ?>>
+            <article <?php post_class($current_post.  ' widget-style'); ?>>
         <?php endif; ?>    
     
         
@@ -71,7 +70,7 @@ if( $slider == 1 ){
 
             <?php if (get_the_title() && $instance['show_title']) : ?>
               <h4 class="entry-title">
-                <a href="<?php the_permalink(); ?>" rel="bookmark">
+                  <a href="<?php the_permalink(); ?>" rel="bookmark" title="..">
                   <?php the_title(); ?>
                 </a>
               </h4>
@@ -92,7 +91,7 @@ if( $slider == 1 ){
                 <?php if ($instance['show_author']) : ?>
                   <span class="author vcard">
                     <?php echo __('By', 'upw'); ?>
-                    <a href="<?php echo get_author_posts_url(get_the_author_meta('ID')); ?>" rel="author" class="fn">
+                      <a href="<?php echo get_author_posts_url(get_the_author_meta('ID')); ?>" rel="author" class="fn" title="..">
                       <?php echo get_the_author(); ?>
                     </a>
                   </span>
@@ -103,7 +102,7 @@ if( $slider == 1 ){
                 <?php endif; ?>
 
                 <?php if ($instance['show_comments']) : ?>
-                  <a class="comments" href="<?php comments_link(); ?>">
+                  <a class="comments" href="<?php comments_link(); ?>" title="..">
                     <?php comments_number(__('No comments', 'upw'), __('One comment', 'upw'), __('% comments', 'upw')); ?>
                   </a>
                 <?php endif; ?>
@@ -119,7 +118,7 @@ if( $slider == 1 ){
               <p>
                 <?php echo get_the_excerpt(); ?>
                 <?php if ($instance['show_readmore']) : ?>
-                  <a href="<?php the_permalink(); ?>" class="more-link"><?php echo $instance['excerpt_readmore']; ?></a>
+                  <a href="<?php the_permalink(); ?>" class="more-link" title=".."><?php echo $instance['excerpt_readmore']; ?></a>
                 <?php endif; ?>
               </p>
             </div>
@@ -135,8 +134,8 @@ if( $slider == 1 ){
           <?php // product specfic info  ?>
                 
             <div class="large-12 columns">
-                <h6><a href="/h/<?php echo $howto->_id;?>/"><?php echo  $howto->data->name; ?></a></h6>
-                <p><img src="<?php echo $howto->data->image; ?>" alt="" /></p>
+                <h6><a href="/h/<?php echo $howto->_id;?>/" title="<?php echo  $howto->data->name; ?> page"><?php echo  $howto->data->name; ?></a></h6>
+                <p><img src="<?php echo $howto->data->image; ?>" alt="Image" title="Image"  /></p>
             </div>         
           <footer>
 
@@ -208,7 +207,8 @@ if( $slider == 1 ){
 <?php endif; ?>
 
 
-<script>
+<?php                 
+wp_add_inline_script( 'site-js',"
 
 jQuery(document).ready(function () {
     //initialize swiper when document ready  
@@ -224,5 +224,4 @@ jQuery(document).ready(function () {
     
 });
 
-
-</script>
+");?>

@@ -11,16 +11,16 @@ and open the template in the editor.
 
 #product_name{
     margin:0;
-    line-height:1;
+    /*line-height:1;*/
 }
 
 .howtos {
 
-    background: #fff;
+    background: $white;
     margin-bottom:6px;
 
     .entry-content p{
-        font-size:14px;
+        font-size:$font-size-standard;
     }    
     .howtos {
 
@@ -42,6 +42,9 @@ and open the template in the editor.
         font-family: 'CeraPRO-Medium';
         a{
             color:$brand-color;
+            &:hover{
+                color:$brand-color-alt;
+            }
         }
     }
 }
@@ -66,8 +69,8 @@ and open the template in the editor.
 
         width:50%;
         text-align: center;
-        border-right:1px solid #e1e1e1;
-        border-top:1px solid #e1e1e1;
+        border-right:1px solid $border;
+        border-top:1px solid $border;
         height:50px;
 
         a{
@@ -88,11 +91,40 @@ and open the template in the editor.
 }
 
 
+#howto-tabs{
+        .is-active{
+        a{color:$black;
+            
+        }
+    }
+    
+    
+    .down-arrow {
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-top: 6px solid black;
+        height: 0;
+        width: 0;
+        margin: -10px auto;
+        
+    }    
+    
+}
+
 .tabs-content{ 
 
+
+    
+    
+    h3{
+        color:$black;
+            font-family: 'CeraPRO-Regular';
+    }
+    
     .arrow{
-        text-indent: 20px;
-        margin: 0 0 10px 0;
+        line-height: 18px;
+        margin: 0 0 10px;
+        padding: 0 0 0 25px;
     }
 
     .product-image img{
@@ -105,90 +137,138 @@ and open the template in the editor.
 }
 
 .related-guides{
-    
-        list-style: outside none none;
-        margin: 0;
-        text-transform: uppercase;
-    
-        li{
-                @include dotted-border-bottom(#1a2433);
-                a{
-                    color:$brand-color;
-                }
-                &last{
-                    a {
-                        border:0;
-                    }
-                }
+
+    list-style: outside none none;
+    margin: 0;
+    text-transform: uppercase;
+
+    li{
+        @include dotted-border-bottom(#1a2433);
+        a{
+            color:$brand-color;
         }
+        &last{
+            a {
+                border:0;
+            }
+        }
+    }
 }
+
+
+.steps-outter a{
+    color:$brand-color;
+}
+
+
+.add-this-con{
+    clear:both;
+    margin:10px 0;
+}
+
+
+.add-basket
+{
+    background: $brand-color-alt none repeat scroll 0% 0%; 
+    color: $white; 
+    border: 0px none; 
+    text-transform: uppercase; 
+    font-size: $font-size-small; 
+    padding: 4px 16px;
+    opacity: 1;
+}
+
+.step-info{
+
+    overflow: hidden;
+
+    .step-count{
+        display: inline-block; 
+        background: $brand-color; 
+        height: 25px; 
+        width: 25px; 
+        border-radius: 15px; 
+        text-align: center; 
+        line-height: 23px; 
+        color: $white;
+    }
+
+    .step-desc{
+        font-size:$font-size-small;
+    }
+}
+
 /**
 * Small & Up Styles
 */
-@media #{$small-up} {
+@include breakpoint(small up) {
 
     #fill-me-up{
         top:0;
-           height: 100%;
+        height: 100%;
         left:0;
         position: fixed ! important;
         width:80%;
-        background: #fff;
+        background: $white;
         z-index: 99999;
         padding: 0 60px 0 50px;
-        border-right:1px solid #e1e1e1;
+        border-right:1px solid $border;
         overflow-y:auto;
-        
+
         .add-to-basket{
-            font-size:25px;
+            font-size:$font-size-bigger-header;
             width:100%;
             height:50px;
-            background: rgb(229, 111, 99) none repeat scroll 0% 0%; 
-            color: rgb(255, 255, 255); 
+            background: $brand-color-alt none repeat scroll 0% 0%; 
+            color: $white; 
             border: 0px none; 
             text-transform: uppercase; 
             padding: 4px 16px;
             margin:20px 0;
             text-transform: uppercase;
         }
-        
+
         .brand-bg{
-            
- 
+
+
             display: inline-block;
             margin: 10px 0;
             padding: 10px;
         }
-        
-        
+
+
     }
-    
+
     .sq-border{
         display:none;
     }
-    
+
     .step-desc-detail{
         position: relative; 
         right: -10px;
     }    
 
-    #howto-tabs {
-
+    .tabs-content{
+        
+        h3{
+            margin-bottom: 10px;
+        }
+        
         .tabs-title {
-            border-right: 1px solid #e1e1e1;
-            border-top: 1px solid #e1e1e1;
+            border-right: 1px solid $border;
+            border-top: 1px solid $border;
             height: 50px;
             text-align: left;
             width: 100%;
         }
 
         .tri {
-            border-color: #000000 transparent transparent;
+            border-color: $black transparent transparent;
             border-style: solid;
             border-width: 8px 6px 0;
             float: right;
             height: 0;
-            margin: -29px 14px 0 0!important;
+            margin: -29px 14px 0 0;
             width: 0;
         }          
 
@@ -196,7 +276,7 @@ and open the template in the editor.
 
 
     .steps-inner{
-        background: #fff;
+        background: $white;
     }
 
     .steps-out-most{
@@ -219,7 +299,7 @@ and open the template in the editor.
 /**
 * Small Up
 */
-@media #{$small-up} {
+@include breakpoint(small up) {
 
     #how-to-image-con img{
         width: 100%
@@ -230,36 +310,36 @@ and open the template in the editor.
         text-align: center;
         padding-left: 0;
         padding-right:0;     
-        border:1px solid #e1e1e1;
+        border:1px solid $border;
     }
 
 
     .step-info{
-    margin: 20px 0;
-    overflow: hidden;
-    padding: 0 20px;
-        
+        margin: 20px 0;
+        overflow: hidden;
+        padding: 0 20px;
+
         h5,p{
             margin:0;
         }
-        
+
     }
 
-    
+
 }
 
 /**
 * Small Only
 */
-@media #{$small-only} {
+@include breakpoint(small only) {
 
 
     .top-meta{
-        
+
         display:block;
         margin:7px 0;
     }
-    
+
     #how-to-image-con{
         padding-left:0;
         padding-right:0;
@@ -282,7 +362,7 @@ and open the template in the editor.
 
 
         .notes{
-            border-top:1px solid #e1e1e1;
+            border-top:1px solid $border;
         }
 
 
@@ -293,7 +373,7 @@ and open the template in the editor.
 /**
 * Medium & Up Styles
 */
-@media #{$medium-up} {
+@include breakpoint(medium up){
 
 
     .top-meta{
@@ -307,12 +387,13 @@ and open the template in the editor.
 /**
 * Medium Only
 */
-@media #{$medium-only} {
+@include breakpoint(medium only){
 
-    .step-group-images{
+
+    #result .steps-outter .step-group-images {
+        float: none;
         margin: 0 auto;
-        float:none!important;
-    }
+    }    
 
 
 }
@@ -321,7 +402,7 @@ and open the template in the editor.
 /**
 * Large & Up Styles
 */
-@media #{$large-up} {
+@include breakpoint(large up){
 
     #fill-me-up{
         top:0;
@@ -330,48 +411,48 @@ and open the template in the editor.
         left:0;
         position: fixed ! important;
         width:35%;
-        background: #fff;
+        background: $white;
     }
-    
-    
-    
+
+
+
     .sq-border{
         display: block;
     }
-    
+
     .step-desc-detail{
         position: relative; 
-        right: 35px;
+        right: 45px;
     }  
-    
+
     .step-info{
         padding:0px;
-        
+
     }    
-    
+
     .steps-inner{
         padding:20px;
     }    
 
     .step-group-images{
         text-align: center;
-        border: 1px solid #e1e1e1;
+        border: 1px solid $border;
         padding-bottom: 30px;
         padding-top: 30px;
         text-align: center;     
 
     }    
-    
-        
+
+
     /*.swiper-button-next ,.swiper-button-prev{
         display:none;
     }*/
-    
- 
-    
+
+
+
     #result div.steps-out-most{
         margin:auto;
-        background: #fff; 
+        background: $white; 
         padding-left: 0.9375rem;
         padding-right: 0.9375rem;
         padding-top: 0;
@@ -395,13 +476,13 @@ and open the template in the editor.
     #howto-tabs {
 
 
-        
+
         .tabs-title{
 
             width:50%;
             text-align: center;
-            border-right:1px solid #e1e1e1;
-            border-top:1px solid #e1e1e1;
+            border-right:1px solid $border;
+            border-top:1px solid $border;
             height:50px;
 
 
@@ -420,7 +501,7 @@ and open the template in the editor.
 /**
 * Large Only
 */
-@media #{$xlarge-only} {
+@include breakpoint(xlarge only){
 
 
 }
@@ -429,7 +510,7 @@ and open the template in the editor.
 /**
 * xLarge & Up Styles
 */
-@media #{$xlarge-up} {
+@include breakpoint(xlarge up){
 
 
 }
@@ -437,7 +518,7 @@ and open the template in the editor.
 /**
 * xLarge Only
 */
-@media #{$xlarge-only} {
+@include breakpoint(xlarge only){
 
 
 }
@@ -446,7 +527,7 @@ and open the template in the editor.
 /**
 * xLarge & Up Styles
 */
-@media #{$xxlarge-up} {
+@include breakpoint(xxlarge up){
 
 
 }

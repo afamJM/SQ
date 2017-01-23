@@ -20,7 +20,36 @@ $top_level          = $ibiza_api->is_top_level;
 $filter_cat_str     = "ejs.TermFilter('_category', '" . $cat ."')";
 $title              = $ibiza_api->get_product_list_title( get_query_var('products') );
 $index              = 'product';
-$page_type          ='products';
+$page_type          = 'products';
+$jsonStr            = '{"query":{"query_string":{"query":"'. $cat.'","lenient":true,"fields":["_category"],"default_operator":"AND"}}}';
+$segments           = explode('/', trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/'));
+$col_size           = '10';
+if( $segments[0] == 'how-to-guides'  ){
+    $ibiza_api->title = 'Projects &amp; Guides';
+    $index              = 'howto';
+    $cat_title          = 'Learn';
+    $sort               =  array();
+    $top_level          = false;
+    $page_type          = "How to's";
+    $col_size           = '12';
+    $productsJSON       = getSslPage( $ibiza_api::$end_points['howto_elastic'] .  "_search?from=0&size=1"  );
+    
+}else{
+    $productsJSON       = getSslPage( $ibiza_api::$end_points['product_elastic'] .  "_search?from=0&size=1&source="  . urlencode( $jsonStr ) );
+}
+
+
+
+
+
+
+if( json_decode( $productsJSON  )->hits->total <=0 && $top_level==false){
+    
+    header('Location: /no-results' );
+    
+}
+
+
 if($cat==0){
     $filter_cat_str     = '';
 }
@@ -28,7 +57,7 @@ if($cat==0){
 
 $breadcrumbs        = breacdcrumbs('cat-' . $cat  );
 $cat_title          = $ibiza_api->cat_data->title;
-$segments           = explode('/', trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/'));
+
 
 
 if( $_GET['q'] ){
@@ -37,21 +66,12 @@ if( $_GET['q'] ){
     $breadcrumbs[]  = '<li>Search - ' . (string) htmlentities( $_GET['q'] ) . '</li>';
 }
 
-$col_size           = '10';
-if( $segments[0] == 'how-to-guides'  ){
-    $index              = 'howto';
-    $cat_title          = $cat_title;
-    $sort               =  array();
-    $top_level          = false;
-    $page_type          = "How to's";
-    $col_size           = '12';
-
-}
 
 
-?>
 
-<?php get_header(); ?>
+
+
+get_header(); ?>
 
 <div id="content"   ng-controller="IndexController" ng-app="ibiza"  eui-index="'<?php echo $index; ?>'"  <?php echo  $filter_cat_str ? 'eui-filter="ejs.BoolFilter().must('. $filter_cat_str.')"' : '' ; ?>  ng-model='querystring'  eui-enabled='true' <?php  echo $_GET['q'] ?  'eui-query="ejs.QueryStringQuery(\'' . $_GET['q'] .'*\').lenient(true).fields(\'name\')"' : ''; ?>>
  
@@ -61,15 +81,15 @@ if( $segments[0] == 'how-to-guides'  ){
     </div>
 
     <div id="loading_container2">
-        <img src="https://d13yacurqjgara.cloudfront.net/users/1275/screenshots/1198509/plus.gif" style="margin: 0px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100px;">
+        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/plus.gif" alt="Plus sign icon" title="Plus sign icon" />
     </div>
 
     <?php endif; ?>
     
     <!-- Side Bar -->
-    <div class="medium-12 ">
+    <div class="medium-12" id="inner_content">
 
-        <div class="columns  row">
+        <div class="columns row">
             <div class="cat-desc">
                 <nav aria-label="You are here:" role="navigation">
                     <ul class="breadcrumbs show-for-medium">
@@ -80,12 +100,12 @@ if( $segments[0] == 'how-to-guides'  ){
                         for ($i = 0; $i < count($segments) - 1 ;$i++) {
                             $previousSegments .= $segments[$i] . '/';
                         } ?>
-                        <a href="<?php echo '/' . $previousSegments; ?>" class="previous-segement">< BACK</a>
+                        <a href="<?php echo '/' . $previousSegments; ?>" class="previous-segement upper" title="Go back to the previous page">< Back</a>
                     </ul>
                 </nav>
                 <?php if($ibiza_api->cat_data->bannerimage):?>
-                    <div class="show-for-large"style="height:200px;overflow: hidden">
-                        <img style="width: 100%" src="<?php echo$ibiza_api->cat_data->bannerimage; ?>" />
+                    <div class="show-for-large category-banner">
+                        <img  class="fullwidth-only" src="<?php echo $ibiza_api->cat_data->bannerimage; ?>" alt="Sewing Quarter banner image" title="Sewing Quarter banner image" />
                     </div>
                 <?php endif; ?>
 
@@ -95,7 +115,7 @@ if( $segments[0] == 'how-to-guides'  ){
                     <h2><?php echo $ibiza_api->title; ?></h2>
                     <?php echo nl2br( $ibiza_api->cat_data->description);?>                   
                 <?php else:?>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <h2><?php echo $ibiza_api->title; ?></h2>
                 <?php endif; ?>
             </div>
 
@@ -105,41 +125,27 @@ if( $segments[0] == 'how-to-guides'  ){
 
     <div class="product-list-container columns">
         <div id="inner-content-product-list" class="row" <?php echo $filter_cat_str1;?>>
+            
+            
+ 
+            
+            
             <div class="category-list sidebar columns large-2 large-text-left text-center <?php print $top_level == true ? 'category-page small-12' : 'product-page show-for-large' ; ?>" role="complementary">
-
-                <?php //if($index=='howto'): ?>
-<!--                <div id="side-facets">-->
-
-                      <!--<h3>Search</h3>
-
-                      <eui-searchboxx>
-                          <p onclick="toggleFacets(jQuery(this).parent());">></p>
-                      </eui-searchboxx>-->
-<!--                </div>-->
-                <?php //endif; ?>
 
                 <?php if($top_level == false && $index=='product'): ?>
 
 
-                <p class="show-for-large"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/Icon_RefineResults_Black.png" /> Refine Results:</p>
+                <p class="show-for-large"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/Icon_RefineResults_Black.png" alt="Refine results icon" title="Refine results icon" /> Refine Results:</p>
                 <div class="applied-filters">
                     <p class="bold">Applied Filters:</p>
                     <ul class="add_facets"></ul>
-                    <button id="reset-filter" aria-expanded="false" aria-haspopup="true" data-yeti-box="example-dropdown2" data-is-focus="false" aria-controls="example-dropdown2" class="button" style="vertical-align: top"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/Icon_Productlist_ResetFilters.png" /> RESET ALL</button>
+                    <button id="reset-filter" aria-expanded="false" aria-haspopup="true"  data-is-focus="false"   class="signup-submit button upper"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/Icon_Productlist_ResetFilters.png"  alt="Reset all icon" title="Reset all icon" /> Reset All</button>
                 </div>
-
-
-
 
                 <div id="side-facets">
                     <?php
                     if(count($facets))
                     foreach( $facets as $facet ):
-
-                    ?>
-
-
-                    <?php
 
                     switch ( $facet->name ):
                         case 'price':
@@ -147,8 +153,9 @@ if( $segments[0] == 'how-to-guides'  ){
                     <h3><?php echo ucwords( $facet->displayname ); ?></h3>
 
                     <?php foreach($range->ranges as $the_the_range):  ?>
-                    <eui-range display="'<?php echo ucwords( $facet->displayname ); ?>'" field="'<?php echo $facet->name; ?>.raw'"  min="'<?php echo $the_the_range->start ?>'"  max="'<?php echo $the_the_range->end ?>'"   size="10"></eui-range>
-
+                    <div eui-or-filter>
+                    <eui-range display="'<?php echo ucwords( $facet->displayname ); ?>'" field="'<?php echo $facet->name; ?>.raw'"  min="'<?php echo $the_the_range->start ?>'"  max="'<?php echo $the_the_range->end ?>'"   size="50"></eui-range>
+                    </div>
                     <?php endforeach;?>
                     <?php
 
@@ -156,7 +163,9 @@ if( $segments[0] == 'how-to-guides'  ){
                         default:
                     ?>
                     <hr>
-                    <eui-checklist  display="'<?php echo ucwords( $facet->displayname ); ?>'" field="'<?php echo $facet->name; ?>.raw'" size="10"><p onclick="toggleFacets(jQuery(this).parent());">toggle</p></eui-checklist> <!-- ACTION: change to field to use as facet -->
+                    <div eui-or-filter>
+                    <eui-checklist  display="'<?php echo ucwords( $facet->displayname ); ?>'" field="'<?php echo $facet->name; ?>.raw'" size="50"><p onclick="toggleFacets(jQuery(this).parent());">toggle</p></eui-checklist> <!-- ACTION: change to field to use as facet -->
+                    </div>
                     <?php
                         endswitch;
                     ?>
@@ -171,7 +180,7 @@ if( $segments[0] == 'how-to-guides'  ){
 
                 <?php foreach($catss as $cat): ?>
 
-                    <li><a href="<?php echo $cat->url; ?>"><?php echo $cat->post_title; ?></a></li>
+                    <li><a href="<?php echo $cat->url; ?>" title="<?php echo $cat->post_title; ?> page"><?php echo $cat->post_title; ?></a></li>
 
                 <?php endforeach; ?>
 

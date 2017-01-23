@@ -127,8 +127,8 @@ function joints_register_sidebars() {
 		'description' => __('The upper four by two blocks on the homepage.', 'jointswp'),
 		'before_widget' => '<div id="%1$s" class="widget %2$s">',
 		'after_widget' => '</div>',
-		'before_title' => '<h1 class="widgettitle">',
-		'after_title' => '</h1>',
+		'before_title' => '<h2 class="widgettitle">',
+		'after_title' => '</h2>',
 	));
 
 	register_sidebar(array(
@@ -137,8 +137,8 @@ function joints_register_sidebars() {
 		'description' => __('Homepage panel below content full second.', 'jointswp'),
 		'before_widget' => '<div id="%1$s" class="widget %2$s">',
 		'after_widget' => '</div>',
-		'before_title' => '<h1 class="widgettitle">',
-		'after_title' => '</h1>',
+		'before_title' => '<h2 class="widgettitle">',
+		'after_title' => '</h2>',
 	));
 
 	register_sidebar(array(
@@ -177,8 +177,19 @@ function joints_register_sidebars() {
 		'description' => __('The heading and paragraph on /designers', 'jointswp'),
 		'before_widget' => '<div class="designers-blurb large-12 columns">',
 		'after_widget' => '</div>',
-		'before_title' => '<h1 class="header-black">',
-		'after_title' => '</h1>',
+		'before_title' => '<h2 class="header-black">',
+		'after_title' => '</h2>',
+	));
+
+
+	register_sidebar(array(
+		'id' => 'featured-programmes',
+		'name' => __('Featured Programmes For Schedule Page', 'jointswp'),
+		'description' => __('Featured Programmes For Schedule Page', 'jointswp'),
+		'before_widget' => '',
+		'after_widget' => '',
+		'before_title' => '<h2 class="column small-12 text-center">',
+		'after_title' => '</h2>',
 	));
 
         

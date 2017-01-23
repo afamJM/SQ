@@ -20,7 +20,7 @@
 */
 
 function IbizaSearchPlugin_init($file) {
-
+    
     require_once('IbizaSearchPlugin_Plugin.php');
     $aPlugin = new IbizaSearchPlugin_Plugin();
 

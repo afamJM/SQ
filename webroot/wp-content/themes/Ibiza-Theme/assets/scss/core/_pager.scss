@@ -1,0 +1,209 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 11-Nov-2016, 16:08:38
+    Author     : Ryan.Blake
+*/
+
+#inner-content-product-list{
+    .paging-container {
+
+        margin-top:20px;
+        margin-bottom:20px;
+
+        .paging-info{
+            position: relative;
+            text-align: center;
+            .pager{
+                display: inline-block;
+                list-style: outside none none;
+                margin: 0;      
+
+                .page-count{
+                    margin:auto;
+                }
+
+                li{
+                    a{
+                        float: none;
+                        height: auto;
+                        padding: 0;
+                        width:  auto;
+                    }
+                }
+
+                li:first-child {
+                    float: left;
+
+
+                }
+            }
+        }
+    }
+}
+.paging-info li:last-child{
+    float:right;
+}
+
+.pagination li.ng-scope {
+    background: $white none repeat scroll 0 0;
+    color: $black;
+}
+.paging-info .pagination a, .pagination button:hover , .pager .arrow:first-child , .pager .arrow:last-child {
+    background: $brand-color none repeat scroll 0 0;
+    text-align: center;
+    display: inline;
+    color:$white;
+    display: inline-block;
+    height: 26px;
+    padding: 0;
+    width: 26px;    
+    &:hover{
+        background:$brand-color-alt;
+    }
+    &.disabled{
+        opacity: 0.35;
+    }
+}
+
+.pagination a   {
+    &:hover{
+        background:$brand-color-alt;
+    }
+}
+
+.pager .arrow:first-child , .pager .arrow:last-child {
+    margin:0 20px;
+}
+
+.paging-top .arrow:first-child , .pager .arrow:last-child {
+    margin:0 10px;
+}
+.paging-top .pager .page-count {
+    padding: 5px 0 0 0;
+}
+
+.pager .arrow:first-child a, .pager .arrow:last-child a{
+
+    color:$white;
+
+}
+
+.pagination .pagination-previous {
+    margin-right: 1rem
+}
+.pagination .pagination-next {
+    margin-left: 1rem
+}
+.pagination-previous a::before, .pagination-previous a::after, .pagination-next a::after {
+    content: "";
+    margin: 0;
+}
+.pagination .current {
+    padding: 0;
+    border: 0;
+}
+.pagination .current span {
+    border: 1px solid $brand-color;
+}
+
+.paging-meta{
+
+    display: block;
+    left: 0;
+    margin: auto;
+    position: absolute;
+    right: 0;
+    top: rem-calc(5);
+    width: 90px;
+
+}
+
+/**
+* Small & Up Styles
+*/
+@include breakpoint(small up) {
+
+    .paging-container{
+        float: none;
+        max-width: 210px;
+        width: 100%;
+        margin:0 auto;
+    }    
+
+}
+
+/**
+* Small Only
+*/
+@include breakpoint(small only) {
+
+
+}
+/**
+* Medium & Up Styles
+*/
+@include breakpoint(medium up){
+
+
+}
+
+/**
+* Medium Only
+*/
+@include breakpoint(medium only){
+
+
+}
+
+
+/**
+* Large & Up Styles
+*/
+@include breakpoint(large up){
+
+    .paging-container {
+
+        width: 100%;
+        float:right;
+    }    
+
+
+}
+
+/**
+* Large Only
+*/
+@include breakpoint(xlarge only){
+
+
+}
+
+
+/**
+* xLarge & Up Styles
+*/
+@include breakpoint(xlarge up){
+
+
+}
+
+/**
+* xLarge Only
+*/
+@include breakpoint(xlarge only){
+
+
+}
+
+
+/**
+* xLarge & Up Styles
+*/
+@include breakpoint(xxlarge up){
+
+
+}

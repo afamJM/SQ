@@ -130,7 +130,7 @@ if( count( $ids ) >0 )
 
             <?php if (get_the_title() && $instance['show_title']) : ?>
               <h4 class="entry-title">
-                <a href="<?php the_permalink(); ?>" rel="bookmark">
+                  <a href="<?php the_permalink(); ?>" rel="bookmark" title="..">
                   <?php the_title(); ?>
                 </a>
               </h4>
@@ -151,7 +151,7 @@ if( count( $ids ) >0 )
                 <?php if ($instance['show_author']) : ?>
                   <span class="author vcard">
                     <?php echo __('By', 'upw'); ?>
-                    <a href="<?php echo get_author_posts_url(get_the_author_meta('ID')); ?>" rel="author" class="fn">
+                      <a href="<?php echo get_author_posts_url(get_the_author_meta('ID')); ?>" rel="author" class="fn" title="..">
                       <?php echo get_the_author(); ?>
                     </a>
                   </span>
@@ -162,7 +162,7 @@ if( count( $ids ) >0 )
                 <?php endif; ?>
 
                 <?php if ($instance['show_comments']) : ?>
-                  <a class="comments" href="<?php comments_link(); ?>">
+                  <a class="comments" href="<?php comments_link(); ?>" title="..">
                     <?php comments_number(__('No comments', 'upw'), __('One comment', 'upw'), __('% comments', 'upw')); ?>
                   </a>
                 <?php endif; ?>
@@ -178,7 +178,7 @@ if( count( $ids ) >0 )
               <p>
                 <?php echo get_the_excerpt(); ?>
                 <?php if ($instance['show_readmore']) : ?>
-                  <a href="<?php the_permalink(); ?>" class="more-link"><?php echo $instance['excerpt_readmore']; ?></a>
+                  <a href="<?php the_permalink(); ?>" class="more-link" title=".."><?php echo $instance['excerpt_readmore']; ?></a>
                 <?php endif; ?>
               </p>
             </div>
@@ -192,10 +192,9 @@ if( count( $ids ) >0 )
                 
                 
           <?php // product specfic info  ?>
-                <a href="/p/<?php echo $product->data->productcode;?>/"><img src="<?php echo $product->data->images[0]->url; ?>" alt="" /></a>
-                <p><a href="/p/<?php echo $product->data->productcode;?>/"><?php echo  $product->data->name; ?></a></p>
+                <a href="/p/<?php echo $product->data->productcode;?>/" title="<?php echo  $product->data->name; ?> page"><img src="<?php echo $product->data->images[0]->url; ?>"  alt="Product image" title="Product image"  /></a>
+                <p><a href="/p/<?php echo $product->data->productcode;?>/" title="<?php echo  $product->data->name; ?> page"><?php echo  $product->data->name; ?></a></p>
                 <p>&pound;<?php echo number_format( $product->data->price , 2 ); ?></p>
-                <p><span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span> Read Reviews (15)</p>
           <footer>
 
             <?php
@@ -265,7 +264,8 @@ if( count( $ids ) >0 )
   </div>
 <?php endif; ?>
 
-<script>
+<?php                 
+wp_add_inline_script( 'site-js',"
 
 jQuery(document).ready(function () {
     //initialize swiper when document ready  
@@ -280,6 +280,5 @@ jQuery(document).ready(function () {
     });
     
 });
-
-
-</script>
+");
+?>

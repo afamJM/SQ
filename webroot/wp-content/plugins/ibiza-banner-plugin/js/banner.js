@@ -14,7 +14,8 @@ jQuery( document ).ready(function() {
         pagination          : '.swiper-pagination',
         paginationClickable : true ,
         nextButton: '.swiper-button-next',
-        prevButton: '.swiper-button-prev'
+        prevButton: '.swiper-button-prev',
+         autoplay: 4000
     });
     
 });    

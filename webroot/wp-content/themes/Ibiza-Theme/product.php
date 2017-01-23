@@ -31,18 +31,12 @@ if (isset($_GET['bundle'])) {
 }
 $breadcrumbs = breacdcrumbs('cat-' . (int) $response->category[0], 'post', 'publish', $response->name);
 
-/**
- * Set ann cookie if you are not logged in and have nsec cookie for the add to basket section
- */
-if ((!$_COOKIE['nsec']) && (!$_COOKIE['ann'])) {
-    setcookie('ann', $_SERVER['REMOTE_ADDR'] . '.' . date('d.m.Y.h.i.s'), time() + 3600, '/', '.' . $_SERVER['SERVER_NAME']);
-}
+wp_enqueue_script('elevatezoom-js', get_template_directory_uri() . '/assets/js/jquery.elevateZoom-3.0.8.min.js', array('jquery'), '', true);
+
+get_header();
 ?>
 
-<?php get_header(); ?>
-
-<script src="<?php echo get_template_directory_uri(); ?>/assets/js/jquery.elevateZoom-3.0.8.min.js"></script>
-<div class="full">
+<div class="full show-for-medium">
     <div class="row">
         <nav aria-label="You are here:" role="navigation" class="columns">
 
@@ -59,8 +53,17 @@ if ((!$_COOKIE['nsec']) && (!$_COOKIE['ann'])) {
 
 
         <div class="medium-12 large-6 columns" id="prodcut_main_inner">
-            <div class="text-center  large-12 medium-10 hide-for-small-only  n-l-p">
-                <a href="<?php echo $response->images[0]->url; ?>" id="zoom" class="text-center"> <img id="zoom_01"   data-zoom-image="<?php echo $response->images[0]->url; ?>" src="<?php echo $response->images[0]->url; ?>"></a>
+            <div class="text-center  large-12 medium-10 hide-for-small-only  n-l-p columns" id="product_image_container">
+
+
+                <?php if (isset($response->images[0]->url)): ?>
+                    <a href="<?php echo $response->images[0]->url; ?>" id="zoom" class="text-center" title="Show the larger image">
+                        <img id="zoom_01" data-zoom-image="<?php echo $response->images[0]->url; ?>" src="<?php echo $response->images[0]->url; ?>" alt="Image" title="Image"  />
+                    </a>
+                <?php else: ?>
+                    <img src="/wp-content/themes/Ibiza-Theme/assets/images/no-product-image-350x250.png" title="No Photo" alt="No Photo" />
+                <?php endif; ?>
+                <span class="enlarge">&#128269; click image to enlarge</span>
             </div>
             <!--            <div class="clear">&nbsp;</div>-->
             <div class="medium-2 large-12 columns small-12 n-l-p n-r-p" id="product_images_container">
@@ -71,20 +74,24 @@ if ((!$_COOKIE['nsec']) && (!$_COOKIE['ann'])) {
                     <!-- Additional required wrapper -->
                     <div class="swiper-wrapper">
 
-                        <?php foreach ($response->images as $i => $image): ?>
+                        <?php
+                        if ($response->images):
+                            foreach ($response->images as $i => $image):
+                                ?>
 
-                            <div class="swiper-slide">
+                                <div class="swiper-slide">
 
-                                <a  rel="group"  class="gallery" href="<?php echo $image->url; ?>"
-                                    data-zoom-image="<?php echo $image->url; ?>"  
-                                    data-image="<?php echo $image->url; ?>">                        
-                                    <img data-zoom-image="<?php echo $image->url; ?>" src="<?php echo $image->url; ?>">
-                                </a>
+                                    <a  rel="group"  class="gallery" href="<?php echo $image->url; ?>"
+                                        title="Click to show image"
+                                        data-zoom-image="<?php echo $image->url; ?>"  
+                                        data-image="<?php echo $image->url; ?>">                        
+                                        <img data-zoom-image="<?php echo $image->url; ?>" src="<?php echo $image->url; ?>"  alt="Thumb Product Image"   title="Thumb Product Image"  />
+                                    </a>
 
-                            </div>
+                                </div>
 
-                        <?php endforeach; ?>
-
+                            <?php endforeach; ?>
+<?php endif; ?>
 
                     </div>
                     <div class="swiper-button-prev"></div>
@@ -93,7 +100,7 @@ if ((!$_COOKIE['nsec']) && (!$_COOKIE['ann'])) {
                 </div>
 
             </div>
-            <div style="clear:both;margin:10px 0">
+            <div  class="clear add-this">
                 <!-- Go to www.addthis.com/dashboard to customize your tools -->
                 <div class="addthis_inline_share_toolbox"></div>
             </div>
@@ -101,107 +108,143 @@ if ((!$_COOKIE['nsec']) && (!$_COOKIE['ann'])) {
         </div>
         <div class="medium-12 large-6 columns">
 
-            <div id="title-area">
+            <div id="title-area"  class="column">
                 <h3 id="product_name"><?php echo $response->name; ?></h3>
 <!--                <p><img src="/wp-content/themes/Ibiza-Theme/assets/images/stars-product-page.png"> Write the first Review </p>-->
                 <p>Product code: <strong><span id="product_code" class="strong"><?php print get_query_var('products'); ?></span></strong></p>
             </div>
 
-            <div class="row column" style="background: transparent url(/wp-content/themes/Ibiza-Theme/assets/images/bg.png) repeat scroll 0% 0%; padding: 20px;">
-                <div class="product-meta1" style="background: white none repeat scroll 0% 0%; padding: 15px;">
+            <div class="row column product-meta-con product_controls">
+                <div class="product-meta1">
 
-
-
-
-                    <div class="small-3 medium-3 large-3 columns">
+                    
+                    <div class="small-4 medium-3 <?php echo (strlen(number_format($response->price, 2)) == 4 ? 'large-3' : 'large-4'); ?> columns">
                         <h4 id="product_price"><?php echo $schema->properties->price->prepend ?><?php echo number_format($response->price, 2); ?> </h4>                        
                     </div>
 
+<?php if ($response->quantity > 0): ?>
+                    <div class="small-6 medium-2 <?php echo (strlen(number_format($response->price, 2)) == 4 ? 'large-3' : 'large-3'); ?> columns">
 
-                    <div class="small-3 medium-3 large-3 columns">
+                            <div class="small-3 medium-3 large-3 columns increment">
+                                <a href="#" id="remove_quantity" title="Click to reduce quantiy">-</a>
+                            </div>
 
-                        <div class="small-2 medium-2 large-2 columns increment">
-                            <a href="#" id="remove_quantity">-</a>
-                        </div>
+                            <div class="small-4 medium-5 large-4 columns no-padding">
+                                <input type="text" id="quantity" value="1">
+                            </div>
 
-                        <div class="small-6 medium-6 large-6 columns" style="padding:0;">
-                            <input type="text" id="quantity" value="1">
-                        </div>
-
-                        <div class="small-2 medium-2 large-2 columns increment end">
-                            <a href="#"  id="add_quantity">+</a>
-                        </div>
+                            <div class="small-3 medium-3 large-3 columns increment end">
+                                <a href="#"  id="add_quantity"  title="Click to increase quantiy">+</a>
+                            </div>
                     </div>                    
 
-                    <div class="small-3 medium-3 large-3 columns">
-                        <p>
-                            <img src="/wp-content/themes/Ibiza-Theme/assets/images/tick-icon.png">
-                            In Stock</p>
-                    </div>
+                        <div class="small-12 show-for-small-only columns">&nbsp</div>
 
-                    <div class="small-3 medium-3 large-3 columns">
-                        <div class="small-3 medium-3 large-3  columns">
-                            <img src="/wp-content/themes/Ibiza-Theme/assets/images/del-icon.png">
+                        <div class="small-6 medium-4 large-2 columns text-center">
+                            <p class="in-stock">
+                                <span class="icon"></span>
+                                In Stock</p>
                         </div>
-                        <div class="small-9 medium-9 large-9 columns">
-                            <p style="font-size: 12px; line-height: 1.1; margin-left: 15px;">Delivery From<br/>&pound;2.99</p>
+
+                        <div class="small-6 medium-3 large-3 columns  right">
+                            
+                            <div class="small-9 medium-7 large-9 columns right">
+                                <p class="shipping-costs">Delivery From Only &pound;2.99</p>
+                            </div>                            
+                            
+                            <div class="small-3 medium-3 large-3  columns right delivery">
+                                <span class="icon"></span>
+                            </div>
+
                         </div>
-                    </div>
-                    <?php  if( $response->quantity > 0 ): ?>
-                    <button id="add-basket" class="button large expanded" type="button"  style="background: #e56f63;text-transform:uppercase" 
-                            data-product-id="<?php echo $response->legacycode; ?>"
-                            data-product-code="<?php print get_query_var('products'); ?>"
-                            data-product-image="<?php echo $response->images[0]->url; ?>"
-                            data-product-name="<?php echo $response->name; ?>" 
-                            data-product-pice="<?php echo number_format($response->price, 2); ?>">Add to basket</button>
-                    <?php endif; ?>
+
+                        <div class="small-12">
+                            <button  class="add-to-basket add-basket button large expanded" type="button"
+                                     data-product-id="<?php echo $response->legacycode; ?>"
+                                     data-product-code="<?php print get_query_var('products'); ?>"
+                                     data-product-image="<?php echo $response->images[0]->url; ?>"
+                                     data-product-name="<?php echo $response->name; ?>" 
+                                     data-product-pice="<?php echo number_format($response->price, 2); ?>">Add to basket</button>
+                        </div>
+
+<?php else: ?>
+
+                        <div class="small-4 medium-6 large-4 columns text-center">
+
+                            <p class="no-stock-text"><span class="icon"></span>Out of stock</p>
+
+                        </div>
+
+                        <div class="small-4 medium-3 large-4 columns">
+
+                            &nbsp;
+
+                        </div>
+
+                        <div class="small-12">
+                            <button class="add-to-basket add-basket button large expanded no-stock" disabled="disabled" type="button">Add to basket</button>                    
+                        </div>
+<?php endif; ?>
                 </div>
             </div>
 
             <div class="clear">&nbsp;</div>
 
-
-<!--            <ul class="tabs" data-tabs id="example-tabs">
-                <li class="tabs-title is-active"><a href="#panel1" aria-selected="true"><span>Description</span></a></li>
-                <li class="tabs-title"><a href="#panel2"><span>Specifications</span></a></li>
-            </ul>-->
-
-<!--            <div class="tabs-content" data-tabs-content="example-tabs">-->
-
-                <div class="columns large-12">
-                
-
-<!--                <div class="tabs-panel is-active" id="panel1">-->
-
-                    <div class="row medium-up-12 large-up-12">
-                        <h2>Description</h2>
-                        <p  id="product_description"><?php echo nl2br($response->description); ?></p>
+            <div class="large-8 medium-12 columns tabber hide-for-large-up">
+                <div class="large-12 no-padding tab-house">
+                    <div data-tabbed="desc" class="tabber-tab active">Description <div class="down-arrow"></div></div>
+                    <div data-tabbed="spec" class="tabber-tab">Specifications <div class="down-arrow"></div></div>
+                    <div class="clear"></div>
+                </div>
+                <div class="tabber-content active" data-content="desc">
+                    <p  id="product_description"><?php echo nl2br($response->description); ?></p>
+                </div>
+                <div class="tabber-content" data-content="spec">
+                    <div class="spec-house large-6 medium-12 small-12 columns">
+                        <?php foreach ($schema->properties as $key => $property): ?>
+    <?php if (!isset($core[$key]) && isset($response->$key) && $response->$key && $property->title): ?>
+                                <div class="small-6 columns attr_template">
+                                    <p><?php echo $property->title; ?></p>
+                                </div>
+                                <div class="small-6 columns attr_template">
+                                    <p><?php echo $property->prepend . $response->$key . $property->append; ?></p>
+                                </div>         
+                            <?php endif; ?>   
+<?php endforeach; ?>
                     </div>
-<!--                </div>-->
-<!--                <div class="tabs-panel" id="panel2">-->
-                    <div class="row medium-up-12 large-up-12">
-                        <h2>Specifications</h2>
+                </div>
+            </div>
 
-                            <?php foreach ($schema->properties as $key => $property): ?>
-                                <?php if (!isset($core[$key]) && isset($response->$key) && $response->$key && $property->title): ?>
+            <div class="columns large-12 hide-for-medium-down">
 
-                                    <div class="medium-6 large-6 columns attr_template">
-                                        <p><?php echo $property->title; ?></p>
-                                    </div>
+                <div class="row medium-up-12 large-up-12">
+                    <h2>Description</h2>
+                    <p  id="product_description"><?php echo nl2br($response->description); ?></p>
+                </div>
+
+                <div class="row medium-up-12 large-up-12">
+                    <h2>Specifications</h2>
+
+                    <?php foreach ($schema->properties as $key => $property): ?>
+    <?php if (!isset($core[$key]) && isset($response->$key) && $response->$key && $property->title): ?>
+
+                            <div class="small-6 columns attr_template">
+                                <p><?php echo $property->title; ?></p>
+                            </div>
 
 
-                                    <div class="medium-6 large-6 columns attr_template">
-                                        <p><?php echo $property->prepend . $response->$key . $property->append; ?></p>
-                                    </div>         
+                            <div class="small-6 columns attr_template">
+                                <p><?php echo $property->prepend . $response->$key . $property->append; ?></p>
+                            </div>         
 
 
 
-                                <?php endif; ?>   
+    <?php endif; ?>   
 
 
-                            <?php endforeach; ?>
-                    </div>
-<!--                </div>-->
+<?php endforeach; ?>
+                </div>
+                <!--                </div>-->
             </div>
 
 
@@ -209,15 +252,15 @@ if ((!$_COOKIE['nsec']) && (!$_COOKIE['ann'])) {
 
 
 
-            <?php if ($response->items): ?>
+<?php if ($response->items): ?>
 
                 <p>In this bundle.</p>
                 <ul class="inline-list row">
-                    <?php foreach ($response->items as $item): ?>
+    <?php foreach ($response->items as $item): ?>
 
 
-                        <li class="medium-6 large-6 columns attr_template" style="height:150px">
-                            <a  rel="groups"   href="/p/<?php echo $item->productcode; ?>?bundle=1" class="product_bundle various">
+                        <li class="medium-6 large-6 columns attr_template">
+                            <a  rel="groups"   href="/p/<?php echo $item->productcode; ?>?bundle=1" class="product_bundle various" title="Show this product">
                                 <?php
                                 $pItem = $ibiza_api->get_product($item->productcode);
 
@@ -226,8 +269,8 @@ if ((!$_COOKIE['nsec']) && (!$_COOKIE['ann'])) {
                                     $pItem[0]->data->images[0]->url = 'https://s3.amazonaws.com/images.seroundtable.com/out-of-stock-1395144988.png';
                                 }
 
-                                echo '<img width="50" src="' . $pItem[0]->data->images[0]->url . '"/>';
-                                echo '<br /><span style="font-size:12px;" >' . $pItem[0]->data->name . '</span>'
+                                echo '<img width="50" src="' . $pItem[0]->data->images[0]->url . '"    alt="Image"   title="Image" />';
+                                echo '<br /><span>' . $pItem[0]->data->name . '</span>'
                                 ?>
                             </a>
                         </li>
@@ -235,73 +278,46 @@ if ((!$_COOKIE['nsec']) && (!$_COOKIE['ann'])) {
 
 
 
-                    <?php endforeach; ?>
+                <?php endforeach; ?>
                 </ul>
-            <?php endif; ?>
-
-
-            <!--        <div class="row" id="quantity">
-                        <div class="small-3 columns">
-                            <label for="middle-label" class="middle">Quantity</label>
-                        </div>
-                        <div class="small-9 columns">
-                            <input type="text" id="middle-label" placeholder="One fish two fish">
-                        </div>
-                    </div>-->
-
-
-
-
-
-
+<?php endif; ?>
 
         </div>
-        <!--
-        <div class="medium-12 large-6 columns small-12" style="clear:left;float:left">
-            <div class="row column" style="background: transparent url(/wp-content/themes/Ibiza-Theme/assets/images/bg.png) repeat scroll 0% 0%; padding: 20px;margin:20px 0">
-                <div class="product-meta1" style="background: white none repeat scroll 0% 0%; padding: 15px;">
 
-                    <p>Customer Reviews <img src="/wp-content/themes/Ibiza-Theme/assets/images/stars-product-page.png"></p>
-
-                </div>
-            </div>            
-        </div>        
-        -->
     </div>
 </div>
 <!-- Footer -->
 
 
-<div style="display:none;" id="attr_template">
-
+<div  class="hidden" id="attr_template">
     <div class="medium-6 large-6 columns attr_template attr_key">
-        <p>Brand</p>
+        <p></p>
     </div>
-
-
     <div class="medium-6 large-6 columns attr_template attr_value">
-        <p>Rowan</p>
+        <p></p>
     </div>
-
 </div>
 
-<script>
+<script type="text/javascript">
 
     function creatSwiper()
     {
 
-        if (mySwiper_products)
-                mySwiper_products.destroy(true, true);
+        if (mySwiper_products) {
+            mySwiper_products.destroy(true, true);
+        }
 
         var dir = 'horizontal';
         var ah = true;
         var spv = 7;
+
         if (jQuery(window).width() > 620 && jQuery(window).width() < 1006) {
-            
+
             dir = 'vertical';
             ah = false;
 
         }
+
         if (jQuery(window).width() < 630) {
 
             spv = 1;
@@ -309,12 +325,12 @@ if ((!$_COOKIE['nsec']) && (!$_COOKIE['ann'])) {
 
         mySwiper_products = new Swiper('.swiper-container-products', {
             // Optional parameters
-            loop            : false,
-            nextButton      : '.swiper-button-next',
-            prevButton      : '.swiper-button-prev',
-            slidesPerView   : spv,
-            direction       : dir,
-            autoHeight      : ah,
+            loop: false,
+            nextButton: '.swiper-button-next',
+            prevButton: '.swiper-button-prev',
+            slidesPerView: spv,
+            direction: dir,
+            autoHeight: ah
         });
 
     }
@@ -355,9 +371,9 @@ if ((!$_COOKIE['nsec']) && (!$_COOKIE['ann'])) {
 
             for (var image in  data.images) {
 
-                var image_link_el_start = '<a data-image="' + data.images[image].url + '" data-zoom-image="' + data.images[image].url + '" href="' + data.images[image].url + '" class="gallery">';
+                var image_link_el_start = '<a title="Show this image" data-image="' + data.images[image].url + '" data-zoom-image="' + data.images[image].url + '" href="' + data.images[image].url + '" class="gallery">';
                 var image_link_el_end = '</a>';
-                mySwiper_products.appendSlide('<div class="swiper-slide">' + image_link_el_start + '<img src="' + data.images[image].url + '" />' + image_link_el_end + '</div>');
+                mySwiper_products.appendSlide('<div class="swiper-slide">' + image_link_el_start + '<img src="' + data.images[image].url + '"  alt="Image"   title="Image" />' + image_link_el_end + '</div>');
 
             }
 
@@ -511,24 +527,26 @@ if ((!$_COOKIE['nsec']) && (!$_COOKIE['ann'])) {
 
     jQuery(document).ready(function () {
 
+        initTabs()
+        jQuery(document).on("click", '#add_quantity', function (e) {
+            e.preventDefault();
+            jQuery('#quantity').val(parseInt(jQuery('#quantity').val()) + 1);
 
-        jQuery(document).on("click", '#add_quantity' , function () {
-            
-            jQuery('#quantity').val( parseInt( jQuery('#quantity').val() ) + 1 );
-            
         });
 
 
-        jQuery(document).on("click", '#remove_quantity' , function () {
-
-            if( parseInt( jQuery('#quantity').val() )<=1  ){
+        jQuery(document).on("click", '#remove_quantity', function (e) {
+            
+            e.preventDefault();
+            
+            if (parseInt(jQuery('#quantity').val()) <= 1) {
                 return;
             }
 
-            jQuery('#quantity').val(  parseInt( jQuery('#quantity').val() ) - 1 );
+            jQuery('#quantity').val(parseInt(jQuery('#quantity').val()) - 1);
 
-            
-            
+
+
         });
 
         creatSwiper();
@@ -548,7 +566,7 @@ if ((!$_COOKIE['nsec']) && (!$_COOKIE['ann'])) {
         });
 
 
-        jQuery.getJSON('<?php echo $ibiza_api::api_location . '/productcatalog.api/api/variantgroup/variants.id/' . get_query_var('products'); ?>', function (data) {
+        jQuery.getJSON('<?php echo $ibiza_api::$end_points['variantgroup'] . get_query_var('products'); ?>', function (data) {
 
 
             if (!data) {
@@ -580,7 +598,7 @@ if ((!$_COOKIE['nsec']) && (!$_COOKIE['ann'])) {
 
                         if (val.image.length > 0) {
 
-                            d_display = '<img src="' + val.image + '" />';
+                            d_display = '<img src="' + val.image + '"  alt="Option Image"   title="Option Image"  />';
 
                         }
 
@@ -657,6 +675,7 @@ if ((!$_COOKIE['nsec']) && (!$_COOKIE['ann'])) {
         jQuery(window).resize(function () {
 
 
+            initTabs()
             jQuery("#zoom").attr('href', jQuery(this).data('image'));
             jQuery('.zoomContainer').remove();
             zoomImage.removeData('elevateZoom');
@@ -706,6 +725,27 @@ if ((!$_COOKIE['nsec']) && (!$_COOKIE['ann'])) {
 
 
 
+        //Tabber
+        function initTabs() {
+            jQuery('.tabber').each(function () {
+                var papa = jQuery(this);
+                if (papa.find('.tab-house').is(':visible')) {
+                    papa.addClass('is-active');
+                    papa.find('[data-tabbed]').off('click');//clear any old listeners
+                    papa.find('[data-tabbed]').on('click', function () {
+                        papa.find('.tabber-content.active').removeClass('active');
+                        papa.find('.tabber-tab.active').removeClass('active');
+                        jQuery('[data-content=' + jQuery(this).data('tabbed') + ']').addClass('active');
+                        jQuery('[data-tabbed=' + jQuery(this).data('tabbed') + ']').addClass('active');
+                        papa.addClass('active');
+                    });
+                } else {
+                    papa.removeClass('is-active');
+                }
+                ;
+            });
+        }
+        ;
 
 
 
@@ -763,7 +803,6 @@ if ((!$_COOKIE['nsec']) && (!$_COOKIE['ann'])) {
 
 
         });
-
 
 
     });

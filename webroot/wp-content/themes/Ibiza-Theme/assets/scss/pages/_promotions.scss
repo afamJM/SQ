@@ -1,0 +1,138 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 16-Jan-2017
+    Author     : Anthony.Freeman
+*/
+
+@import "../settings";
+
+
+#promotions-tabs {
+	
+	padding-top: 25px;
+	background: transparent url(../images/bg.png) repeat scroll 0% 0%;
+    .tabs-title{
+
+        float: left;
+    	list-style: none;
+    	margin-bottom: 0 !important;
+    	position: relative;
+    	padding-left:8px;
+
+        a{
+            display: block;
+	      	background-color: $brand-color;
+      		color: $white;
+	      	font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif !important;
+	      	font-size: 0.88889rem;
+	      	padding-top: 0.88889rem; 
+	      	padding-left:2px;
+	      	width:170px;
+	      	height: 65px;
+	    	text-align: center;
+
+		    -webkit-border-top-left-radius: 10px;
+		    border-top-left-radius: 10px;
+		    -webkit-border-top-right-radius: 10px;
+		    border-top-right-radius: 10px;
+
+		    img{
+		      	object-fit: none;
+			  	object-position: 0 -43px;
+			  	width: 120px;
+			  	height: 43px;
+
+		    }
+		    :hover {
+		    	background-color: $brand-color-alt;
+		    }
+        }
+        a[aria-selected='true'] {
+	      background-color: $white;
+	      color: $black;
+
+	      img{
+			  object-position: 0 0 !important;
+
+	      }
+	    }
+
+    }     
+
+}
+
+#promotions-tabs-content {
+	margin-bottom: 1.33333rem;
+	width: 100%;            
+	padding-top: 20px;
+	overflow: auto;
+	background: transparent url(../images/promotions/Image_BGBrick_Desktop.png) no-repeat scroll 0px center;
+
+
+	.layout-button {
+		  font-family: 'CeraPRO-Medium', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
+		  background: $brand-color;
+		  color: $white;
+		  clear: both;
+		  display: inline-block;
+		  margin: 30px auto 0;
+		  padding: 10px 35px;
+		  text-align: center;
+
+		  :hover {
+		    	background-color: $brand-color-alt;
+		    }
+		}
+
+	#promotionImagePage {
+		background: none;
+		@include breakpoint(medium down) {
+			background: transparent url(../images/promotions/Image_BGBrick_Mobile.png) no-repeat scroll 0px right;
+			
+		}
+
+		@include breakpoint(large) {
+			background: none;
+			/*background: transparent url(../images/promotions/Image_BGBrick_Desktop.png) no-repeat scroll 0px bottom;*/
+		}
+	}
+			
+
+	@include breakpoint(medium down) {
+
+		background: none;
+	}
+
+	@include breakpoint(large) {
+		background: transparent url(../images/promotions/Image_BGBrick_Desktop.png) no-repeat scroll 0px bottom;
+	}
+	h2{
+		color: $black;
+	}
+	h3{
+		color: $black;
+		margin-bottom: 0px;
+	}
+	h4{
+		color: $black;
+	}
+
+}
+
+.cookie-policy__table{
+  border-collapse: collapse;
+
+  table, td, th {
+	  border: 1px solid #cccccc;
+	  padding: 10px; 
+	}
+}
+
+.font-color--accent{
+    color: #00bcb4;
+}
+

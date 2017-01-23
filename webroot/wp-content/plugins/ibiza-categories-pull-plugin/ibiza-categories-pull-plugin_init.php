@@ -20,7 +20,8 @@
 */
 
 function IbizaCategoriesPullPlugin_init($file) {
-
+    
+   
     require_once('IbizaCategoriesPullPlugin_Plugin.php');
     $aPlugin = new IbizaCategoriesPullPlugin_Plugin();
 

@@ -69,6 +69,10 @@ function IbizaPostTypePlugin_i18n_init() {
 }
 
 
+
+
+
+
 //////////////////////////////////
 // Run initialization
 /////////////////////////////////
@@ -83,3 +87,8 @@ if (IbizaPostTypePlugin_PhpVersionCheck()) {
     include_once('ibiza-post-type-plugin_init.php');
     IbizaPostTypePlugin_init(__FILE__);
 }
+
+
+
+
+

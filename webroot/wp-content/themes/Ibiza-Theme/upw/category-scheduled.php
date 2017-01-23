@@ -159,13 +159,12 @@ if( count( $ids1 ) >0 )
         
     
         
-        <div class="<?php echo $row_class; ?>" style="height:250px">
+        <div class="<?php echo $row_class; ?> cat-sc">
         
             
     
         <?php if (current_theme_supports('post-thumbnails') && $instance['show_thumbnail'] && has_post_thumbnail()) : ?>              
-              <article <?php post_class($current_post); ?>  style="    height: 100%;background-size:cover;background:url(<?php the_post_thumbnail_url($instance['thumb_size']); ?>); border: 1px solid #ddd;
-    padding: 17px;" >
+              <article <?php post_class($current_post .  ' widget-style'); ?>  style="background:url(<?php the_post_thumbnail_url($instance['thumb_size']); ?>);" >
         <?php else:?>
                   
             <?php 
@@ -174,8 +173,7 @@ if( count( $ids1 ) >0 )
             
             ?>
                   
-            <article <?php post_class($current_post); ?> style="    height: 100%;background-size:cover;background:url(<?php echo $rowArrTitles[trim(get_the_title())]['image'];; ?>); border: 1px solid #ddd;
-    padding: 17px;" >
+            <article <?php post_class($current_post.  ' widget-style'); ?> style="background:url(<?php echo $rowArrTitles[trim(get_the_title())]['image'];; ?>);" >
         <?php endif; ?>    
     
         
@@ -186,7 +184,7 @@ if( count( $ids1 ) >0 )
               
               
             <?php if (get_the_title() && $instance['show_title']) : ?>
-              <h4 class="entry-title"><a href="<?php echo $rowArrTitles[trim(get_the_title())]['url']; ?>"><?php echo $rowArrTitles[trim(get_the_title())]['title']; ?></a></h4>
+              <h4 class="entry-title"><a href="<?php echo $rowArrTitles[trim(get_the_title())]['url']; ?>" title="<?php echo $rowArrTitles[trim(get_the_title())]['title']; ?>"><?php echo $rowArrTitles[trim(get_the_title())]['title']; ?></a></h4>
             <?php endif; ?>
 
             <?php if ($instance['show_date'] || $instance['show_author'] || $instance['show_comments']) : ?>
@@ -204,7 +202,7 @@ if( count( $ids1 ) >0 )
                 <?php if ($instance['show_author']) : ?>
                   <span class="author vcard">
                     <?php echo __('By', 'upw'); ?>
-                    <a href="<?php echo get_author_posts_url(get_the_author_meta('ID')); ?>" rel="author" class="fn">
+                      <a href="<?php echo get_author_posts_url(get_the_author_meta('ID')); ?>" rel="author" class="fn" title="..">
                       <?php echo get_the_author(); ?>
                     </a>
                   </span>
@@ -215,7 +213,7 @@ if( count( $ids1 ) >0 )
                 <?php endif; ?>
 
                 <?php if ($instance['show_comments']) : ?>
-                  <a class="comments" href="<?php comments_link(); ?>">
+                  <a class="comments" href="<?php comments_link(); ?>" title="..">
                     <?php comments_number(__('No comments', 'upw'), __('One comment', 'upw'), __('% comments', 'upw')); ?>
                   </a>
                 <?php endif; ?>
@@ -231,7 +229,7 @@ if( count( $ids1 ) >0 )
               <p>
                 <?php echo get_the_excerpt(); ?>
                 <?php if ($instance['show_readmore']) : ?>
-                  <a href="<?php the_permalink(); ?>" class="more-link"><?php echo $instance['excerpt_readmore']; ?></a>
+                  <a href="<?php the_permalink(); ?>" class="more-link" title=".."><?php echo $instance['excerpt_readmore']; ?></a>
                 <?php endif; ?>
               </p>
             </div>

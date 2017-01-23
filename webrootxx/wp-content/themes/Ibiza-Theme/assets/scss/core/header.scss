@@ -1,0 +1,638 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 11-Nov-2016, 15:25:06
+    Author     : Ryan.Blake
+*/
+
+@import "../settings";
+
+#logo{
+    margin:15px 0 10px 0;
+}
+
+.header-outter {
+    background:#fff;
+    border-bottom:rem-calc(2) solid  $brand-color;
+    z-index: 99999999;
+    position: relative;
+}
+
+
+.search-container{
+    text-align: center;
+    background:#eaece7;
+    display:none;
+    height:60px;
+    padding-top:15px;
+    img{
+
+        float: left;
+        height: 20px;
+        left: -7px;
+        margin-bottom: 2px;
+        margin-left: 0;
+        margin-top: 2px;
+        position: relative;
+        vertical-align: top;
+        z-index: 99;
+
+    }
+
+
+    form{
+        background: white none repeat scroll 0 0;
+        border-radius: 15px;
+        display: inline-block; 
+        z-index: 900;
+
+        input{
+
+        }
+
+    }    
+
+
+}
+
+[type="text"]:focus, [type="password"]:focus, [type="date"]:focus, [type="datetime"]:focus, [type="datetime-local"]:focus, [type="month"]:focus, [type="week"]:focus, [type="email"]:focus, [type="number"]:focus, [type="search"]:focus, [type="tel"]:focus, [type="time"]:focus, [type="url"]:focus, [type="color"]:focus, textarea:focus
+{
+    box-shadow:none;
+    border:0;
+}
+
+
+.site-top-bar {
+
+    background:$brand-color;
+
+    strong{
+        color:$white;
+        line-height: rem-calc(38);
+        font-weight:normal;
+        font-size:rem-calc(16);
+    }
+
+
+    li{ 
+
+        color:#fff;
+
+        a{
+
+            font-size:rem-calc(16);
+            display: inline-block;
+            padding-left: 1px;
+            padding-right: 0px;
+            text-transform: uppercase;
+            color:#fff;
+            &:hover{
+                text-decoration: underline;
+            }        
+
+        }    
+    }
+    .tel-number{        
+        padding-left: 30px; 
+        background: transparent url(../images/Icon_Phone_White.png) no-repeat scroll 0px center;
+
+    }
+
+    .account{
+        padding-left: 23px; 
+        background: transparent url(../images/Icon_User_White.png) no-repeat scroll 0 center;        
+    }
+
+}
+
+
+/*
+ search start
+*/
+
+
+#search-cancel{
+    background: rgba(0, 0, 0, 0) url("../images/Btn_Cancel_Black.png") no-repeat scroll  10px center;
+    color: white;
+    cursor: pointer;
+    color: $black;
+    cursor: pointer;
+    text-align: left;
+    text-indent: 20px;
+    height: 23px;
+    &:hover{
+        background-image:url(../images/Btn_Cancel_hover.png);
+        color:#e95968;
+    }
+}
+
+input.search-field{
+    background-color: transparent;
+    height: 100%;
+    position: relative;
+    vertical-align: top;
+    width: 100%;
+}
+
+
+
+
+
+
+.typeahead {
+    float:left;
+    background-color: transparent;
+    border-bottom:none !important;
+    border-image: none !important;
+    border-left: medium none !important;
+    border-right: medium none !important;
+    border-top: medium none !important;
+    box-shadow: none;
+    color:#000;
+    height: 24px;
+    margin: 0 0 0 0;
+    padding: 0;
+    top:3px;
+}
+.typeahead::-webkit-input-placeholder {
+    color: #000;  
+    opacity: 1 ;
+}
+
+.typeahead:-moz-placeholder { /* Firefox 18- */
+    color: #000;  
+    opacity: 1 ; 
+}
+
+.typeahead::-moz-placeholder {  /* Firefox 19+ */
+    color: #000;  
+    opacity: 1 ;
+    text-transform: uppercase;
+
+
+}
+
+.typeahead :-ms-input-placeholder {  
+    color: #000;  
+    opacity: 1 ; 
+}
+
+
+.tt-suggestion{ 
+    img{
+
+        display:none;
+
+    }
+    &:hover{
+        color:#e95968;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.tt-dataset {
+    background: rgba(0, 0, 0, 0) url("/wp-content/themes/Ibiza-Theme/assets/images/border.gif") repeat-x scroll left bottom;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    width: 121%;
+}
+
+
+.border-bottom,.sq-border{
+    background: rgba(0, 0, 0, 0) url("/wp-content/themes/Ibiza-Theme/assets/images/border.gif") repeat-x scroll left bottom;
+}
+
+
+.twitter-typeahead{
+    width:80%;
+    float:left;
+}
+
+.breadcrumbs{
+    margin: $foundation-padding-large 0 ($foundation-padding-large / 2) 0;
+    li{
+        text-transform: capitalize;
+        font-family: 'CeraPRO-Regular';
+        font-size: 1rem;
+        a{
+            color: $body-text-black;
+        }
+        &:last-child{
+            a{
+                color: darken($body-text-black,30%);
+            }
+        }
+    }
+    li:not(:last-child)::after {
+        color: #0a0a0a;
+        content: ">";
+    }
+}
+
+.nav-menu-icon{
+    height:264px;
+    height:100%;
+    overflow: hidden;
+
+    div{
+
+        font-size: 12px;
+        padding: 25% 0;
+    }       
+
+
+    img{
+
+        display: inline-block;
+
+    }     
+
+
+    strong{
+        display: block;
+        margin: 10px 0; 
+        color:$brand-color;
+    }    
+
+}
+
+
+.remove-filter {
+    background: rgba(0, 0, 0, 0) url("../images/Btn_Cancel_Green.png") no-repeat scroll 0 0;
+    display: inline-block;
+    height: 18px;
+    line-height: 15px;
+    text-indent: 25px;
+    width: 100%;
+    &:hover {
+        background-image:url( ../images/Btn_Cancel_hover.png );
+        color:#e95968;
+    }
+}
+
+
+select{
+    background-image:url(../images/Btn_DropDownMenu_Green.png);
+    background-size:26px 26px;
+    height:rem-calc(31);
+    padding:2px 2px 2px 2px;
+    background-position: right top;
+    text-transform:uppercase;
+}
+#top-bar-menu .menu > li > a{
+    padding-left:0;
+    padding-right:45%;
+}
+
+.menu .active > a{
+    background:transparent;
+}
+
+
+#my-account-button{
+    display:inline-block;
+    background:$brand-color;
+    color:#fff;
+    padding:12px 25px!important;
+    margin-bottom: 20px;
+}
+
+
+#signout-button{
+    color:$brand-color;
+}
+
+
+
+.account-link-con{
+    position: relative;
+    .sp-box{
+         top: 30px;
+    }
+    &:hover{
+        text-decoration:underline;
+        .sp-box{
+            display:block;
+        }
+    }
+
+}
+
+.sp-box{
+    position: absolute; 
+    z-index: 999999990; // z-index needs refactor
+    text-align: center; 
+    left: -50px;
+    display:none;
+
+
+    .my-basket{
+        p{
+            color:#000;
+        }
+    }
+
+
+    .my-basket-link{
+        background:#E95968;
+        color:#fff;
+        display:block;
+        padding:10px
+    }
+
+}
+
+.header-tri{
+    border-color: transparent transparent #eaece7;
+    border-style: solid;
+    border-width: 0 10px 15px;
+    height: 0;
+    margin: 0 auto;
+    text-align: center;
+    width: 14px;
+
+
+}
+
+
+/*
+search end
+*/
+
+
+/**
+* Small & Up Styles
+*/
+@media #{$small-up} {
+
+          .header-outter {
+        max-height:81px;
+    }
+
+
+}
+
+/**
+* Small Only
+*/
+@media #{$small-only} {
+
+
+    
+    .twitter-typeahead{
+        position: static!important;
+    }
+    
+    
+    .site-top-bar {
+
+        li{ 
+
+            a{
+                 background-position: right center !important;
+                position: relative;
+            }        
+
+        }    
+    }    
+    
+
+    .tt-menu{
+
+        top: 173px !important;
+        background: white none repeat scroll 0 0;
+        text-align: left;
+        width: 100%;
+        z-index: 100; 
+        padding:15px;
+        p{  
+
+            cursor: pointer;
+            font-size:75%;
+            margin-bottom:5px;
+            overflow: hidden;
+            position: relative;
+        }      
+
+        h5{
+
+            clear:both;
+            text-indent: 5px;
+            color:#000;
+            font-size:75%;
+            font-family:'CeraPRO-Bold';
+        }    
+
+        strong{
+            font-weight: normal;
+        }    
+
+        a{
+
+            color:$brand-color;
+            text-indent: 5px;
+
+        }    
+
+
+    }        
+
+
+}
+/**
+* Medium & Up Styles
+*/
+@media #{$medium-up} {
+
+    
+    .search-container{
+
+
+        position: relative;
+    }    
+    
+    .search-container  {
+
+        form{
+           
+            height: auto;
+            left: 0;
+            margin-left: auto;
+            margin-right: auto;
+            overflow: hidden;
+            right: 0;
+        }
+
+    }      
+    
+    
+    .header-container {
+        //text-align: right;
+        margin: 2px 0 0;
+        a{
+            font-size:rem-calc(18);
+            font-family: 'CeraPRO-Medium';
+        }
+    }
+
+
+    .tt-menu{
+
+
+        background: white none repeat scroll 0 0;
+        margin: 5px -25px 0;
+        position: static!important;
+        right: 0;
+        text-align: left;
+        top: 100%;
+        width: 100%;
+        z-index: 100; 
+        margin-top: 40px;
+
+        p{  
+
+            cursor: pointer;
+            font-size:75%;
+            margin-bottom:5px;
+            overflow: hidden;
+            position: relative;
+        }      
+
+        h5{
+
+            clear:both;
+            text-indent: 5px;
+            color:#000;
+            font-size:75%;
+            font-family:'CeraPRO-Bold';
+        }    
+
+        strong{
+            font-weight: normal;
+        }    
+
+        a{
+
+            color:$brand-color;
+            text-indent: 5px;
+
+        }    
+
+
+    }     
+
+
+}
+
+/**
+* Medium Only
+*/
+@media #{$medium-only} {
+
+        .site-top-bar {
+
+        li{ 
+
+            a{
+                 background-position: right center !important;
+                position: relative;
+            }        
+
+        }    
+    }   
+    
+
+}
+
+
+/**
+* Large & Up Styles
+*/
+@media #{$large-up} {
+
+    .header-outter {
+        height:81px!important;
+    }
+    .search-container  {
+
+        form{
+            position: absolute;
+        }
+
+    }  
+
+
+    .site-top-bar {
+
+        li{ 
+
+            a{
+                padding-left: 1px;
+                padding-right: 0px!important;// temp fix, needs updating
+            }        
+
+        }    
+    }
+
+
+
+
+
+
+
+
+
+}
+
+/**
+* Large Only
+*/
+@media #{$xlarge-only} {
+
+
+}
+
+
+/**
+* xLarge & Up Styles
+*/
+@media #{$xlarge-up} {
+
+
+}
+
+/**
+* xLarge Only
+*/
+@media #{$xlarge-only} {
+
+
+}
+
+
+/**
+* xLarge & Up Styles
+*/
+@media #{$xxlarge-up} {
+
+
+}
+

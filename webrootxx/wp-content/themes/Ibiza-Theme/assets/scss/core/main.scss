@@ -1,0 +1,603 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 11-Nov-2016, 15:00:35
+    Author     : Ryan.Blake
+*/
+
+/* Basic font */
+html, body {
+    
+    font-size: 16px;
+    font-family: 'CeraPRO-Regular';
+    color: $body-text-black;
+    font-weight: 400;
+    line-height: 1.25rem;
+    
+}
+
+.full-width-bg{
+    background:$white;
+}
+
+.ibiza-menu ul img{
+    width: 100%;
+}
+
+
+.ibiza-menu ul li img{
+    width: auto;
+}
+
+.off-canvas-wrapper{
+    overflow: hidden;
+}
+
+#off-canvas > ul > li{
+
+    border-bottom: solid 2px $brand-color;
+    
+}
+
+.is-accordion-submenu-parent  > li   > a{
+        color:$brand-color;
+
+}
+
+
+// random
+
+.page-template-template-products{
+    
+    #content{
+        
+        background:#fff;
+        
+    }
+    
+}
+
+
+#menu-item  li  a {
+
+    color:$brand-color;
+
+}
+
+.menu.vertical > li {
+    border-bottom: 1px solid;
+    display: block;
+    color:$brand-color;
+}
+
+#off-canvas{
+    
+    
+    .menu li > a{
+        color:$brand-color;
+    }    
+    li:last-child {
+        border:0;
+    }  
+   
+    
+    background:transparent;
+    
+    ul{
+        background: #fff none repeat scroll 0 0;
+        margin: 18px;
+        
+      
+
+        li{
+            
+
+            
+            
+            a{
+                
+                text-transform: uppercase;
+
+            }
+        
+            .is-accordion-submenu{
+                padding:0;
+                margin:0; 
+                
+                a{
+                    color:#000;
+                    
+                }
+                
+                li:last-child {
+                   border:0;
+                }
+                
+            }
+        
+        }
+    }
+    
+}
+
+
+
+#main .panel{
+    margin:0 0 30px 0 ;
+}
+
+h1{
+    font-size: 2rem;
+    color: #00a5a7;
+    font-family: 'CeraPRO-Regular', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
+    line-height: 2.5rem;
+}
+
+h2 {
+    font-family: 'CeraPRO-Regular', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
+    font-size: 1.5rem;
+}
+
+h4{
+    font-weight: 500;
+    font-size: 1.125rem;
+    font-family: 'CeraPRO-Medium';
+    &.green{
+        color: $brand-color;
+    }
+}
+/*
+h5 {
+    
+}
+
+h6 {
+    
+}
+*/
+
+p {
+    
+    line-height: 1.25;
+    
+}
+
+.no-padding {
+    
+    padding: 0;
+    
+}
+
+#off-canvas-left {
+    
+    background: rgba(0, 0, 0, 0) url("../images/bg.png") repeat scroll 0 0;
+    
+    ul{
+        background: #fff;
+    }
+    
+    .sidebar{
+        background:#fff;
+        padding: 30px;
+        text-align: left;
+    }    
+    
+} 
+
+
+.off-canvas-content, .off-canvas-content {
+    
+    box-shadow: none;
+    
+}
+
+
+.large-push-1-xtra {
+    @extend .large-push-1;
+    left:4%;
+}
+
+.large-12-xtra {
+    @extend .large-12;
+    width: 1335px;
+}
+
+
+.upw-posts article {
+    margin-bottom: 0;
+}
+
+.upw-posts .entry-title {
+    margin-bottom: 0;
+}
+
+a:hover{
+    color:$brand-color-hover;
+}
+
+
+
+.fullwidth {
+    width: 100%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: initial;
+}    
+   
+
+.font-small{
+    font-size: rem-calc( 10 );
+    margin: 0;
+    padding: 0;
+}
+
+.upper{
+    text-transform: uppercase;
+}
+
+.separator{
+    padding:rem-calc( 0 12 0 12 );
+}
+
+.right{
+    float:right;
+}
+
+.left{
+    float:left;
+}
+
+
+.padding-1{
+    padding:0px;
+    padding-top:0px;
+}
+
+#result , .full{
+    background:$white;
+}
+
+p.ng-binding {
+    line-height: 31px;
+    margin: 0;
+    overflow: hidden;
+    text-align: center;
+}
+ 
+
+fieldset {
+    border: 1px solid $brand-color;
+    margin: initial;
+    padding: 0 0 10px 15px;
+    input{
+        border:0;
+        border-bottom:1px solid $black;
+        width:95%;
+        margin: 0 0 15px 0;
+        font-size:12px;
+    }
+    
+    p{
+        font-size:12px;
+    }    
+    
+    legend {
+        
+        span{
+           background: rgba(0, 0, 0, 0) url("../images/mail-icon.png") no-repeat scroll 0 0;
+           display: inline-block;
+           margin: 0 7px;
+           text-indent: 33px;
+           vertical-align: -moz-middle-with-baseline;
+           font-size:12px;
+       }
+        
+    }  
+}
+ 
+
+.submit{
+    background: $brand-color;
+    border:0;
+    color:$white;
+    font-size:12px;
+    padding:10px 20px;
+    margin:0;
+}
+
+.sq-border {
+    
+    .product-title , .product-price, .arrow{
+        font-size:12px;
+        margin:0;
+    }    
+}
+.upw-posts{
+    
+    .columns{
+        overflow:hidden;    
+    }
+    
+    article {
+        overflow: hidden;
+    }    
+
+}
+
+
+
+/* misc style */
+.rating-text{
+    
+    font-weight: bold;
+    line-height: 32px;
+    
+    img{
+        vertical-align: text-bottom;
+    }
+    
+    span{
+        margin: rem-calc(0 0 0 8);
+        color:#fff;
+    }    
+}
+
+
+.blog  #content .medium-12{
+    background:#fff;
+}
+
+.breadcrumbs.show-for-small-only{
+    display:none;
+}
+
+
+.upsells{
+    background:#fff;
+}
+
+/* misc style */
+
+.brand-bg{
+
+    background:$brand-color;
+    color: #fff;
+    display: inline-block;
+    margin: 10px 0;
+    padding: 10px;
+}
+
+#dvVideoHolderHome{
+    background: transparent;
+    position: relative;
+}
+.n-l-p{
+    padding-left: 0;
+}
+
+.n-r-p{
+    padding-right: 0;
+}
+
+ul.breadcrumbs {
+    margin: 20px 0;
+    padding: 0;
+}
+
+.header-row{
+    line-height: 1;
+    padding: 0 0 10px;
+}
+
+#basket-item{
+    display:none;
+}
+
+/**
+* Small & Up Styles
+*/
+@media #{$small-up} {
+
+    #basket-count{
+        display:none;
+    }
+    
+    
+.sticky {
+  position: fixed;
+  z-index: 9999;
+  width: 100%;
+  background:$white;
+}    
+    
+    #triangle-outter{
+
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 0 14px 11px 14px;
+        border-color: transparent transparent #fff transparent;
+        line-height: 0px;
+        _border-color: #000000 #000000 #00bcb4 #000000;
+        _filter: progid:DXImageTransform.Microsoft.Chroma(color='#000000');        
+        right           : 50%;
+        top             : -11px;
+        z-index         : 8;
+        position        : absolute;
+        display         : none;        
+
+    }
+    
+    #triangle{
+
+
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 0 14px 11px 14px;
+        border-color: transparent transparent #00bcb4 transparent;
+        line-height: 0px;
+        _border-color: #000000 #000000 #00bcb4 #000000;
+        _filter: progid:DXImageTransform.Microsoft.Chroma(color='#000000');      
+        right: 50%;
+        top: -9px;
+        z-index         : 9;
+        position        : absolute;
+        display         : none;
+    }    
+    
+}
+
+.basket-remove-item{
+    background: transparent url(../images/Btn_Cancel_Black) repeat scroll 0% 0%; 
+    display: block; 
+    position: absolute; 
+    height: 23px; 
+    top: -7px; 
+    width: 23px; 
+    left: -10px;
+}
+
+.basket-item-image{
+    background:grey;
+    height:84px;
+    width:84px;
+    position: relative;
+}
+
+
+/**
+* Small Only
+*/
+@media #{$small-only} {
+    
+    
+}
+/**
+* Medium & Up Styles
+*/
+@media #{$medium-up} {
+
+    
+}
+
+/**
+* Medium Only
+*/
+@media #{$medium-only} {
+    
+    strong.slogan{
+        position: absolute!important;
+        left:0;
+        right:0;
+    }    
+    
+     article.featured_categories {
+      padding: 17px 17px 0 17px;
+      height: 350px;
+    }
+
+    .medium-top-margin-push { 
+        padding-top: 2%;
+    }
+    
+}
+
+
+/**
+* Large & Up Styles
+*/
+@media #{$large-up} {
+
+    
+    .is-open-left {
+        transform: translateX(30%)!important;
+    }
+    .off-canvas.position-left {
+        left: -30%!important;
+        top: 0;
+        width: 30%!important;
+    }    
+    
+    
+    #fill-me-up{
+        
+        .product-price{
+            font-family: 'CeraPRO-Medium';
+            font-size: rem-calc( 25 );
+        }
+        .tabs-title{
+            position:relative;
+            span{
+                margin:0;
+                padding:0;
+                border:0;
+                font-size:rem-calc(18);
+                color:$brand-color;
+                text-transform:uppercase;
+            }            
+            
+        }
+        
+        .is-active{
+            span{
+                color:#000;
+            }
+            .tri {
+                border-color: #000000 transparent transparent;
+                 border-style: solid;
+                 border-width: 8px 6px 0;
+                 height: 0;
+                 left: 50%;
+                 margin: 3px 14px 0 0 !important;
+                 position: absolute;
+                 text-align: center
+            }            
+        }
+        
+    }
+    
+    
+}
+
+/**
+* Large Only
+*/
+@media #{$xlarge-only} {
+    
+    
+}
+
+
+/**
+* xLarge & Up Styles
+*/
+@media #{$xlarge-up} {
+
+    
+}
+
+/**
+* xLarge Only
+*/
+@media #{$xlarge-only} {
+    
+    
+}
+
+
+/**
+* xLarge & Up Styles
+*/
+@media #{$xxlarge-up} {
+
+    
+}    
+
+
+
+ 

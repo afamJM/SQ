@@ -1,17 +1,114 @@
-<!doctype html>
-<?php $is_home  = is_front_page(); ?>
+<?php
+global $ibiza_api;
+$haspromoBanner = false;
+delete_transient();
+delete_site_transient();
+if ( !isset($_COOKIE['nsec']) && !isset($_COOKIE['ann']) ) {
+
+    $cookieVal = time() . date('dmYhis');
+    setcookie('ann', $cookieVal, time() + 3600, '/', '.' . $_SERVER['SERVER_NAME']);
+} else if( isset($_COOKIE['ann']) ){
+    $cookieVal = $_COOKIE['ann'];
+}else {
+
+    $cookieVal = urldecode($_COOKIE['ann']);
+    $cookieStr = $_COOKIE['nsec'];
+    parse_str($cookieStr);
+}
+
+
+$the_cache = 'promotional_banner';
+$cb = function($the_cache) {
+
+    global $wpdb;
+
+    $banner_meta = array();
+
+    $args = array(
+        'post_type' => 'promotional_banner',
+        'order' => 'ASC',
+        'post_status ' => 'publish'
+    );
+
+    $the_query = new WP_Query($args);
+    
+    if ($the_query->have_posts()) :
+        
+       
+        $rowArr = array();
+        while ($the_query->have_posts()) :
+         
+            $the_query->the_post();
+
+            $myrows = $wpdb->get_results('SELECT * FROM wp_postmeta AS w1  
+                                            WHERE post_id IN ( ' . get_the_ID() . ' ) AND 
+                                            ( meta_key = "_cs-start-date" OR 
+                                            meta_key = "_cs-expire-date" OR meta_key = "_cs-enable-schedule" )');
+
+            if (is_array($myrows)) {
+
+                foreach ($myrows as $row) {
+
+                    $rowArr[$row->post_id][$row->meta_key] = $row->meta_value;
+                }
+                $start_time = $rowArr[get_the_ID()]['_cs-start-date'];
+                $end_time   = $rowArr[get_the_ID()]['_cs-expire-date'];
+
+                if (time() > $start_time && time() < $end_time) {
+                    
+                    $banner_meta['end_time']                    = $end_time;
+                    $banner_meta['banner_content']              = get_the_content();
+                    $banner_meta['banner_title']                = get_the_title();
+                    $banner_meta['menu_banner_url']             = get_post_meta(get_the_ID(), 'menu_banner_url', '');
+                    $banner_meta['banner_background_colour']    = get_post_meta(get_the_ID(), 'banner_background_colour', '#f38a76');
+                }
+            }
+            // can only be one
+            break;
+        endwhile;
+    endif;
+
+    
+    
+    $args = array(
+        'post_type' => 'menu_banner',
+        'order' => 'ASC',
+        'post_status ' => 'publish'
+    );
+
+    $the_query = new WP_Query($args);
+    if ($the_query->have_posts()) :
+        while ($the_query->have_posts()) : $the_query->the_post();
+            $menu_banner = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->the_post()), 'single-post-thumbnail');
+            $menu_banner_url = get_post_meta(get_the_ID(), 'menu_banner_url', true);
+        endwhile;
+    endif;
+    wp_reset_query();    
+    
+    
+    $banner_meta['menu_banner']     = $menu_banner;
+    $banner_meta['menu_banner_url'] = $menu_banner_url;
+    
+    
+    create_cache($the_cache, $banner_meta);
+    return $banner_meta;
+};
+
+
+$banner_meta = get_cache($the_cache, $cb);
+//remove_cache($the_cache, $cb);
+
+?><!doctype html>
+<?php $is_home = is_front_page(); ?>
 <html class="no-js"  <?php language_attributes(); ?>>
 
     <head>
         <meta charset="utf-8">
-
         <!-- Force IE to use the latest rendering engine available -->
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
         <!-- Mobile Meta -->
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
         <meta class="foundation-mq">
-
         <!-- If Site Icon isn't set in customizer -->
         <?php if (!function_exists('has_site_icon') || !has_site_icon()) { ?>
             <!-- Icons & Favicons -->
@@ -43,29 +140,72 @@
         <?php } ?>
 
         <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>">
+        <?php wp_head(); ?>
 
-        <?php wp_head(); 
-        $cookieStr      = $_COOKIE['sec'];
-        parse_str($cookieStr, $output);        
-        ?>
         <!-- Drop Google Analytics here -->
-        <!-- end analytics -->
-        <script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-584565b16fa56454"></script>
-        <script>var api_location    = "<?php global $ibiza_api; echo $ibiza_api::api_location; ?>";</script>
-        <script>
-            var basket_url          = "<?php echo  $ibiza_api::api_location . '/ProductCatalog.api/api/legacy/securebasket/' .  $_SERVER['REMOTE_ADDR']  .'/'  .  $output['ci']  .'/'  . $output['sk']; ?>";
-            var basket_update_url   = "<?php echo  $ibiza_api::api_location . '/ProductCatalog.api/api/legacy/basketitemquantitysecure/{basketId}/'  .  $output['ci']  .'/{quantity}/'  . $output['sk']; ?>";
-        </script>
-        
-    </head>
+        <script type="text/javascript">
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function ()
+                {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }
 
-    <!-- Uncomment this line if using the Off-Canvas Menu --> 
+                , i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-85186561-2', 'auto');
+            ga('send', 'pageview');
+        </script>        
+        <!-- end analytics -->
+
+
+        <script type="text/javascript">
+
+            var end_points = {};
+<?php foreach ($ibiza_api::$end_points as $key => $endpoint): ?>
+                end_points.<?php echo $key ?> = '<?php echo $endpoint; ?>';
+<?php endforeach; ?>
+            var api_location = "<?php global $ibiza_api;
+echo $ibiza_api::api_location;
+?>";
+            var api_url = "<?php echo API; ?>";
+<?php
+if (_LOGGED_IN):
+
+    $cookieStr = $_COOKIE['sec'];
+    parse_str($cookieStr, $output);
+    ?>
+                var basket_url = "<?php echo $ibiza_api::$end_points['securebasket'] . $_SERVER['REMOTE_ADDR'] . '/' . $output['ci'] . '/' . $output['sk']; ?>";
+                var basket_update_url = "<?php echo $ibiza_api::$end_points['basketitemquantitysecure'] . '/{basketId}/' . $output['ci'] . '/{quantity}/' . $output['sk']; ?>";
+    <?php
+else:
+    /**
+     * Set ann cookie if you are not logged in and have nsec cookie for the add to basket section
+     */
+    ?>
+
+                var basket_url = "<?php echo $ibiza_api::$end_points['nonsecurebasket'] . $_SERVER['REMOTE_ADDR'] . '/' . $cookieVal; ?>";
+
+<?php
+endif;
+?>
+
+
+        </script>
+
+    </head>
 
     <body <?php body_class(); ?> >
 
-        <!--        <div class="header" style="margin: 0px;  overflow: hidden;">
-        
-                </div>-->
+        <div class="menu_banner hidden">
+            <img src="<?php echo  $banner_meta['menu_banner'][0]; ?>" alt="banner Image" title="banner Image" />
+        </div>
 
         <div class="off-canvas-wrapper">
 
@@ -78,51 +218,36 @@
                     <div class="fullwidth site-top-bar">
                         <div class="row">
 
-                            <div class="large-4 medium-4  columns small-12 text-center medium-text-left">
-                                <!--<p class="font-small rating-text">
-                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/stars.png" />
-                                    <span class="show-for-medium">Rated excellent by our customers</span>
-                                    <span  class="show-for-small-only">Excellent</span>
-                                </p>-->&nbsp;
+                            <div class="hide-for-small-only large-4 medium-4 columns small-12 text-center medium-text-left medium-text-left">
+                                &nbsp;
                             </div>
 
 
-                            <div class="large-4 medium-4 columns text-center show-for-medium">
-                                <strong class="slogan"><?php bloginfo('description');  ?></strong>
+                            <div class="small-11 large-4 medium-4 columns text-center small-text-left">
+                                <h1 class="slogan"><?php bloginfo('description'); ?></h1>
                             </div>  
 
-                       
 
+                            <div class="small-1 medium-4 columns panel clearfix header-contact-large">
 
-                            <div class="large-4 medium-4 columns panel  clearfix">
+                                <ul class="menu right">
 
-                                <ul class="menu right show-for-medium">
+                                    <?php if (_LOGGED_IN): ?>
 
-                                    <?php if ( _LOGGED_IN ):?>
-                                    
-                                    <li class="account-link-con"  class="show-for-large-only">
-                                        <a class="font-small  account"  href="https://secure.<?php echo $_SERVER['SERVER_NAME']; ?>/account.aspx?_ga=1.111643779.624630137.1465816634">&nbsp;<span class="show-for-large">My Account</span></a>
-                                            
-                                            <div  class="sp-box show-for-large">
+                                        <li class="account-link-con"  class="show-for-large-only">
+                                            <a class="font-small  account"  href="<?php echo  $ibiza_api::$end_points['secure_site']  ?>/account.aspx?_ga=1.111643779.624630137.1465816634" title="My account page link">&nbsp;<span class="show-for-large">My Account</span></a>
+
+                                            <div  class="sp-box">
 
                                                 <div class="header-tri"></div>
 
-                                                <div id="my-account" style="height:auto;width:240px;background:#fff;border:15px solid #eaece7;text-align: center;padding:12px 15px" class="row">
-
-                                                    
-                                                    <?php
-                                                    
-                                                    $str =  $_COOKIE['nsec'];
-                                                    parse_str($str);                                                    
-                                                    
-                                                    ?>
-                                                    
+                                                <div id="my-account"  class="row">
 
 
                                                     <div class="large-12">
-                                                        <h2 style="color:#000">Welcome Back<br /><?php echo ucwords( sanitize($fn) ); ?></h2>
-                                                        <a href="https://secure.<?php echo $_SERVER['SERVER_NAME']; ?>/account.aspx?_ga=1.111643779.624630137.1465816634" class="upper" id="my-account-button">My Account</a>
-                                                        <a href="http://<?php echo $_SERVER['SERVER_NAME']; ?>?logout=1" class="upper" id="signout-button">Sign Out</a>
+                                                        <h2 class="dark-header">Welcome Back<br /><?php echo ucwords(sanitize($fn)); ?></h2>
+                                                        <a href="<?php echo  $ibiza_api::$end_points['secure_site']  ?>/account.aspx?_ga=1.111643779.624630137.1465816634" class="upper" id="my-account-button"  title="My account page link">My Account</a>
+                                                        <a href="http://<?php echo $_SERVER['SERVER_NAME']; ?>?logout=1" class="upper" id="signout-button"  title="Sign out link">Sign Out</a>
                                                     </div>
 
 
@@ -130,30 +255,27 @@
 
 
                                             </div>                                            
-                                            
-                                            
-                                            
+
+
+
                                         </li>
 
                                     <?php else: ?>
 
-                                        <li  class="show-for-large">
-                                            <a class="font-small account"   href="https://secure.<?php echo $_SERVER['SERVER_NAME']; ?>/login.aspx?_ga=1.246909059.624630137.1465816634">Login / Register </a>
+                                        <li  class="show-for-small">
+                                            <a class="font-small account"   href="<?php echo  $ibiza_api::$end_points['secure_site']  ?>/login.aspx?_ga=1.246909059.624630137.1465816634" title="Login page link"><span class="show-for-large">Login / Register</span></a>
                                         </li>
 
                                     <?php endif; ?>
 
                                     <li class="separator show-for-large">|</li>
 
-                                    <li class="show-for-medium">
-                                        <a class="font-small tel-number" href="tel:0800 6444 655">&nbsp;<span  class="show-for-large">0800 6444 655</span></a>
+                                    <li class="show-for-large">
+                                        <a class="font-small tel-number" href="tel:08001124433" title="Sewing Quarter telephone number"><span class="show-for-large">0800 112 4433</span></a>
                                     </li>
                                 </ul>                    
 
                             </div>
-
-
-
 
                         </div>
                     </div>
@@ -164,43 +286,49 @@
 
                             <!-- This navs will be applied to the topbar, above all content 
                                      To see additional nav styles, visit the /parts directory -->
-                            <?php get_template_part('parts/nav', 'offcanvas-topbar'); ?>
+<?php get_template_part('parts/nav', 'offcanvas-topbar'); ?>
 
                         </nav> <!-- end .header -->
-                        
-
-                        
                     </div>
-                    
-                    
+
+
                     <div class="fullwidth">
                         <div>
-                        <?php if (is_active_sidebar('searchbar')) : ?>
+                            <?php if (is_active_sidebar('searchbar')) : ?>
 
-                            <?php dynamic_sidebar('searchbar'); ?>
+                                <?php dynamic_sidebar('searchbar'); ?>
 
-                        <?php endif; ?>
+<?php endif; ?>
                         </div>                    
                     </div>
-                    
+
                     <div class="show-for-medium upsells">
-                        <div class="row" id="channels" style="large-12-xtra" style="text-align: center;">
+                        <div class="row text-center" id="channels">
 
-                            <div class="small-4 columns tv-channel-con text-center medium-text-left">
-
-                                <p>Free Beginner, Intermediate &amp; Advanced Tutorials</p>
-
+                            <div class="small-4 columns tv-channel-con tv-channel-con1 text-center medium-text-left">
+                                <p>Free Beginner, Intermediate and Advanced Tutorials</p>
                             </div>
-                            <div class="small-4 columns  tv-channel-con text-center medium-text-left" style="border-left:1px solid #000;border-right:1px solid #000;">
-
-                                <p>Buy Online - Standard Delivery Only &pound;2.99</p>
-
+                            <div class="small-4 columns  tv-channel-con tv-channel-con2 text-center medium-text-left">
+                                <p>Shop all day, pay once for delivery - only &pound;2.95* </p>
                             </div>
-                            <div class="small-4 columns  tv-channel-con text-center medium-text-left">
-
-                                <p>Watch Online or Available on <img alt="Freeview Icon" src="<?php echo get_template_directory_uri(); ?>/assets/images/Image_FreeviewLogo.png" style="position: relative; bottom: 3px;" /> Channel 78 </p>
-
+                            <div class="small-4 columns  tv-channel-con tv-channel-con3 text-center medium-text-left">
+                                <p>Watch Online and on <span class="icon freeview"></span> Channel 78, 8am-12pm</p>
                             </div>
 
                         </div>
+
                     </div>
+<?php if ( isset( $banner_meta['banner_content'] ) ): ?>
+                        <div id="promo_banner" class="row">
+                            <div class="small-12 text-center columns">
+                                <h2 style="background:<?php echo $banner_meta['banner_background_colour']; ?>">
+                                    <span>
+                                        <a href="<?php echo $banner_meta['menu_banner_url']; ?>" title="Promo link page" class="block-el" ><strong><?php echo $banner_meta['banner_title']; ?></strong> <?php echo $banner_meta['banner_content']; ?></a>
+                                        <small>Offer ends <?php echo date('d/m/Y', $banner_meta['end_time']); ?> <a  href="/terms-conditions/">*Terms & Conditions Apply</a></small>
+                                    </span>
+
+                                </h2>
+
+                            </div>
+                        </div>
+<?php endif; ?>

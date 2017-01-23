@@ -1,17 +1,17 @@
          
         
         <main id="main" class="large-<?php echo $col_size; ?> medium-12 small-12 columns" role="main" >
-                <div class="row">
+                <div class="row columns" ng-controller="PaginationDemoCtrl">
                         <?php if($top_level == false): ?>
 
-                        <div class="small-6 top-bar-left float-left hide-for-large columns">
+                        <div class="small-6 top-bar-left float-left hide-for-large columns  n-l-p">
                             <ul class="menu">
                                 <!-- <li><button class="menu-icon" type="button" data-toggle="off-canvas"></button></li> -->
-                                <li class="refine-results"><a data-toggle="off-canvas-left" aria-expanded="false" aria-controls="off-canvas"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/Icon_RefineResults_Black.png" />Refine Results</a></li>
+                                <li class="refine-results"><a data-toggle="off-canvas-left" aria-expanded="false" aria-controls="off-canvas" title="Function link to refine results"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/Icon_RefineResults_Black.png" alt="Refine search results icon" title="Refine search results icon" />Refine Results</a></li>
                             </ul>
                         </div>
 
-                        <div class="large-3 medium-6 small-6 columns">
+                        <div class="large-3 medium-6 small-6 columns no-padding">
 
                             <?php if( count( $sort ) ): ?>
                             <select id="sort_order" data-id="sort">
@@ -23,13 +23,15 @@
                                 <?php endforeach; ?>
 
                             </select>
+                            <?php else:?>
+                            &nbsp;
                             <?php endif; ?>
                             
                         </div>
 
 
-                        <div class="large-4 columns small-12 small-text-center">
-                            <p>Showing {{indexVM.pageSize * indexVM.page - indexVM.pageSize + 1}} - {{min(indexVM.pageSize * indexVM.page, indexVM.results.hits.total)}} of {{indexVM.results.hits.total}} <?php echo $page_type; ?></p>
+                        <div class="large-<?php  count( $sort ) ? '4' :'12'; ?> columns small-12 small-text-center">
+                            <p>Showing {{indexVM.pageSize * indexVM.page - indexVM.pageSize +1 }} - {{angMath.min(indexVM.pageSize * indexVM.page, indexVM.results.hits.total)}} of {{indexVM.results.hits.total}} <?php echo $page_type; ?></p>
                             <!--<select ng-model="indexVM.pageSize" id="count" data-id="the_count">-->
                                 <?php
 //                                foreach( $page_sizes as $key => $page_size ):
@@ -43,47 +45,57 @@
                             </select>
                         </div>
 
-                        <div class="large-4 small-12 columns">
+                        <div class="large-<?php  count( $sort ) ? '5' :'12'; ?> small-12 columns">
 <!--                            <eui-simple-paging></eui-simple-paging>-->
                             
-                            <div ng-controller="PaginationDemoCtrl" class="paging-container">
+                            <div class="paging-container">
                                 {{setPageTotal(indexVM.results.hits.total)}}
 <!--                                <pagination total-items="totalItems" page="currentPage" on-select-page="pageChanged(page)" items-per-page="itemsPerPage"  max-size="maxSize" class="pagination-sm" boundary-links="false" rotate="false" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>-->
-                                <div class="paging-info">
-                                    <pager total-items="totalItems" page="currentPage"  num-pages="numPages" previous-text="Icon_WhiteArrowPrev.png" next-text="Icon_WhiteArrowNext.png" ></pager>
-                                    <span class="paging-meta">Page {{currentPage}} of {{numPages}}</span>
+                                <div class="paging-info paging-top">
+<!--                                    <pager total-items="totalItems" page="currentPage"  num-pages="numPages" previous-text="Icon_WhiteArrowPrev.png" next-text="Icon_WhiteArrowNext.png" ></pager>
+                                    <span class="paging-meta">Page {{currentPage}} of {{numPages}}</span>-->
+                                    <eui-simple-paging></eui-simple-paging>
                                 </div>
                             </div>                            
                             
                             
                         </div>
                         <?php endif; ?>
+                    <div class="large-12 columns show-for-large no-padding">
+                        <hr>
                     </div>
-                    <hr class="show-for-large">
 
                     <?php if($top_level == false): ?>
 
 
+                    <div class="row" vertilize-container>
+                        <div class="large-3 medium-4 small-6 columns" ng-repeat="doc in indexVM.results.hits.hits"  ng-class="!$last ? '' : 'end'" >
 
-                    <div class="large-3 medium-4 small-6 columns" ng-repeat="doc in indexVM.results.hits.hits"  ng-class="!$last ? '' : 'end'">
+                            <div class="panel"  ng-if="doc._index=='product'" >
+                                <a href="/p/{{doc._source.productcode}}/{{doc._source['_friendly-uri-suffix']}}" title="Product details page">
+                                    <img ng-show="doc._source.images[0].url" ng-src="{{doc._source.images[0].url}}" alt="{{doc._source.name}} image" title="{{doc._source.name}} image" />
+                                    <img ng-hide="doc._source.images[0].url" ng-src="/wp-content/themes/Ibiza-Theme/assets/images/no-product-image-350x350.png" alt="image not loaded" title="image not loaded" />
+                                </a>
+                                <div vertilize>
+                                <h5><a href="/p/{{doc._source.productcode}}/{{doc._source['_friendly-uri-suffix']}}"  title="Product details page">{{doc._source.name}}</a></h5>
+                                <h6><strong>&pound;{{ doc._source.price | number : 2}} </strong></h6>
+    <!--                            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>-->
+                                </div>
+                            </div>
 
+                            <div class="panel"  ng-if="doc._index=='howto'" >
+                                <a vertilize style="max-height:350px;" vertilizehref="/h/{{doc._id}}/{{doc._source.name}}"  title="How to Guide page">
+                                    <img ng-show="{{doc._source.image[0].url}}"  ng-src="{{doc._source.image[0].url}}" alt="How to guide image" title="How to guide image" />
+                                    <img ng-hide="doc._source.images[0].url" ng-src="/wp-content/themes/Ibiza-Theme/assets/images/no-product-image-350x350.png" alt="image not loaded" title="image not loaded" />
+                                </a>
+                                <div>
+                                    <h5 style="height: 50px;"><a href="/h/{{doc._id}}/{{doc._source.name}}" title="How to Guide page">{{doc._source.name}}</a></h5>
+<!--                                <h6><strong>Level - {{doc._source.level[0]}}</strong></h6>-->
+                                </div>
+                            </div>
 
-
-                        <div class="panel"  ng-if="doc._index=='product'" >
-                            <a href="/p/{{doc._source.productcode}}/{{doc._source['_friendly-uri-suffix']}}"><img src="{{doc._source.images[0].url}}" alt="{{doc._source.name}} image" /></a>
-                            <h5><a href="/p/{{doc._source.productcode}}/{{doc._source['_friendly-uri-suffix']}}">{{doc._source.name}}</a></h5>
-                            <h6><strong>&pound;{{ doc._source.price | number : 2}} </strong></h6>
-<!--                            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>-->
                         </div>
-
-                        <div class="panel"  ng-if="doc._index=='howto'" >
-                            <a href="/h/{{doc._id}}/{{doc._source.name}}"><img src="{{doc._source.image[0].url}}" /></a>
-                            <h5 style="height:auto;"><a href="/h/{{doc._id}}/{{doc._source.name}}">{{doc._source.name}}</a></h5>
-                            <h6><strong>Level - {{doc._source.level[0]}}</strong></h6>
-                        </div>
-
                     </div>
-
 
                 <?php else: ?>
 
@@ -122,10 +134,10 @@
                         ?>
 
                     <div class="large-3 medium-3 columns padded-column box <?php echo  $i == ( $total - 1) ? ' end ' : '' ; ?>">
-                        <a href="<?php print $cat->url; ?>">
+                        <a href="<?php print $cat->url; ?>" title="<?php echo $cat->post_title;?> page">
                         <span class="caption fade-caption">
                             <h3><?php echo $cat->post_title;?></h3>
-                            <p><?php echo $cat_data_ob->intro ? $cat_data_ob->intro :'nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.'; ?></p>
+                            <p><?php echo $cat_data_ob->intro ? $cat_data_ob->intro :''; ?></p>
                         </span>
                         </a>
                     </div>
@@ -136,17 +148,27 @@
 
                     <?php endforeach; ?>
 
-                <!-- End Thumbnails -->
-                
-                <div class="large-12 columns text-center">
-                    <ul class="pager" data-id="pager"> 
-                        <li><pagination  total-items="totalItems" page="currentPage"  num-pages="numPages"     rotate="false" previous-text="Icon_WhiteArrowPrev.png" next-text="Icon_WhiteArrowNext.png"></pagination></li>
-                    </ul>
+                    <!-- End Thumbnails -->
+
+                    <div class="large-12 columns text-center">
+                        <pagination class="pagination-bottom" total-items="totalItems" max-size="4" page="indexVM.page" on-select-page="indexVM.page" previous-text="&lsaquo;" next-text="&rsaquo;"></pagination>
+                    </div>
+
                 </div>
             </main>
 
 <!-- Footer -->
 <script src="<?php echo get_template_directory_uri(); ?>/vendor/angular/angular.min.js" type='text/javascript'></script>
+<?php if(ENV=='prod'): 
+    
+    wp_enqueue_script('search-js', get_template_directory_uri() . '/assets/prod/search-dist.js', array('jquery'), '', true);
+    ?>
+
+
+
+<?php else :
+    ?>
+
 <script src="<?php echo get_template_directory_uri(); ?>/assets/js/purl.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/vendor/elasticsearch/elasticsearch.angular.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/assets/js/elastic/new/elastic.min.js"></script>
@@ -156,7 +178,9 @@
 <script src="<?php echo get_template_directory_uri(); ?>/vendor/history.js/scripts/compressed/history.adapter.jquery.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/vendor/history.js/scripts/compressed/history.js"></script>
 
-<script>
+<?php endif; ?>
+
+<script type="text/javascript">
 var started             = 0;
 var query_str_arr       = {};
 var state_change        = 0;
@@ -394,8 +418,19 @@ function app()
 
         indexVm.refresh( true );
         console.log( 'Refresh results' );
+        
+        
+        
+        
     }else{
-
+         
+        
+        jQuery('#loading_container2').fadeOut();
+        
+        if( indexVm.results.hits.total <=0 ){
+            
+        }
+        
         if(hasQueryParam==false)
         {
             jQuery('#loading_container2').fadeOut();
@@ -412,13 +447,14 @@ function push_state( changedEl , query_str_arr )
     var url         = jQuery.url().attr('host');
     var directory   = jQuery.url().attr('directory');
     var q           = jQuery.url().param('q');
+    var type           = jQuery.url().param('type');
     var cat         = jQuery.url().param('cat');
     var title       = jQuery.url().param('title');
 
     if(q){
-        History.pushState({state: jQuery( changedEl ).attr('data-id')  }, "State 1",  protocol + '://' + url +  directory  +  '?q=' + q + '&' + toQueryString(query_str_arr, '') );
+        History.pushState({state: jQuery( changedEl ).attr('data-id')  }, null,  protocol + '://' + url +  directory  +  '?q=' + q + '&type=' + type + '&' + toQueryString(query_str_arr, '') );
     }else{
-        History.pushState({state: jQuery( changedEl ).attr('data-id')  }, "State 1",  protocol + '://' + url +  directory  +  '?' + toQueryString(query_str_arr, '') );
+        History.pushState({state: jQuery( changedEl ).attr('data-id')  }, null,  protocol + '://' + url +  directory  +  '?' + toQueryString(query_str_arr, '') );
     }
 
 }

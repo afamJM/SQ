@@ -26,7 +26,7 @@ $schema                 = $ibiza_api->get_product_schema( $rst[0]->{'$schema'});
         
         <div class="medium-6 columns">
 
-            <img id="zoom_01"   data-zoom-image="<?php echo $response->images[0]->url; ?>" src="<?php echo $response->images[0]->url; ?>">
+            <img id="zoom_01"   data-zoom-image="<?php echo $response->images[0]->url; ?>" src="<?php echo $response->images[0]->url; ?>" alt="Main Product Image"  title="Main Product Image" />
 
         </div>
         <div class="medium-6 columns">

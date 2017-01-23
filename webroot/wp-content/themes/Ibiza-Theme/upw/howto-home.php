@@ -56,7 +56,7 @@ if( count( $ids ) >0 )
 
 
 
-<div class="upw-posts hfeed <?php echo $container_class; ?>" <?php echo $style; ?>>
+<div class="upw-posts hfeed <?php echo $container_class; ?>" <?php echo $style; ?> data-equalizer>
 
     
     <?php if($slider): ?>
@@ -106,32 +106,27 @@ if( count( $ids ) >0 )
     
         
     
-        <?php $howto =  get_product_by_mongo_id( $post->post_title ) ; /// print_r($product); ?>
-     <div class="<?php echo $row_class; ?>">
+        <?php $howto =  get_product_by_mongo_id( $post->post_title );  ?>
+        <div class="<?php echo $row_class; ?> panel"  >
         
-         <article <?php post_class($current_post); ?>>
+            <article <?php post_class($current_post); ?> >
          
          
         <?php if (current_theme_supports('post-thumbnails') && $instance['show_thumbnail'] && has_post_thumbnail()) : ?>              
               <header <?php post_class($current_post); ?>  style="background-image:url(<?php the_post_thumbnail_url($instance['thumb_size']); ?>); background-size: cover;
     padding: 17px;" >
                   
-        <?php elseif ($howto->data->image) : ?>              
-             <header <?php post_class($current_post); ?>  style="background-image:url(<?php echo $howto->data->image; ?>); background-size: cover;
+        <?php elseif (isset( $howto->data->images[0]->url ) && $howto->data->images[0]->url ) : ?>              
+             <header <?php post_class($current_post); ?>  style="background-image:url(<?php echo $howto->data->images[0]->url; ?>); background-size: cover;
          padding: 17px;" >
         <?php else:?>
             <header <?php post_class($current_post); ?>>
         <?php endif; ?>    
-    
-        
-
-          
-
 
 
             <?php if (get_the_title() && $instance['show_title']) : ?>
               <h4 class="entry-title">
-                <a href="<?php the_permalink(); ?>" rel="bookmark">
+                  <a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php the_title(); ?>">
                   <?php the_title(); ?>
                 </a>
               </h4>
@@ -152,7 +147,7 @@ if( count( $ids ) >0 )
                 <?php if ($instance['show_author']) : ?>
                   <span class="author vcard">
                     <?php echo __('By', 'upw'); ?>
-                    <a href="<?php echo get_author_posts_url(get_the_author_meta('ID')); ?>" rel="author" class="fn">
+                      <a href="<?php echo get_author_posts_url(get_the_author_meta('ID')); ?>" rel="author" class="fn" title="..">
                       <?php echo get_the_author(); ?>
                     </a>
                   </span>
@@ -163,7 +158,7 @@ if( count( $ids ) >0 )
                 <?php endif; ?>
 
                 <?php if ($instance['show_comments']) : ?>
-                  <a class="comments" href="<?php comments_link(); ?>">
+                  <a class="comments" href="<?php comments_link(); ?>" title="..">
                     <?php comments_number(__('No comments', 'upw'), __('One comment', 'upw'), __('% comments', 'upw')); ?>
                   </a>
                 <?php endif; ?>
@@ -175,9 +170,9 @@ if( count( $ids ) >0 )
           </header>
 
             
-            <div class="how-to-holder">
+            <div class="how-to-holder" data-equalizer-watch>
                 
-                <h6><a href="/h/<?php echo $howto->_id;?>/"><?php echo  $howto->data->name; ?></a></h6>
+                <h6><a href="/h/<?php echo $howto->_id;?>/" title="<?php echo  $howto->data->name; ?> page"><?php echo  $howto->data->name; ?></a></h6>
                  
                 
           <?php if ($instance['show_excerpt']) : ?>
@@ -185,19 +180,19 @@ if( count( $ids ) >0 )
               <p>
                 <?php echo get_the_excerpt(); ?>
                 <?php if ($instance['show_readmore']) : ?>
-                  <a href="<?php the_permalink(); ?>" class="more-link"><?php echo $instance['excerpt_readmore']; ?></a>
+                  <a href="<?php the_permalink(); ?>" class="more-link" title=""><?php echo $instance['excerpt_readmore']; ?></a>
                 <?php endif; ?>
               </p>
             </div>
           <?php elseif ($instance['show_content']) : ?>
-            <div class="entry-content">
-              <?php the_content() ?>
+            <div class="entry-content" >
+              <?php echo $howto->data->introduction;; ?>
             </div>
           <?php endif; ?>
 
-          <div class="skill-level">
+<!--          <div class="skill-level">
             <p>Skill Level: Advanced</p>
-          </div>
+          </div>-->     
             
         </div> 
                 
@@ -277,7 +272,8 @@ if( count( $ids ) >0 )
 <?php endif; ?>
 
 
-<script>
+<?php                 
+wp_add_inline_script( 'site-js',"
 
 jQuery(document).ready(function () {
     //initialize swiper when document ready  
@@ -291,7 +287,5 @@ jQuery(document).ready(function () {
         prevButton : '.swiper-button-prev'
     });
     
-});
-
-
-</script>
+});");
+?>

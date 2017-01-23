@@ -58,7 +58,9 @@ if (!class_exists('WP_Widget_Ultimate_Posts')) {
         }
 
         function widget($args, $instance) {
-
+            
+            $widget_id = $args['widget_id'];
+            
             global $post;
             $current_post_id = $post->ID;
 
@@ -92,7 +94,7 @@ if (!class_exists('WP_Widget_Ultimate_Posts')) {
             $orderby = $instance['orderby'];
             $meta_key = $instance['meta_key'];
             $custom_fields = $instance['custom_fields'];
-            $post_id        = (int)$instance['the_post'];
+            $post_id = (int) $instance['the_post'];
             // Sticky posts
             if ($sticky == 'only') {
                 $sticky_query = array('post__in' => get_option('sticky_posts'));
@@ -167,11 +169,11 @@ if (!class_exists('WP_Widget_Ultimate_Posts')) {
                 'post_type' => $types
             );
 
-            if($post_id>0) {
+            if ($post_id > 0) {
                 $args['p'] = $post_id;
                 $args['posts_per_page'] = 1;
             }
-            
+
             if ($orderby === 'meta_value') {
                 $args['meta_key'] = $meta_key;
             }
@@ -180,21 +182,32 @@ if (!class_exists('WP_Widget_Ultimate_Posts')) {
                 $args[key($sticky_query)] = reset($sticky_query);
             }
 
-            $args = apply_filters('upw_wp_query_args', $args, $instance, $this->id_base);
-
-            $upw_query = new WP_Query($args);
-
-            if ($instance['template'] === 'custom') {
-                $custom_template_path = apply_filters('upw_custom_template_path', '/upw/' . $instance['template_custom'] . '.php', $instance, $this->id_base);
-                if (locate_template($custom_template_path)) {
-                    include get_stylesheet_directory() . $custom_template_path;
-                } else {
-                    include 'templates/standard.php';
-                }
-            } elseif ($instance['template']) {
-                include 'templates/' . $instance['template'] . '.php';
+            $args       = apply_filters('upw_wp_query_args', $args, $instance, $this->id_base);
+            $upw_query  = new WP_Query($args);
+            $the_cache  = str_replace( '-' , '_' ,  $this->id_base . '_' . $widget_id );
+            if ($contents = get_cache($the_cache, null )) {
+                print $contents;
             } else {
-                include 'templates/legacy.php';
+                ob_start();
+
+                if ($instance['template'] === 'custom') {
+                    $custom_template_path = apply_filters('upw_custom_template_path', '/upw/' . $instance['template_custom'] . '.php', $instance, $this->id_base);
+                    if (locate_template($custom_template_path)) {
+                        include get_stylesheet_directory() . $custom_template_path;
+                    } else {
+                        include 'templates/standard.php';
+                    }
+                } elseif ($instance['template']) {
+                    include 'templates/' . $instance['template'] . '.php';
+                } else {
+                    include 'templates/legacy.php';
+                }
+
+                $contents   = ob_get_contents();
+                $cb         = null;
+                ob_end_clean();
+                create_cache($the_cache, $contents);
+                print $contents;
             }
 
             // Reset the global $the_post as this query will have stomped on it
@@ -212,7 +225,7 @@ if (!class_exists('WP_Widget_Ultimate_Posts')) {
             $instance = $old_instance;
 
             $instance['showpost'] = $new_instance['showpost'];
-            $instance['the_post'] = $new_instance['the_post'];    
+            $instance['the_post'] = $new_instance['the_post'];
             $instance['title'] = strip_tags($new_instance['title']);
             $instance['class'] = strip_tags($new_instance['class']);
             $instance['title_link'] = strip_tags($new_instance['title_link']);
@@ -305,11 +318,11 @@ if (!class_exists('WP_Widget_Ultimate_Posts')) {
                 'template_custom' => '',
                 'before_posts' => '',
                 'after_posts' => ''
-                    ));
+            ));
 
             // Or use the instance
             $showpost = $instance['showpost'];
-            $the_post = $instance['the_post'];            
+            $the_post = $instance['the_post'];
             $title = strip_tags($instance['title']);
             $class = strip_tags($instance['class']);
             $title_link = strip_tags($instance['title_link']);
@@ -343,9 +356,9 @@ if (!class_exists('WP_Widget_Ultimate_Posts')) {
             $before_posts = format_to_edit($instance['before_posts']);
             $after_posts = format_to_edit($instance['after_posts']);
 
-            
-            
-            
+
+
+
             // Let's turn $types, $cats, and $tags into an array if they are set
             if (!empty($types))
                 $types = explode(',', $types);
@@ -497,7 +510,7 @@ if (!class_exists('WP_Widget_Ultimate_Posts')) {
                 <p<?php if (!$show_excerpt && !$show_content) echo ' style="display:none;"'; ?>>
                     <label for="<?php echo $this->get_field_id('show_readmore'); ?>">
                         <input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('show_readmore'); ?>" name="<?php echo $this->get_field_name('show_readmore'); ?>"<?php checked((bool) $show_readmore, true); ?> />
-            <?php _e('Show read more link', 'upw'); ?>
+                        <?php _e('Show read more link', 'upw'); ?>
                     </label>
                 </p>
 
@@ -505,9 +518,9 @@ if (!class_exists('WP_Widget_Ultimate_Posts')) {
                     <input class="widefat" type="text" id="<?php echo $this->get_field_id('excerpt_readmore'); ?>" name="<?php echo $this->get_field_name('excerpt_readmore'); ?>" value="<?php echo $excerpt_readmore; ?>" />
                 </p>
 
-            <?php if (function_exists('the_post_thumbnail') && current_theme_supports('post-thumbnails')) : ?>
+                <?php if (function_exists('the_post_thumbnail') && current_theme_supports('post-thumbnails')) : ?>
 
-                <?php $sizes = get_intermediate_image_sizes(); ?>
+                    <?php $sizes = get_intermediate_image_sizes(); ?>
 
                     <p>
                         <input class="checkbox" id="<?php echo $this->get_field_id('show_thumbnail'); ?>" name="<?php echo $this->get_field_name('show_thumbnail'); ?>" type="checkbox" <?php checked((bool) $show_thumbnail, true); ?> />
@@ -517,14 +530,14 @@ if (!class_exists('WP_Widget_Ultimate_Posts')) {
 
                     <p<?php if (!$show_thumbnail) echo ' style="display:none;"'; ?>>
                         <select id="<?php echo $this->get_field_id('thumb_size'); ?>" name="<?php echo $this->get_field_name('thumb_size'); ?>" class="widefat">
-                <?php foreach ($sizes as $size) : ?>
+                            <?php foreach ($sizes as $size) : ?>
                                 <option value="<?php echo $size; ?>"<?php if ($thumb_size == $size) echo ' selected'; ?>><?php echo $size; ?></option>
-                    <?php endforeach; ?>
+                            <?php endforeach; ?>
                             <option value="full"<?php if ($thumb_size == $size) echo ' selected'; ?>><?php _e('full'); ?></option>
                         </select>
                     </p>
 
-            <?php endif; ?>
+                <?php endif; ?>
 
                 <p>
                     <input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('show_cats'); ?>" name="<?php echo $this->get_field_name('show_cats'); ?>" <?php checked((bool) $show_cats, true); ?> />
@@ -554,16 +567,16 @@ if (!class_exists('WP_Widget_Ultimate_Posts')) {
                     <label for="<?php echo $this->get_field_id('cats'); ?>"><?php _e('Categories', 'upw'); ?>:</label>
                     <select name="<?php echo $this->get_field_name('cats'); ?>[]" id="<?php echo $this->get_field_id('cats'); ?>" class="widefat" style="height: auto;" size="<?php echo $c ?>" multiple>
                         <option value="" <?php if (empty($cats)) echo 'selected="selected"'; ?>><?php _e('&ndash; Show All &ndash;') ?></option>
-            <?php
-            $categories = get_categories('hide_empty=0');
-            foreach ($categories as $category) {
-                ?>
+                        <?php
+                        $categories = get_categories('hide_empty=0');
+                        foreach ($categories as $category) {
+                            ?>
                             <option value="<?php echo $category->term_id; ?>" <?php if (is_array($cats) && in_array($category->term_id, $cats)) echo 'selected="selected"'; ?>><?php echo $category->cat_name; ?></option>
-            <?php } ?>
+                        <?php } ?>
                     </select>
                 </p>
 
-            <?php if ($tag_list) : ?>
+                <?php if ($tag_list) : ?>
                     <p>
                         <input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('attag'); ?>" name="<?php echo $this->get_field_name('attag'); ?>" <?php checked((bool) $attag, true); ?> />
                         <label for="<?php echo $this->get_field_id('attag'); ?>"> <?php _e('Show posts only from current tag', 'upw'); ?></label>
@@ -573,12 +586,12 @@ if (!class_exists('WP_Widget_Ultimate_Posts')) {
                         <label for="<?php echo $this->get_field_id('tags'); ?>"><?php _e('Tags', 'upw'); ?>:</label>
                         <select name="<?php echo $this->get_field_name('tags'); ?>[]" id="<?php echo $this->get_field_id('tags'); ?>" class="widefat" style="height: auto;" size="<?php echo $t ?>" multiple>
                             <option value="" <?php if (empty($tags)) echo 'selected="selected"'; ?>><?php _e('&ndash; Show All &ndash;') ?></option>
-                    <?php foreach ($tag_list as $tag) { ?>
+                            <?php foreach ($tag_list as $tag) { ?>
                                 <option value="<?php echo $tag->term_id; ?>" <?php if (is_array($tags) && in_array($tag->term_id, $tags)) echo 'selected="selected"'; ?>><?php echo $tag->name; ?></option>
-                <?php } ?>
+                            <?php } ?>
                         </select>
                     </p>
-                        <?php endif; ?>
+                <?php endif; ?>
 
                 <p>
                     <label for="<?php echo $this->get_field_id('types'); ?>"><?php _e('Post types', 'upw'); ?>:</label>
@@ -606,9 +619,11 @@ if (!class_exists('WP_Widget_Ultimate_Posts')) {
                                 $post_types_data[$post_type][$post_data->ID] = $post_data->post_title;
                             }
                             ?>
-                            <option value="<?php echo $post_type; ?>" <?php if (is_array($types) && in_array($post_type, $types)) {
-                                echo 'selected="selected"';
-                            } ?>><?php echo $post_type; ?></option>
+                            <option value="<?php echo $post_type; ?>" <?php
+                if (is_array($types) && in_array($post_type, $types)) {
+                    echo 'selected="selected"';
+                }
+                            ?>><?php echo $post_type; ?></option>
             <?php } ?>
                     </select>
                 </p>
@@ -616,26 +631,26 @@ if (!class_exists('WP_Widget_Ultimate_Posts')) {
                 <p>
                     <input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('showpost'); ?>" name="<?php echo $this->get_field_name('showpost'); ?>" <?php checked((bool) $showpost, true); ?> />
                     <label for="<?php echo $this->get_field_id('showpost'); ?>"> <?php _e('Show specfic post from this post type, this will only return one post', 'upw'); ?></label>
-                </p>        
+                </p>
 
 
                 <p id="<?php echo $this->get_field_id('showspost_container'); ?>">
 
-                    <?php foreach ($post_types_data as $post_type_key => $post_show_type): ?>
+            <?php foreach ($post_types_data as $post_type_key => $post_show_type): ?>
 
-                    <select name="<?php echo $this->get_field_name('the_post'); ?>" class="post_type_<?php echo $post_type_key; ?>" style="width:100%;display:none;">
+                        <select name="<?php echo $this->get_field_name('the_post'); ?>" class="post_type_<?php echo $post_type_key; ?>" style="width:100%;display:none;">
 
-                        <option value="">Select Post</option>
+                            <option value="">Select Post</option>
 
-                        <?php foreach ($post_show_type as $key_id => $post_show): ?>
+                <?php foreach ($post_show_type as $key_id => $post_show): ?>
 
-                        <option <?php echo $key_id==$the_post? 'selected="seelcted"' : '' ; ?> value="<?php echo $key_id ?>"><?php echo $post_show; ?></option>
+                                <option <?php echo $key_id == $the_post ? 'selected="seelcted"' : ''; ?> value="<?php echo $key_id ?>"><?php echo $post_show; ?></option>
 
-                        <?php endforeach; ?>
+                <?php endforeach; ?>
 
-                    </select>
+                        </select>
 
-                    <?php endforeach; ?>
+            <?php endforeach; ?>
 
                 </p>
 
@@ -688,14 +703,14 @@ if (!class_exists('WP_Widget_Ultimate_Posts')) {
                 <script>
 
 
-                    function showThePost(ob , post_type) {
-                        
+                    function showThePost(ob, post_type) {
+
                         jQuery('#<?php echo $this->get_field_id('showspost_container'); ?> select').hide();
-                        jQuery('#<?php echo $this->get_field_id('showspost_container'); ?> select').attr('disabled' , 'disabled');
+                        jQuery('#<?php echo $this->get_field_id('showspost_container'); ?> select').attr('disabled', 'disabled');
                         if (jQuery(ob).attr("checked")) {
                             // checked
                             jQuery('.post_type_' + post_type.val()).show();
-                            jQuery('.post_type_' + post_type.val()).removeAttr( "disabled" );
+                            jQuery('.post_type_' + post_type.val()).removeAttr("disabled");
                             return;
                         }
 
@@ -722,7 +737,7 @@ if (!class_exists('WP_Widget_Ultimate_Posts')) {
 
 
 
-                        showThePost(show_post , post_type);
+                        showThePost(show_post, post_type);
 
                         var toggleReadmore = function () {
                             if (show_excerpt.is(':checked') || show_content.is(':checked')) {
@@ -745,7 +760,7 @@ if (!class_exists('WP_Widget_Ultimate_Posts')) {
                         post_type.change(function () {
 
 
-                            showThePost(show_post , post_type);
+                            showThePost(show_post, post_type);
 
 
                         });
@@ -753,7 +768,7 @@ if (!class_exists('WP_Widget_Ultimate_Posts')) {
                         // Toggle read more option
                         show_post.click(function () {
 
-                            showThePost(show_post,post_type);
+                            showThePost(show_post, post_type);
 
 
                         });

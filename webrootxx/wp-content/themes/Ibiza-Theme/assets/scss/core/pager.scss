@@ -1,0 +1,174 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 11-Nov-2016, 16:08:38
+    Author     : Ryan.Blake
+*/
+
+
+.paging-info{
+    position: relative;
+}
+
+.paging-info li:last-child{
+    float:right;
+}
+
+.pagination li.ng-scope {
+    background: #fff none repeat scroll 0 0;
+    color: #000;
+}
+ .paging-info .pagination a, .pagination button:hover , .pager .arrow:first-child , .pager .arrow:last-child {
+    background: #00bcb4 none repeat scroll 0 0;
+    text-align: center;
+    display: inline;
+    color:#fff;
+    display: inline-block;
+    height: 26px;
+    padding: 0;
+    width: 26px;    
+    &:hover{
+        background:#ea516c!important;
+    }
+    
+}
+
+.pagination a   {
+        &:hover{
+        background:#ea516c!important;
+    }
+}
+
+.pager .arrow:first-child , .pager .arrow:last-child {
+  
+   margin:0 20px;
+   
+    
+}
+
+.pager .arrow:first-child a, .pager .arrow:last-child a{
+    
+    color:#fff!important;
+    
+}
+
+.pagination .pagination-previous {
+    margin-right: 1rem
+}
+.pagination .pagination-next {
+    margin-left: 1rem
+}
+.pagination-previous a::before, .pagination-previous a::after, .pagination-next a::after {
+    content: "";
+    margin: 0;
+}
+.pagination .current {
+    padding: 0;
+    border: 0;
+}
+.pagination .current span {
+    border: 1px solid #00bcb4;
+}
+
+.paging-meta{
+    
+    display: block;
+    left: 0;
+    margin: auto;
+    position: absolute;
+    right: 0;
+    top: rem-calc(5);
+    width: 82px;
+    
+}
+
+/**
+* Small & Up Styles
+*/
+@media #{$small-up} {
+    
+    .paging-container{
+        float: none;
+        max-width: 210px;
+        width: 100%;
+        margin:0 auto;
+    }    
+    
+}
+
+/**
+* Small Only
+*/
+@media #{$small-only} {
+    
+    
+}
+/**
+* Medium & Up Styles
+*/
+@media #{$medium-up} {
+
+    
+}
+
+/**
+* Medium Only
+*/
+@media #{$medium-only} {
+    
+    
+}
+
+
+/**
+* Large & Up Styles
+*/
+@media #{$large-up} {
+
+    .paging-container {
+        
+        float: right;
+        max-width: 210px;
+        width: 100%;
+        
+    }    
+    
+    
+}
+
+/**
+* Large Only
+*/
+@media #{$xlarge-only} {
+    
+    
+}
+
+
+/**
+* xLarge & Up Styles
+*/
+@media #{$xlarge-up} {
+
+    
+}
+
+/**
+* xLarge Only
+*/
+@media #{$xlarge-only} {
+    
+    
+}
+
+
+/**
+* xLarge & Up Styles
+*/
+@media #{$xxlarge-up} {
+
+    
+}

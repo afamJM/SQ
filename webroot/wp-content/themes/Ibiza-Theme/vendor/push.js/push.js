@@ -1,4 +1,4 @@
-/**
+/**  
  * Push
  * =======
  * A compact, cross-browser solution for the JavaScript Notifications API

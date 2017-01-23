@@ -10,7 +10,7 @@
 
   // SIDEBAR PUBLIC CLASS DEFINITION
   // ================================
-
+ 
   var Sidebar = function (element, options) {
     this.$element      = $(element)
     this.options       = $.extend({}, Sidebar.DEFAULTS, options)

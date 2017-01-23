@@ -44,7 +44,7 @@ $image = '';
 
             <?php if (get_the_title() && $instance['show_title']) : ?>
               <h4 class="entry-title">
-                <a href="<?php the_permalink(); ?>" rel="bookmark">
+                  <a href="<?php the_permalink(); ?>" rel="bookmark" title="..">
                   <?php the_title(); ?>
                 </a>
               </h4>
@@ -65,7 +65,7 @@ $image = '';
                 <?php if ($instance['show_author']) : ?>
                   <span class="author vcard">
                     <?php echo __('By', 'upw'); ?>
-                    <a href="<?php echo get_author_posts_url(get_the_author_meta('ID')); ?>" rel="author" class="fn">
+                      <a href="<?php echo get_author_posts_url(get_the_author_meta('ID')); ?>" rel="author" class="fn" title="..">
                       <?php echo get_the_author(); ?>
                     </a>
                   </span>
@@ -76,7 +76,7 @@ $image = '';
                 <?php endif; ?>
 
                 <?php if ($instance['show_comments']) : ?>
-                  <a class="comments" href="<?php comments_link(); ?>">
+                  <a class="comments" href="<?php comments_link(); ?>" title="..">
                     <?php comments_number(__('No comments', 'upw'), __('One comment', 'upw'), __('% comments', 'upw')); ?>
                   </a>
                 <?php endif; ?>
@@ -92,7 +92,7 @@ $image = '';
               <p>
                 <?php echo get_the_excerpt(); ?>
                 <?php if ($instance['show_readmore']) : ?>
-                  <a href="<?php the_permalink(); ?>" class="more-link"><?php echo $instance['excerpt_readmore']; ?></a>
+                  <a href="<?php the_permalink(); ?>" class="more-link" title=".."><?php echo $instance['excerpt_readmore']; ?></a>
                 <?php endif; ?>
               </p>
             </div>

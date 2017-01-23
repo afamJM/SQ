@@ -1,0 +1,20 @@
+<div class="form-group" eui-aggregation="ejs.TermsAggregation(field).field(field).size(size)" eui-filter-self="false" eui-or-filter>
+  <div ng-repeat="bucket in aggResult.buckets">
+    <label class="checkbox" eui-filter="ejs.TermsFilter(field, bucket.key)">
+      <input type="checkbox" ng-model="filter.enabled">
+      <div class="text-u-c">
+    <small>{{bucket.key}}</small>
+
+                                                <span class="badge">{{bucket.doc_count}}</span>
+                                            </div>
+      </input>
+    </label>
+
+  </div>
+        <div class="text-u-l text-center">
+                                    <a href=""  ng-click="size = size +10" ng-show="(size <= aggResult.buckets.length) && size !=0">Plus
+                                        <span class="fa fa-chevron-circle-down"></span>
+  </a>
+  </div>
+
+</div>

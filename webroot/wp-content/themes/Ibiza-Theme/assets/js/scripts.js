@@ -1,17 +1,22 @@
+;
 jQuery(document).foundation();
 /*
  These functions make sure WordPress
  and Foundation play nice together.
  */
 
+
 var ibizaHubProxy = (function () {
     getCurrentAuction();
+
+    console.log(jQuery.connection.crystalHubProxy);
+
     return {
         ibizaHubProxy: jQuery.connection.ibizaHubProxy,
         // Starts connection with Hub and call Hub functions.
         startServer: function () {
             var self = this;
-            self.ibizaHubProxy.connection.url = api_location + "/ProductCatalog.Api/signalr";
+            self.ibizaHubProxy.connection.url = end_points.signalr;
             self.ibizaHubProxy.connection.start();
         },
         //Register callback listeners to get data from Hub(Server-Side)
@@ -38,10 +43,11 @@ var ibizaHubProxy = (function () {
     };
 })();
 
+;
 function getCurrentAuction(update) {
     jQuery.ajax({
         dataType: "json",
-        url: api_location + "/ProductCatalog.api/api/legacy/auction"
+        url: end_points.auction
     }).done(function (data) {
         if (!data) {
             return;
@@ -95,12 +101,12 @@ function getCurrentAuction(update) {
         getRecentAuctions();
     });
 }
-;
 
+;
 function getRecentAuctions() {
     jQuery.ajax({
         dataType: "json",
-        url: api_location + "/ProductCatalog.api/api/legacy/todaysproducts"
+        url: end_points.todaysproducts
     }).done(function (data) {
         if (!data) {
             return;
@@ -134,8 +140,8 @@ function getRecentAuctions() {
         }
     });
 }
-;
 
+;
 function buildTodaysProductsAuction(data) {
     var html = "";
     for (var i = 0; i < data.length; i++) {
@@ -150,8 +156,8 @@ function buildTodaysProductsAuction(data) {
     }
     jQuery("#current-product").html(html);
 }
-;
 
+;
 function buildTodaysProducts(data) {
     var html = "";
     for (var i = 0; i < data.length; i++) {
@@ -168,26 +174,25 @@ function buildTodaysProducts(data) {
     jQuery("#dvDayShowProducts").html(html);
 }
 
+;
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
-;
 
+;
 function toggleFacets(e) {
     console.log(e);
 }
+
 ;
-
-
 function updateBasket(title, price, image, productCode) {
 
-
-
     jQuery('.my-basket-prdocut-name').text(title);
-    jQuery('.my-basket-price').text(price);
+    jQuery('.my-basket-price').text('£' + price);
     jQuery('.my-basket-image').attr('src', image);
     jQuery('.header-container .sp-box').fadeIn();
 
+    var theBasketItem = null;
 
     if (jQuery('#basket-item-' + productCode).length > 0) {
 
@@ -195,77 +200,93 @@ function updateBasket(title, price, image, productCode) {
         quantity += 1;
         var sub_total = quantity * price;
         jQuery('.basket-product-total', jQuery('#basket-item-' + productCode)).text('£' + sub_total);
-        jQuery('.basket-product-total', jQuery('#basket-item-' + productCode)).attr('data-sub-total' , sub_total);
-         
+        jQuery('.basket-product-total', jQuery('#basket-item-' + productCode)).attr('data-sub-total', sub_total);
+        theBasketItem = jQuery('#basket-item-' + productCode);
     } else {
 
         var item = jQuery('#basket-item').clone();
         jQuery(item).show();
         jQuery(item).attr('id', 'basket-item-' + productCode);
-        jQuery('.basket-product-image', item).attr( 'src', image);
+        jQuery('.basket-product-image', item).attr('src', image);
         jQuery('.basket-product-title', item).text(title);
         jQuery('.basket-product-price', item).text('£' + price);
-        jQuery('.basket-product-price', item).attr('data-product-price' , price);
+        jQuery('.basket-product-price', item).attr('data-product-price', price);
         jQuery('.basket-product-total', item).text('£' + (price * 1));
-        jQuery('.basket-product-total', item).attr('data-sub-total' , (price * 1) );
-
+        jQuery('.basket-product-total', item).attr('data-sub-total', (price * 1));
+        theBasketItem = item;
 
     }
 
     jQuery(item).appendTo(".basket-data");
 
+    jQuery('#basket-count').fadeIn().text(jQuery('.basket-item').length - 1);
+
 
     setTimeout(function () {
         jQuery('.header-container .sp-box').fadeOut();
     }, 4000);
-
+    return theBasketItem;
 }
 
+;
 function basketTotalUpdate()
 {
-    
-    var total = 0;
-    jQuery( ".basket-item" ).each(function( index ) {
- 
-        // skip template basket
-        if(index>0){
-            
-            var productPrice    = jQuery('.basket-product-price' ,this).attr('data-product-price');
-            var quantity        = parseInt( jQuery('.quantity' ,this).val() ) ;
-            var subtotal        = productPrice * quantity;
 
-            total = total +  subtotal;
-            jQuery('.basket-product-total' ,this).attr('data-sub-total' , subtotal);
-            jQuery('.basket-product-total' ,this).text('£' + subtotal.toFixed(2));            
-            
+    var total = 0;
+    jQuery(".basket-item").each(function (index) {
+
+        // skip template basket
+        if (index > 0) {
+
+            var productPrice = jQuery('.basket-product-price', this).attr('data-product-price');
+            var quantity = parseInt(jQuery('.quantity', this).val());
+            var subtotal = productPrice * quantity;
+
+            total = total + subtotal;
+            jQuery('.basket-product-total', this).attr('data-sub-total', subtotal);
+            jQuery('.basket-product-total', this).text('£' + subtotal.toFixed(2));
+
         }
 
-    });    
-    
-    jQuery('#basket-total').text( '£' + total.toFixed(2) );
+    });
+
+
+    if ((jQuery('.basket-item').length - 1) <= 0) {
+
+        jQuery('#basket-count').fadeOut();
+
+    } else {
+        jQuery('#basket-count').fadeIn().text(jQuery('.basket-item').length - 1);
+    }
+
+    jQuery('#basket-total').text('£' + total.toFixed(2));
 }
 
 
+;
 jQuery(document).ready(function () {
 
 
+    if (jQuery('.menu_banner img').attr('src').length > 0) {
+        jQuery('.ibiza-menu  > .menus').first().after('<ul style="width: 100%; height: 57px; background: rgb(255, 0, 0) none repeat scroll 0% 0% ! important;"><img src="' + jQuery('.menu_banner img').attr('src') + '" alt="Promotional Sewing Quarter Banner" /></ul>');
+    }
 
-    jQuery('.ibiza-menu  > .menus').first().after('<ul style="width: 100%; height: 57px; background: rgb(255, 0, 0) none repeat scroll 0% 0% ! important;"><img src="/wp-content/themes/Ibiza-Theme/assets/images/menu-banner.png" /></ul>');
-
+    jQuery(document).on("click", '#my-basket .close_button', function () {
+        jQuery('.header-container .sp-box').fadeOut();
+    });
 
     jQuery(document).on("click", '#basket-con .add_quantity', function () {
 
-        var container   = jQuery(this).parent().parent();
-        var quantity    = parseInt(jQuery('.quantity', container).val()) + 1;
-        var basket_id   = container.parent().parent().attr('data-basket-product-basketid');
-        var url         = basket_update_url.replace('{basketId}', basket_id).replace('{quantity}', quantity);
+        var container = jQuery(this).parent().parent();
+        var quantity = parseInt(jQuery('.quantity', container).val()) + 1;
+        var basket_id = container.parent().parent().attr('data-basket-product-basketid');
+        var url = basket_update_url.replace('{basketId}', basket_id).replace('{quantity}', quantity);
 
         jQuery.ajax({
             dataType: 'json',
             url: url,
             method: 'POST'
         }).done(function (data) {
-                
             basketTotalUpdate();
 
         });
@@ -292,7 +313,7 @@ jQuery(document).ready(function () {
             url: url,
             method: 'POST'
         }).done(function (data) {
-            
+
             basketTotalUpdate();
 
         });
@@ -310,7 +331,7 @@ jQuery(document).ready(function () {
 
         console.log(container);
 
-        var quantity =  0;
+        var quantity = 0;
         var basket_id = container.attr('data-basket-product-basketid');
         var url = basket_update_url.replace('{basketId}', basket_id).replace('{quantity}', quantity);
 
@@ -321,10 +342,9 @@ jQuery(document).ready(function () {
         }).done(function (data) {
 
             jQuery(container).fadeOut();
+            jQuery(container).remove();
             basketTotalUpdate();
         });
-
-
 
         jQuery('.quantity', container).val(quantity);
 
@@ -332,23 +352,22 @@ jQuery(document).ready(function () {
 
 
     var grid_arr = new Array();
-    var grid_ops = {itemSelector: '#lev-0 > .menu-item-has-children', columnWidth: 315};
+    var grid_ops = {itemSelector: '#lev-0 > .menu-item-has-children', columnWidth: 320};
 
-    jQuery(".header-container")
+    jQuery(".hc2")
             .mouseover(function () {
-
 
                 if (jQuery('.sp-box').is(":visible")) {
                     return;
                 }
                 // stop basket pop up from showing
 
-                jQuery('#tri').remove();
-                jQuery('#tri').css({margin: '5px auto', 'z-index': '1'});
+                jQuery('#tri', '.hc2').remove();
+                jQuery('#tri').css({  'z-index': '1'});
                 jQuery('span', this).first().append('<div id="tri"></div>');
                 jQuery('#basket-con', this).show();
                 jQuery('.basket-link', this).addClass('active');
-                jQuery('.search-link', this).addClass('active');
+                //jQuery('.search-link', this).addClass('active');
 
                 if (jQuery('.basket-link', this).hasClass('active')) {
                     jQuery('.main-nav__backdrop').css({'opacity': 1, 'visibility': 'visible'});
@@ -358,10 +377,7 @@ jQuery(document).ready(function () {
             }).mouseleave(function () {
         jQuery('.main-nav__backdrop').css({'opacity': 0, 'visibility': 'hidden'});
         jQuery('.basket-link', this).removeClass('active');
-        if (!jQuery('.search-container').is(":visible")) {
-            jQuery('.search-link', this).removeClass('active');
-            jQuery('#tri').hide().remove();
-        }
+        jQuery('#tri', '.hc2').remove();
         jQuery('#basket-con', this).hide();
 
     });
@@ -370,49 +386,85 @@ jQuery(document).ready(function () {
     jQuery("#tri").mouseleave(function () {
         if (!jQuery('.search-container').is(":visible")) {
             jQuery('.search-link', this).removeClass('active');
-            jQuery('#tri').hide().remove();
+            jQuery('#tri').remove();
         }
     });
 
 
+    jQuery("#top-bar-menu").mouseleave(function () {
+        jQuery('#tri', '#top-bar-menu').remove();
+        jQuery('.main-nav__backdrop').css({'visibility': 'hidden', 'opacity': 0});
+    });
+
+
+    /* Fix onload menu  hover dodgyness :) */
+    if (jQuery("#menu-main-1  > .menu-item:hover").length > 0) {
+
+        var hoverEl = jQuery("#menu-main-1  > .menu-item:hover");
+
+        jQuery('#tri', '#top-bar-menu').remove();
+        jQuery('a', hoverEl).first().append('<div id="tri"></div>');
+        jQuery('#tri').css({  'z-index': '1'});
+
+        if (jQuery(' > .ibiza-menu ul', hoverEl).length > 0) {
+
+            jQuery('.main-nav__backdrop').css({'opacity': 1, 'visibility': 'visible'});
+
+            //
+            var index = jQuery('li', hoverEl).index('#menu-main-1 li');
+            if (!jQuery('.menus', hoverEl).hasClass('masonry')) {
+
+                var $grid = jQuery('.menus', hoverEl).masonry(grid_ops);
+                grid_arr[index] = $grid;
+                jQuery('.menus', hoverEl).addClass('masonry');
+            } else {
+
+                grid_arr[index].masonry('destroy');
+                grid_arr[index] = jQuery('.menus', hoverEl).masonry(grid_ops);
+            }
+        } else {
+            jQuery('.ibiza-menu', hoverEl).remove();
+            //no needed quick work around
+        }
+    }
+    /* End Fix onload hover dodgyness  */
+
     jQuery("#menu-main-1 > .menu-item")
-            .mouseover(function () {
+        .mouseover(function () {
 
-                jQuery('#tri', '#top-bar-menu').remove();
-                jQuery('a', this).first().append('<div id="tri"></div>');
+            jQuery('#tri', '#top-bar-menu').remove();
+            jQuery('a', this).first().append('<div id="tri"></div>');
+            jQuery('.main-nav__backdrop').css({'opacity': 1, 'visibility': 'visible'});
+            if (jQuery(' > .ibiza-menu ul', this).length > 0) {
 
-                if (jQuery(' > .ibiza-menu ul', this).length > 0) {
-
-                    jQuery('.main-nav__backdrop').css({'opacity': 1, 'visibility': 'visible'});
-
-                    //
+                if (jQuery(this).hasClass('menu-item-32')) {
                     var index = jQuery('li', this).index('#menu-main-1 li');
                     if (!jQuery('.menus', this).hasClass('masonry')) {
 
                         var $grid = jQuery('.menus', this).masonry(grid_ops);
                         grid_arr[index] = $grid;
                         jQuery('.menus', this).addClass('masonry');
+
                     } else {
 
                         grid_arr[index].masonry('destroy');
                         grid_arr[index] = jQuery('.menus', this).masonry(grid_ops);
                     }
-                } else {
-                    jQuery('.ibiza-menu', this).remove();
-                    //no needed quick work around
                 }
 
-            }).mouseout(function () {
+            } else {
+                jQuery('.ibiza-menu', this).remove();
+                //no needed quick work around
+            }
+        });
 
-        //jQuery('#tri').remove();
-        jQuery('.main-nav__backdrop').css({'visibility': 'hidden', 'opacity': 0});
-    });
 
-    jQuery(".ibiza-menu").mouseleave(function () {
+
+    // make sure it remove  triangle and back drop
+    jQuery('.main-nav__backdrop').mouseenter(function () {
         jQuery('#tri', '#top-bar-menu').remove();
         jQuery('.main-nav__backdrop').css({'visibility': 'hidden', 'opacity': 0});
     });
-
 
     var basketItem = jQuery("#basket-item").clone();
     var basketTotalOut = 0;
@@ -420,8 +472,6 @@ jQuery(document).ready(function () {
         url: basket_url,
         context: document.body
     }).done(function (data) {
-
-
 
         jQuery('#basket-item').hide();
         var count = 0;
@@ -435,16 +485,14 @@ jQuery(document).ready(function () {
             jQuery('#basket-count').fadeIn();
             var item = jQuery(basketItem).clone();
             jQuery(item).attr('id', 'basket-item-' + value.productCode);
-            jQuery('.basket-product-image', item).attr( 'src', value.imageURL);
+            jQuery('.basket-product-image', item).attr('src', value.imageURL);
             jQuery('.basket-product-title', item).text(value.description);
             jQuery(item).attr('data-basket-product-basketid', value.basketid);
             jQuery('.basket-product-price', item).text('£' + value.price.toFixed(2));
-            jQuery('.basket-product-price', item).attr( 'data-product-price', value.price.toFixed(2) );
+            jQuery('.basket-product-price', item).attr('data-product-price', value.price.toFixed(2));
             jQuery('.basket-product-total', item).text('£' + basketTotal.toFixed(2));
-            jQuery('.basket-product-total', item).attr('data-sub-total' , basketTotal.toFixed(2) );
+            jQuery('.basket-product-total', item).attr('data-sub-total', basketTotal.toFixed(2));
             jQuery('.quantity', item).val(value.quantity);
-
-
             jQuery(item).appendTo(".basket-data");
 
         });
@@ -472,29 +520,20 @@ jQuery(document).ready(function () {
         var productPrice = jQuery(this).attr('data-product-pice');
         var productImage = jQuery(this).attr('data-product-image');
 
-        updateBasket(productName, productPrice, productImage, productCode);
+        var basket = updateBasket(productName, productPrice, productImage, productCode);
 
         jQuery.ajax({
             dataType: 'json',
             url: '/proxy.php?auctionID=-1&productCode=' + productCode + '&productDetailID=' + productDetailID + '&quantity=' + quantity
         }).done(function (data) {
-
-
-
-            //jQuery('#basket-total').text('£' + data.basketTotal.toFixed(2));
-            //jQuery('#basket-description').text(data.description);
-
+            jQuery(basket).attr('data-basket-product-basketid', data);
         });
-
     });
-
-
-
 
     $window = jQuery(window);
     $window.scroll(function () {
         $scroll_position = $window.scrollTop();
-        if ($scroll_position > 50) { // if body is scrolled down by 300 pixels
+        if ($scroll_position > 80) { // if body is scrolled down by 300 pixels
             jQuery('.header-outter').addClass('sticky');
 
             jQuery('.ibiza-menu').css('margin-top', '0px');
@@ -503,25 +542,50 @@ jQuery(document).ready(function () {
             // to get rid of jerk
             header_height = jQuery('.header-outter').innerHeight();
             jQuery('.header-outter').css('top', 0);
+            jQuery('#back_to_top').css('opacity',  '0.5');
         } else {
             jQuery('.ibiza-menu').css('margin-top', '0');
             jQuery('#basket-con,.main-nav__backdrop').removeClass('add-basket-margin');
             jQuery('body').css('padding-top', '0');
             jQuery('.header-outter').removeClass('sticky');
+            jQuery('#back_to_top').css('opacity',  0);
+
         }
+ 
+        
+        if(jQuery(window).scrollTop() + jQuery(window).height() < jQuery(document).height() - jQuery(".footer").height() - 60 ){
+            jQuery('#back_to_top').css("position","fixed");    //resetting it
+        }
+        else {
+            jQuery('#back_to_top').css("position","fixed"); // make it related
+        }
+
+
     });
 
+
+    jQuery('#back_to_top').click(function(event) {
+
+        event.preventDefault();
+
+        jQuery('html, body').animate({scrollTop: 0}, 750);
+
+        return false;
+
+    })
 
 
     // Remove empty P tags created by WP inside of Accordion and Orbit
     jQuery('.accordion p:empty, .orbit p:empty').remove();
 
 
-    //initialize swiper when document ready  
-    var mySwiper = new Swiper('.swiper-container', {
-        // Optional parameters
-        loop: true
-    });
+    //initialize swiper when document ready
+    if (!window.isAuctionPage) {
+        var mySwiperMain = new Swiper('.swiper-container', {
+            // Optional parameters
+            loop: true
+        });
+    }
 
 
 
@@ -543,6 +607,7 @@ jQuery(document).ready(function () {
 
         jQuery("html, body").animate({scrollTop: 0}, "slow");
 
+
         if (sliding == 1)
             return;
 
@@ -552,8 +617,184 @@ jQuery(document).ready(function () {
             jQuery('.tt-input').focus();
         });
         jQuery(this).toggleClass('active');
+
+        if (jQuery(this).hasClass('active')) {
+            jQuery('span', this).first().append('<div id="tri"></div>');
+        } else {
+            jQuery('#tri', '.hc1').remove();
+        }
+
     });
 
-    ibizaHubProxy.init();
+
+    var url_products = end_points.product_elastic + '_search?from=0&size=5&source=%QUERY';
+    var url_howto = end_points.howto_elastic + '_search?from=0&size=5&source=%QUERY';
+    var url_categories = '/?cat_search=*%QUERY*';
+
+
+
+
+    jQuery('#search-cancel').click(function () {
+        jQuery('.search-link').first().click();
+        jQuery('#tri', ".header-container").hide().remove();
+    });
+
+
+
+
+    var cats_engine = new Bloodhound({
+        datumTokenizer: function (hits) {
+
+            return Bloodhound.tokenizers.whitespace(hits.hits);
+        },
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        remote: {
+            wildcard: '%QUERY',
+            url: url_categories,
+            filter: function (response) {
+
+                return response.hits.hits;
+            }
+        }
+    });
+
+    var product_engine = new Bloodhound({
+        datumTokenizer: function (hits) {
+
+            return Bloodhound.tokenizers.whitespace(hits.hits);
+        },
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        remote: {
+            wildcard: '%QUERY',
+            url: url_products,
+            replace: function (url, query) {
+                var jsonStr = '{"query":{"query_string":{"query":"*' + query + '*","lenient":true,"fields":["name"],"default_operator":"AND"}}}';
+                return url.replace('%QUERY', jsonStr).replace('%CID', jQuery(this).attr('id'));
+
+            },
+            filter: function (response) {
+
+                return response.hits.hits;
+            }
+        }
+    });
+
+    var howto_engine = new Bloodhound({
+        datumTokenizer: function (hits) {
+
+            return Bloodhound.tokenizers.whitespace(hits.hits);
+        },
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        remote: {
+            wildcard: '%QUERY',
+            url: url_howto,
+            replace: function (url, query) {
+                var jsonStr = '{"query":{"query_string":{"query":"*' + query + '*","lenient":true,"fields":["name"],"default_operator":"AND"}}}';
+                return url.replace('%QUERY', jsonStr).replace('%CID', jQuery(this).attr('id'));
+
+            },
+            filter: function (response) {
+
+                return response.hits.hits;
+            }
+        }
+    });
+
+
+
+    // initialize the bloodhound suggestion engine
+    cats_engine.initialize();
+    product_engine.initialize();
+    howto_engine.initialize();
+
+    // instantiate the typeahead UI
+    jQuery('.typeahead').typeahead(
+            {
+                hint: true,
+                highlight: true,
+                minLength: 4
+            },
+            {
+                name: 'products',
+                displayKey: function (hits) {
+
+                    return '';
+                    hits._source.name;
+
+                },
+                source: product_engine.ttAdapter(),
+                limit: 4,
+                templates: {
+                    header: '<h5>Products</h5>',
+                    footer: '<p><a href="/search/p?q=' + jQuery('.tt-input').first().val() + '&p=1">View all</a></p>',
+                    suggestion: function (data) {
+
+                        return '<p class="quick_search"><strong>' + data._source.name + '</strong> - ' + data._source.productcode + '</p>';
+                    }
+                }
+            },
+            {
+                name: 'categories',
+                displayKey: function (hits) {
+
+                    return '';//hits._source.name;        
+
+                },
+                source: cats_engine.ttAdapter(),
+                limit: 4,
+                templates: {
+                    header: '<h5>Categories</h5>',
+                    suggestion: function (data) {
+
+                        return '<p class="quick_search"><strong>' + data._source.name + '</strong></p>';
+                    }
+                }
+            },
+            {
+                name: 'howto',
+                displayKey: function (hits) {
+
+                    return '';// hits._source.name;        
+
+                },
+                source: howto_engine.ttAdapter(),
+                limit: 4,
+                templates: {
+                    header: '<h5>How To Guides</h5>',
+                    footer: '<p><a href="/search/?q=' + jQuery('.tt-input').first().val() + '&p=0">View all</a></p>',
+                    suggestion: function (data) {
+
+                        return '<p class="quick_search"><strong>' + data._source.name + '</strong> - ' + data._id + '</p>';
+                    }
+                }
+            }
+
+
+    );
+
+    jQuery('.typeahead').bind('typeahead:selected', function (obj, datum, name) {
+
+        switch (datum._type)
+        {
+
+
+            case 'howto':
+            case 'howtoguide':
+                window.location.href = '/h/' + datum._id
+                break;
+            case 'category':
+                window.location.href = 'http://' + datum._url
+                break;
+            case 'product':
+            default:
+                window.location.href = '/p/' + datum._source.productcode;
+                break;
+        }
+
+
+    });
+
+    //ibizaHubProxy.init();
 });
 
+ 

@@ -1,6 +1,6 @@
 <ul class="pagination">
   
-    <li   ng-repeat="page in pages" class="arrow" ng-class="{unavailable: page.disabled, left: page.previous, right: page.next}">
+    <li ng-repeat="page in pages" ng-class="{unavailable: page.disabled, thispage: page.active}">
         <a ng-switch on="page.text"  ng-click="selectPage(page.number)">
             <span ng-switch-when="Icon_WhiteArrowPrev.png">
                 <img  src='/wp-content/themes/Ibiza-Theme/assets/images/{{page.text}}' />

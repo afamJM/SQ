@@ -20,7 +20,7 @@ global $ibiza_api;
                                     <article class="post-26859 featured_categories type-featured_categories status-publish has-post-thumbnail hentry category-c1 category-featured-products" style="    height: 100%;background-size:cover;background-image:url(http://ibiza.dev/wp-content/uploads/2016/08/ImgHpCat_Embroidery.png); border: 1px solid #ddd;
                                              padding: 17px;">
                                         <header>
-                                            <h4 class="entry-title"><a href="/how-to-guides/guides/56">Guides</a></h4>
+                                            <h4 class="entry-title"><a href="/how-to-guides/guides/56" title="How to guides page">Guides</a></h4>
                                         </header>
                                         <footer>
                                         </footer>
@@ -42,7 +42,7 @@ global $ibiza_api;
                                     <article class="post-26859 featured_categories type-featured_categories status-publish has-post-thumbnail hentry category-c1 category-featured-products" style="    height: 100%;background-size:cover;background-image:url(http://ibiza.dev/wp-content/uploads/2016/08/ImgHpCat_Embroidery.png); border: 1px solid #ddd;
                                              padding: 17px;">
                                         <header>
-                                            <h4 class="entry-title"><a href="/how-to-guides/projects/56">Projects</a></h4>
+                                            <h4 class="entry-title"><a href="/how-to-guides/projects/56" title="Project page">Projects</a></h4>
                                         </header>
                                         <footer>
                                         </footer>
@@ -72,8 +72,8 @@ global $ibiza_api;
         </main>
     </div>
 </div>
-<?php get_footer(); ?>
-<script type="text/javascript">
+<?php                 
+wp_add_inline_script( 'site-js',"
     // Height matching code
     function heightMatcher(A, B) {
         jQuery(B).height('auto');
@@ -93,4 +93,5 @@ global $ibiza_api;
         heightMatcher('.catLarge', '.catLargeRight');
         //Put a minimum screen size in here where it is all reset to auto
     });
-</script>
+");?>
+<?php get_footer(); ?>

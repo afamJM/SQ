@@ -1,18 +1,24 @@
 
+.second-band-shop-page{
+    padding-top: 20px;
+    overflow: hidden;
+    
+}
+
 .category-page{
     a{
         color: $brand-color;
     }
-}
+} 
 .cat-desc {
-    background-color: #fff;
+    background-color: $white;
     margin-bottom: 1.5em;
     margin-top: 1.5em;
     padding: 0.5em 1.5em;
 }
 
 .product-list-container {
-    background-color: #fff;
+    background-color: $white;
     width: 100%;
     max-width: 100%;
     
@@ -33,15 +39,22 @@
 
 .product-category-page{
 	#second-band{
-		.category-boxes{
-			padding: 0;
-			.large-12{
-				padding: 0.21875rem;
-			}
-		}
-		@include breakpoint(medium down) {
-			padding-top: 0;
-        }
+            
+            .widgettitle{
+                text-align: left;
+            }
+            
+            .category-boxes{
+                    padding: 0;
+                    .large-12{
+                            padding: 0.21875rem;
+                    }
+            }
+            
+            @include breakpoint(medium down) {
+                    padding-top: 0;
+            }
+            
 	}
 	.featured_categories .featured-products-title{
 		padding: 0;
@@ -50,7 +63,7 @@
 		a, p{
 			border: none;
 			font-family: 'CeraPRO-Medium';
-			font-size: 1rem;
+			font-size: $font-size-standard;
 			font-weight: 400;
 			text-transform: initial;
 		}
@@ -74,7 +87,7 @@
 		background-size: cover;
 	}
 	.featured-products-title{
-		font-size: 1rem;
+		font-size: $font-size-standard;
 		font-weight: 600;
 		margin: 15px 0;
 		a{

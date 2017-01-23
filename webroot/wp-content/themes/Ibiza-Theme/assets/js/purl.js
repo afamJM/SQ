@@ -12,7 +12,7 @@
         window.purl = factory();
     }
 })(function() {
-
+     
     var tag2attr = {
             a       : 'href',
             img     : 'src',

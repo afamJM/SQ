@@ -94,17 +94,23 @@ class IbizaApi_Plugin extends IbizaApi_LifeCycle {
 
 
         if (isset($_GET['logout'])) {
+           
             if (isset($_SERVER['HTTP_COOKIE'])) {
+                
+               
                 $cookies = explode(';', $_SERVER['HTTP_COOKIE']);
                 foreach ($cookies as $cookie) {
                     $parts = explode('=', $cookie);
                     $name = trim($parts[0]);
-                    setcookie($name, '', time() - 1000);
-                    setcookie($name, '', time() - 1000, '/', '.'. $_SERVER['SERVER_NAME'] );
+                    
+                    setcookie($name, '', -1);
+                    setcookie($name, '', -1, '/', '.'. str_replace( 'www.' ,'', $_SERVER['SERVER_NAME']) );
                 }
             }
-             
-            header('Location: /');die;
+            
+            
+            header('Location: /');
+            die;
         }
         
         
@@ -180,29 +186,73 @@ class IbizaApi_Plugin extends IbizaApi_LifeCycle {
      * start class variables
      */
     const api_location = API_URL;
+    const api = API;
 
     public $top_level_category = array('32', '23935');
 
     const wp_menu_id = '2';
 
-    private $end_points = array('product_list' => '/ProductCatalog.Api/api/category/categoryId/',
-        'price_range' => '/ProductCatalog.Api/api/pricerange/range/',
-        'product' => '/ProductCatalog.Api/api/document/data.productcode/',
-        'howto' => '/ProductCatalog.Api/api/document/',
-        'product_schema' => '/productcatalog.api/api/schema/title/',
-    );
-    public $is_top_level = false;
-    private $sort = array(0 => 'Sort By', 1 => 'Price (Low - High)', 2 => 'Price (High - Low)');
-    private $page_sizes = 48;
+    /*
+    private $end_points = array('product_list' => '/api/category/categoryId/',
+        'price_range' => '/api/pricerange/range/',
+        'product' => '/api/document/data.productcode/',
+        'howto' => '/api/document/',
+        'product_schema' => '/productcatalog.api/api/schema/title/',    
+    */
+    
+    
+    public static  $end_points             = 
+            //nonsecurebasket 
+        array(     
+            
+                'price_range'              => ENV == 'prod' ? API . '/pricerange/range/'             :  API . '/pricerange/range/',
+                'categorytree'              => ENV == 'prod' ? API . '/categorytree/'                :  API . '/categorytree/',
+                'product_list'              => ENV == 'prod' ? API .  '/category/categoryId/'        :  API . '/category/categoryId/',
+                'category'                  => ENV == 'prod' ? API .  '/category/categoryId/'        :  API . '/category/categoryId/',
+                'mongo'                     => ENV == 'prod' ? API .  '/document/'                   :  API . '/document/',
+                'product'                   => ENV == 'prod' ? API .  '/document/data.productcode/'  :  API . '/document/data.productcode/',
+                'elastic'                   => ENV == 'prod' ? API .  '/elastic/'                    :  API . '/elastic/',                            
+                'product_elastic'           => ENV == 'prod' ? API .  '/elastic/product/'            :  API . '/elastic/product/',                
+                'howto'                     => ENV == 'prod' ? API .  '/document/'                   :  API . '/document/',
+                'howto_elastic'             => ENV == 'prod' ? API .  '/elastic/howto/'              :  API . '/elastic/howto/',
+                'product_schema'            => ENV == 'prod' ? API .  '/schema/title/'               :  API . '/schema/title/',
+                'variantgroup'              => ENV == 'prod' ? API .  '/variantgroup/variants.id'    :  API . '/variantgroup/variants.id',
+                'signalr'                   => ENV == 'prod' ? API .  '/signalr'                     :  API . '/signalr/',    
+                'signalr_hubs'              => ENV == 'prod' ? API .  '/signalr/hubs'                        :  API . '/signalr/hubs',
+                'securebasket'              => ENV == 'prod' ? API_LEG .  '/legacy/securebasket/'                :  API_LEG . '/legacy/securebasket/',
+                'nonsecurebasket'           => ENV == 'prod' ? API_LEG .  '/legacy/nonsecurebasket'              :  API_LEG . '/legacy/nonsecurebasket/',
+                'basketitemquantitysecure'  => ENV == 'prod' ? API_LEG .  '/legacy/basketitemquantitysecure'     :  API_LEG . '/legacy/basketitemquantitysecure/',
+                'message'                   => ENV == 'prod' ? API_LEG .  '/legacy/message'                      :  API_LEG . '/legacy/message',
+                'auction'                   => ENV == 'prod' ? API_LEG .  '/legacy/auction'                      :  API_LEG . '/legacy/auction/',
+                'productCatalog_web'        => ENV == 'prod' ? API .  '/ProductCatalog.Web'                             :  API . '/ProductCatalog.Web',
+                'tvschedule'                => ENV == 'prod' ? API_LEG .  '/legacy/tvschedule'                :  API_LEG . '/legacy/tvschedule',
+                'todaysproducts'            => ENV == 'prod' ? API_LEG .  '/legacy/todaysproducts/'              :  API_LEG . '/legacy/todaysproducts/',
+                'login_page'                => ENV == 'prod' ?    'http://secure.sewingquarter.com/login.aspx?_ga=1.246909059.624630137.1465816634'              :   'https://secure.ibiza.com.dev/login.aspx?_ga=1.246909059.624630137.1465816634',
+                'secure_site'               => ENV == 'prod' ?    'http://secure.sewingquarter.com/'              :  'https://secure.ibiza.com.dev',
+            );
+    
+    public  $is_top_level           = false;
+    private $sort                   = array(0 => 'Sort By', 1 => 'Price (Low - High)', 2 => 'Price (High - Low)');
+    private $page_sizes             = 48;
 //    private $page_sizes = array(1, 5, 12, 20, 50, 100, 200);
-    private $ignore_query_strs = array('cat', 'title', 'count', 'sort', 'pager', 'q');
-    private $facetsOb = null;
-    private $sub_cats = array();
-    public $all_cats = array();
+    private $ignore_query_strs      = array('cat', 'title', 'count', 'sort', 'pager', 'q');
+    private $facetsOb               = null;
+    private $sub_cats               = array();
+    public  $all_cats               = array();
 
     /**
      * end class variables
      */
+
+    public function __construct() 
+    {
+    
+         
+        
+    }
+
+
+
 
     /**
      * 
@@ -244,7 +294,7 @@ class IbizaApi_Plugin extends IbizaApi_LifeCycle {
      */
     public function get_product_list_api_url($category) {
 
-        return $this::api_location . $this->end_points['product_list'] . (int) $category;
+        return  $this::$end_points['product_list'] . (int) $category;
     }
 
     /**
@@ -352,7 +402,7 @@ class IbizaApi_Plugin extends IbizaApi_LifeCycle {
      */
     public function get_product_list_facets($jsonPath, $cat = 0) {
 
-        $facetsJSON = @file_get_contents($jsonPath);
+        $facetsJSON = getSslPage( $jsonPath  );
         // remove suppression on production
         $this->facetsOb = json_decode($facetsJSON);
 
@@ -373,9 +423,9 @@ class IbizaApi_Plugin extends IbizaApi_LifeCycle {
      */
     public function get_product_list_price_range() {
 
-        $rangePath = $this::api_location . $this->end_points['price_range'] . '0/20000';
-        $rangeJSON = @file_get_contents($rangePath);
-        $range = json_decode($rangeJSON);
+        $rangePath  = $this::$end_points['price_range'] . '0/20000';
+        $rangeJSON  = getSslPage($rangePath);
+        $range      = json_decode($rangeJSON);
 
         return $range;
     }
@@ -414,7 +464,7 @@ class IbizaApi_Plugin extends IbizaApi_LifeCycle {
      */
     public function get_product($product_code) {
 
-        $json_contents = file_get_contents($this::api_location . $this->end_points['product'] . strtoupper($this->sanitize($product_code)));
+        $json_contents = getSslPage( $this::$end_points['product'] . strtoupper($this->sanitize($product_code)) );
         $rst = json_decode($json_contents);
 
         return $rst;
@@ -427,7 +477,9 @@ class IbizaApi_Plugin extends IbizaApi_LifeCycle {
      */
     public function get_howto($id) {
 
-        $json_contents = file_get_contents($this::api_location . $this->end_points['howto'] . $this->sanitize($id));
+        //echo $this::$end_points['howto'] . $this->sanitize($id);die;
+        
+        $json_contents = getSslPage(  $this::$end_points['howto'] . $this->sanitize($id) );
         $rst = json_decode($json_contents);
 
         return $rst;
@@ -439,8 +491,9 @@ class IbizaApi_Plugin extends IbizaApi_LifeCycle {
      * @return object
      */
     public function get_category($id) {
-        $json_contents = file_get_contents($this::api_location . $this->end_points['product_list'] . $this->sanitize($id));
-        $rst = json_decode($json_contents);
+        
+        $json_contents  = getSslPage( $this::$end_points['product_list'] . $this->sanitize($id) );
+        $rst            = json_decode($json_contents);
 
         return $rst;
     }
@@ -452,7 +505,7 @@ class IbizaApi_Plugin extends IbizaApi_LifeCycle {
      */
     public function get_product_schema($schema) {
 
-        $json_contents = @file_get_contents($this::api_location . $this->end_points['product_schema'] . $schema);
+        $json_contents = getSslPage( $this::$end_points['product_schema'] . $schema);
 
         $rst = json_decode($json_contents);
         return $rst;
@@ -468,7 +521,7 @@ class IbizaApi_Plugin extends IbizaApi_LifeCycle {
 
     public function get_current_and_previous_tv_products() {
 
-        $json_contents = file_get_contents('http://legacyapi.localdev/Api/todaysproducts/0/1/49');
+        $json_contents = getSslPage( 'http://legacyapi.localdev/Api/todaysproducts/0/1/49' );
 
         $rst = json_decode($json_contents);
 
@@ -477,7 +530,7 @@ class IbizaApi_Plugin extends IbizaApi_LifeCycle {
 
     public function get_tv_schedule() {
 
-        $json_contents = file_get_contents('http://legacyapi.localdev/Api/todaysproducts/0/1/49');
+        $json_contents = getSslPage( 'http://legacyapi.localdev/Api/todaysproducts/0/1/49');
 
         $rst = json_decode($json_contents);
 
@@ -490,7 +543,7 @@ class IbizaApi_Plugin extends IbizaApi_LifeCycle {
     function sanitize($string, $force_lowercase = true, $anal = false) {
         $strip = array("~", "`", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "=", "+", "[", "{", "]",
             "}", "\\", "|", ";", ":", "\"", "'", "&#8216;", "&#8217;", "&#8220;", "&#8221;", "&#8211;", "&#8212;",
-            "â€”", "â€“", ",", "<", ".", ">", "/", "?");
+            "â€”", "â€“", ",", "<" , ">", "/", "?");
         $clean = trim(str_replace($strip, "", strip_tags($string)));
         $clean = preg_replace('/\s+/', "-", $clean);
         $clean = ($anal) ? preg_replace("/[^a-zA-Z0-9]/", "", $clean) : $clean;
@@ -502,3 +555,5 @@ class IbizaApi_Plugin extends IbizaApi_LifeCycle {
     }
 
 }
+
+//print_r( new IbizaApi_Plugin() );

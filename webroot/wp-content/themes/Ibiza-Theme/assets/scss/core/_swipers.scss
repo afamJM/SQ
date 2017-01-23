@@ -1,0 +1,324 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 11-Nov-2016, 16:14:39
+    Author     : Ryan.Blake
+*/
+
+.swiper-container-banner{
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    height:295px;
+
+    img{
+        width:100%;
+    }    
+
+
+    .info{
+        color: $white;
+        left: 70px;
+        position: absolute;
+        top: 20px;
+        width: 40%;
+    }    
+
+}
+
+.swiper-container-designer {
+    height: 322px;
+}
+
+.swiper{
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+.swiper-container-products-page ,.swiper-container-designer{
+    @extend .swiper;
+}
+
+.swiper-container-scheduled-home .home_product {
+    padding: 25px;
+}
+.swiper-container-howto{
+
+    img{
+        height:200px;
+    }
+
+    article{
+        text-align: center;
+
+    }    
+
+}
+
+.swiper-pagination{
+
+
+    span.swiper-pagination-bullet {
+        background: $white none repeat scroll 0 0;
+        border: 1px solid $brand-color;
+        border-radius: 100%;
+        display: inline-block;
+        height: 11px;
+        opacity:1;
+        width: 11px;
+    }
+
+    span.swiper-pagination-bullet-active {
+        background: $brand-color none repeat scroll 0 0;
+        border: 1px solid $white!important;
+        opacity: 1!important;
+    }    
+
+}
+
+.swiper-container-tv-schedule{
+
+    overflow: hidden;
+
+}
+
+
+
+.swiper-container-products {
+
+    .swiper-slide{
+        height:auto!important;   
+    }    
+    // important required for vertical layout fix 
+
+    @include breakpoint(large up) {
+        .swiper-wrapper{
+
+            width:auto;
+
+        }
+    }
+}
+
+
+
+#howto_main .swiper-container-howto-main , #fill-me-up .swiper-container-howto-main{
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+}
+
+
+.swiper-container-howto-steps{
+
+    .swiper-button-next ,.swiper-button-prev {
+        display:none;
+    }
+
+}
+
+.swiper-container-horizontal{
+
+    div.swiper-button-next ,div.swiper-button-prev {
+        display:block;
+    }
+
+
+}
+
+
+div.swiper-button-prev,  div.swiper-button-next {
+    background: $brand-color none repeat scroll 0 0;
+    background-image:none;
+    border: 2px solid $white;
+    border-radius: 26px;
+    font-size: 30px;
+    font-weight: normal;
+    height: 30px;
+    margin-top: -15px;
+    text-align: center;
+    width: 30px;
+    &:hover{
+        background-color:$brand-color-alt;
+    }
+
+}
+
+div.swiper-button-prev:not(.circularButtonUp){
+    &:after{
+        content:'\2039';
+        color:$white;
+        vertical-align: baseline;
+        line-height: 0;
+    }
+
+}
+
+div.swiper-button-next:not(.circularButtonDown){
+    &:after{
+        content:'\203A';
+        color:$white;
+        vertical-align: baseline;
+        line-height: 0;
+        ;
+    }
+
+}
+
+
+
+
+/**
+* Small & Up Styles
+*/
+@include breakpoint(small up) {
+
+
+    div.swiper-container-banner{
+        margin: 0 auto;
+        overflow: hidden;
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        height: auto;
+        .swiper-wrapper{
+            box-sizing: border-box;
+        }
+    }
+    div.swiper-container-banner div.swiper-slide {
+        height:100%;
+        width: 100%;
+    }    
+
+
+}
+
+/**
+* Small Only
+*/
+@include breakpoint(small only) {
+
+
+}
+/**
+* Medium & Up Styles
+*/
+@include breakpoint(medium down){
+
+
+    .swiper-container-banner{
+        .swiper-slide{
+            padding:0;
+        }
+    }
+}
+
+/**
+* Medium Only
+*/
+@include breakpoint(medium only){
+
+    .swiper-container-products  {
+
+        .swiper-button-prev{
+            left                : 37%;
+            top                 : 25px;    
+        }
+
+        .swiper-button-next{
+            bottom              : 0;
+            left                : 37%;
+            top                 : auto;
+        }           
+
+
+    }
+
+
+}
+
+
+/**
+* Large & Up Styles
+*/
+@include breakpoint(large up){
+
+
+    .swiper-container-banner{
+
+        .swiper-slide {
+        }        
+
+
+    }
+
+    .swiper-container-products   .swiper-wrapper{
+
+        padding:0 50px;
+
+    }
+
+
+}
+
+/**
+* Large Only
+*/
+@include breakpoint(xlarge only){
+
+
+}
+
+
+/**
+* xLarge & Up Styles
+*/
+@include breakpoint(xlarge up){
+
+
+    .swiper-container-howto-main{
+        margin: 0 auto;
+        overflow: hidden;
+        position: relative;
+        z-index: 1;        
+    }
+
+    div.swiper-container-banner{
+        margin: 0 auto;
+        overflow: hidden;
+        position: relative;
+        z-index: 1;
+        max-height:676px;
+
+        div.swiper-slide {
+            max-height:676px;
+        }        
+
+    }    
+
+
+}
+
+/**
+* xLarge Only
+*/
+@include breakpoint(xlarge only){
+
+
+}
+
+
+/**
+* xLarge & Up Styles
+*/
+@include breakpoint(xxlarge up){
+
+
+}    

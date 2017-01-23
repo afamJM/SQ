@@ -9,7 +9,9 @@ and open the template in the editor.
 */
 
 
-
+.main{
+    position: relative;
+}
 
 #dvVideoHolderHome_wrapper {
     height: 0;
@@ -18,6 +20,14 @@ and open the template in the editor.
     position: relative;
     width: 100%;
 }
+
+
+.home {
+    #channels{
+        background: $white;
+    }
+}
+
 #channels{
 
     background: url(../images/border.gif) repeat-x bottom center $white;
@@ -27,12 +37,12 @@ and open the template in the editor.
     p{
         text-align: center;
         margin: 0;
-        font-size:14px; 
+        font-size: $font-size-standard; 
     }    
 
     .hide-for-small-only{
         p{
-            border-right:1px solid #000;
+            border-right:1px solid $black;
         }    
     }
 }
@@ -43,7 +53,7 @@ and open the template in the editor.
         padding: 17px 17px 60% 17px;
         height: 100%;
         h4{
-            padding: 1.2rem 0;
+            padding: 1.2rem;
             a{
                 padding-bottom: 4px;
                 line-height: 2.2rem;
@@ -52,14 +62,39 @@ and open the template in the editor.
     }
 }
 
+.home {
 
+    .layout-button{
+        &:hover{
+            background:$brand-color-alt;
+        }
+    }
+
+    #second-band{
+        margin-top:20px;
+        padding:20px 0;
+    }
+
+    #third-band{
+        .widgettitle{
+            background: $white none repeat scroll 0 0;
+            display: inline-block;
+            height: 60px;
+            line-height: 55px;
+            margin: 20px 0;
+            overflow: hidden;
+            padding: 0 30px;
+        }
+    }
+
+}
 
 .tv-product.part-sell {
     background-color: rgba(253, 243, 212, 1);
 }
 
 .tv-product.active-product {
-    background:#00bcb4;
+    background:$brand-color;
 }
 
 .tv-product {
@@ -72,12 +107,12 @@ and open the template in the editor.
 }
 
 #second-band{
-   padding-bottom: 20px;
+    padding-bottom: 20px;
     padding-top: 52px;
     .more-link{
         color: $brand-color;
         display: block;
-        font-size: 14px;
+        font-size: $font-size-standard;
         margin: 10px 0 0;
         text-transform: uppercase;
     }
@@ -93,12 +128,13 @@ and open the template in the editor.
         color: $brand-color;
 
         a{
+            color:$black;
             border-bottom: 3px solid $brand-color;
             text-transform: uppercase;
-            font-size: 19px;
-            
+            font-size: $font-size-standard-header;
+
             &:hover{
-                border-bottom: 3px solid #EA516C;
+                border-bottom: 3px solid $brand-color-alt;
                 text-decoration: none;
                 color:$black;
             }
@@ -112,12 +148,22 @@ and open the template in the editor.
 
 #second-band .home-cats article.featured_categories{
     position: relative;
-    padding: 0 0 80% 0;
+    padding: 0 0 100% 0;
     h4{
         position: absolute;
         width: 80%;
         left: 10%;
         top: 10%;
+        @include breakpoint(small only) {
+            width: 90%;
+            left: 5%;
+            top: 5%;
+            padding: 0.6rem;
+            a{
+                font-size: $font-size-14;
+                line-height: $font-size-standard;
+            }
+        }
     }
 }
 
@@ -136,7 +182,7 @@ and open the template in the editor.
     margin: 0 0 9px 20px;
     p{
         margin:0;
-        font-size:12px;
+        font-size:$font-size-small;
         line-height: 16px;
     }    
 }
@@ -167,16 +213,31 @@ and open the template in the editor.
     }
 
     .large-6, .large-3{
-        padding:rem-calc(3.5); 
+        padding:0.21875rem 0.21875rem 0 0; 
     }
 
 
 }
 
+.home  .category_widget{
+    @extend .columns;
+}
 
+.product-category-page {
+    
+    .category-boxes{
+        h4{
+            margin:20px 0;
+       }       
+    }
+    
+ 
+    
+}
 
 .slogan{
     position: static;
+    margin:0;
 }
 
 
@@ -192,7 +253,7 @@ and open the template in the editor.
     }
     p{
         margin:4px 0 4px 0;
-        font-size:75%;
+        font-size:$font-size-small;
     }    
 
 }
@@ -201,8 +262,7 @@ and open the template in the editor.
 
 .active-product {
     p ,  a {
-        color:#fff;
-        font-weight: bold;
+        color:$white;
     }
 }
 
@@ -210,7 +270,7 @@ and open the template in the editor.
 
     .large-6{
         background-clip: content-box;
-        background-color:#fff;
+        background-color:$white;
         a{
             line-height: 64px;
             color:$brand-color;
@@ -229,9 +289,9 @@ and open the template in the editor.
     }
 
     .layout-button{
-
+        font-family: 'CeraPRO-Medium', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
         background: $brand-color;
-        color:#fff;
+        color:$white;
         clear: both; 
         display: inline-block;
         margin: 30px auto 0;
@@ -244,37 +304,52 @@ and open the template in the editor.
 #inner-content{
     min-height:600px;
 }
-#inner-content.home-inner-content{
+#content #inner-content{
     min-height: auto;
 }
 
 
 #tv-options {
- 
+
     a{
         color:$brand-color;
     }
-    
+
+}
+
+@media only screen and (min-width: 1006px) and (max-width: 1055px) {  
+    .tv-options-1{
+
+
+        a{
+            font-size:$font-size-small;
+
+        }
+    }
+}
+
+.position-left{
+    //display:none;
 }
 
 /**
 * Small & Up Styles
 */
-@media #{$small-up} {
+@include breakpoint(small up) {
 
-    
+
     .small-top-margin-push { 
         padding-top: rem-calc(11);
     }      
-    
-    
+
+
     .tv-products .large-3 {
         padding: 15px 0 10px 20px;
     }
 
     .tv-product.active-product {
 
-        border:1px solid #fff;
+        border:1px solid $white;
     }    
 
     #tv-options{
@@ -284,7 +359,7 @@ and open the template in the editor.
         }
 
     }    
-    
+
 
     #dvVideoHolderHome {
         position: absolute;
@@ -293,10 +368,10 @@ and open the template in the editor.
         width: 100%;
         height: 100%;
     }    
-    
-    
+
+
     .small-top-margin-push { 
-        padding-top: rem-calc(23);
+        padding-top: rem-calc(21);
     }    
 
 }
@@ -304,7 +379,32 @@ and open the template in the editor.
 /**
 * Small Only
 */
-@media #{$small-only} {
+@include breakpoint(small only) {
+
+
+
+    #tv-options {
+        .option-2, .option-1{
+
+
+
+            a{
+
+
+                span{
+
+                    display: block;
+                    margin: 15% auto 10px;
+                }
+
+            }
+        }
+    }
+
+
+
+
+
 
     article.featured_categories {
         height: 200px;
@@ -316,19 +416,19 @@ and open the template in the editor.
     }
 
     #tv-options {
-        
+
         margin: 0 0 30px;
-        
+
         .option-1{
-            border-right: 1px solid #e1e1e1;
+            border-right: 1px solid $border;
         }
-        
+
         .small-6
         {
-            background          : rgb(255, 255, 255) none repeat scroll 0% 0%; 
+            background          : $white none repeat scroll 0% 0%; 
             padding-bottom      : 50%;
-            background-clip     : initial!important;
-            background-color    : #fff;
+            background-clip     : initial;
+            background-color    : $white;
             height              : 135px;
             padding-bottom      : 30%;
 
@@ -338,7 +438,7 @@ and open the template in the editor.
                 display: block;
                 margin: 0 auto;
                 font-size: 4vw;
-                 margin: 2% auto;
+                margin: 2% auto;
             }             
 
 
@@ -370,7 +470,7 @@ and open the template in the editor.
 
     .active-product {
 
-        display: block !important
+        display: block ;
 
     }   
 
@@ -392,22 +492,20 @@ and open the template in the editor.
 /**
 * Medium & Up Styles
 */
-@media #{$medium-up} {
+@include breakpoint(medium up){
 
-    .small-top-margin-push { 
-        padding-top: rem-calc(16);
-    }  
+
     .tv-product.active-product {
-        background:#00bcb4;
-        border-top:1px solid #fff;
-        border-bottom:1px solid #fff;
-        border-right:1px solid #fff;
+        background:$brand-color;
+        border-top:1px solid $white;
+        border-bottom:1px solid $white;
+        border-right:1px solid $white;
         width:100%;
     }
 
 
     .active-product{
-        display:block!important;
+        display:block;
     }     
 
     .tv-product{
@@ -464,30 +562,30 @@ and open the template in the editor.
         margin-right: 5px;
     }
 
- 
-    
-    
+
+
+
     #tv-options{
 
         .large-6{
             height:64px;
         }
-        
+
         .option-1{
             padding-right: 0;
-            border-right: 1px solid #e1e1e1;
+            border-right: 1px solid $border;
 
         }
         .option-2{
             padding-left:0;
 
         }         
-        
+
 
     }         
-    
-    
-    
+
+
+
     #tv-options .medium-6 a {
         color               : #e57063;
         display             : block;
@@ -500,7 +598,7 @@ and open the template in the editor.
 /**
 * Medium Only
 */
-@media #{$medium-only} {
+@include breakpoint(medium only){
 
 
     .tv-options-1{
@@ -509,19 +607,85 @@ and open the template in the editor.
 
 
 }
+@include breakpoint(small up){
+    #tv-options {
+        .option-2{
 
 
+
+            a{
+
+                &:hover{
+
+                    color:$brand-color-alt!important;
+                    span{
+
+                        background-position: -241px -157px;
+                    }
+                }
+            }
+
+
+
+
+
+
+            span{
+
+                background-position: -241px -127px;
+                display: inline-block;
+                height: 30px;
+                width: 39px;
+                vertical-align: middle;
+                margin-right: 5px;
+            }
+        }
+        .option-1{
+
+
+
+
+            a{
+
+                &:hover{
+
+                    color:$brand-color-alt!important;
+
+
+                    span{
+
+                        background-position: -290px -157px;
+                    }
+                }
+            }
+
+
+
+
+
+            span{
+
+                background-position: -290px -127px;
+                display: inline-block;
+                height: 30px;
+                vertical-align: middle;
+                width: 39px;
+                margin-right: 5px;
+            }
+        }
+    }    
+
+
+}
 /**
 * Large & Up Styles
 */
-@media #{$large-up} {
+@include breakpoint(large up){
 
-    
-    .small-top-margin-push{
-        padding-top:28px;
-    }    
-    
- 
+
+
+
+
     #sticky-posts-10{
         overflow: hidden;
     }    
@@ -532,17 +696,17 @@ and open the template in the editor.
     }
 
 
-    
+
 
     #triangle-outter{
         width: 0;
         height: 0;
         border-style: solid;
         border-width: 67.5px 59px 67.5px 0;
-        border-color: transparent #fff transparent transparent;
+        border-color: transparent $white transparent transparent;
         line-height: 0px;
-        _border-color: #000000 #fff #000000 #000000;
-        _filter: progid:DXImageTransform.Microsoft.Chroma(color='#000000');
+        _border-color: $black $white $black $black;
+        _filter: progid:DXImageTransform.Microsoft.Chroma(color='$black');
         position: absolute;
         left            : -59px;
         display:none;
@@ -550,7 +714,7 @@ and open the template in the editor.
     }
 
     #triangle{
-        border-color    : transparent #00bcb4 transparent transparent;
+        border-color    : transparent $brand-color transparent transparent;
         border-style    : solid;
         border-width    : 66.5px 58px 66.5px 0;
         height          : 0;
@@ -559,7 +723,7 @@ and open the template in the editor.
         top             : 1px;
         width           : 0;
         z-index         : 9;
-        _filter         : progid:DXImageTransform.Microsoft.Chroma(color='#000000');
+        _filter         : progid:DXImageTransform.Microsoft.Chroma(color='$black');
         position        : absolute;
         display         : none;
     } 
@@ -571,7 +735,7 @@ and open the template in the editor.
 /**
 * Large Only
 */
-@media #{$xlarge-only} {
+@include breakpoint(xlarge only){
 
 
 }
@@ -580,7 +744,7 @@ and open the template in the editor.
 /**
 * xLarge & Up Styles
 */
-@media #{$xlarge-up} {
+@include breakpoint(xlarge up){
 
     div#tv-options img {
         display: inline;
@@ -596,7 +760,7 @@ and open the template in the editor.
 /**
 * xLarge Only
 */
-@media #{$xlarge-only} {
+@include breakpoint(xlarge only){
 
 
 }
@@ -605,7 +769,7 @@ and open the template in the editor.
 /**
 * xLarge & Up Styles
 */
-@media #{$xxlarge-up} {
+@include breakpoint(xxlarge up){
 
 
 }

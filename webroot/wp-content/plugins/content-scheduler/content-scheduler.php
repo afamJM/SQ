@@ -413,7 +413,9 @@ if ( !class_exists( "ContentScheduler" ) ) {
             $output = 'names'; // names or objects
             $operator = 'and'; // 'and' or 'or'
             $post_types = get_post_types( $args, $output, $operator );
-            $scheduled_post_types = array('home_product', 'howtos', 'banner', 'featured_categories');
+            
+            $scheduled_post_types = array('home_product', 'howtos', 'banner', 'featured_categories'  ,'programmes' ,'promotional_banner' );
+            
             // Step through each public custom type and add the content scheduler box
             foreach ($post_types  as $post_type ) {
                 if (in_array($post_type, $scheduled_post_types)) {

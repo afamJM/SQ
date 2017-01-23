@@ -345,7 +345,7 @@ class IbizaApi_OptionsManager {
                 </p>
             </form> -->
            
-           <iframe width="100%" height="600px" src="<?php echo $ibiza_api::api_location;?>/ProductCatalog.Web/document_edit/Tablet/5786078b1ea1f20af417c1bb/%7B%7D"></iframe>
+           <iframe width="100%" height="600px" src="<?php echo $ibiza_api::api_location;?>/ProductCatalog.Web"></iframe>
            
         </div>
         <?php

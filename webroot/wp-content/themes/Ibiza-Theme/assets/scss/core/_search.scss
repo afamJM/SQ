@@ -1,0 +1,113 @@
+@import "../settings";
+
+.results-container{
+    background-color: $white; 
+    text-align: center;
+    padding-top:20px;
+}
+
+.search-container-results{
+    text-align: center;
+    background:$white;
+    height:60px;
+    padding-top:5px;
+    div{
+
+        button{
+
+            img{
+                height: auto;
+                margin: 2px -6px 0 7px;
+                position: static;
+            }
+
+        }}
+    img{
+
+        float: left;
+        height: 20px;
+        margin: 5px 5px 5px -3px;
+        margin-bottom: 2px;
+        position: relative;
+        text-indent: 28px;
+        vertical-align: top;
+        z-index: 99;
+
+    }
+
+    form{
+        background: $white none repeat scroll 0 0;
+        border-radius: 15px;
+        border: 1px;
+        border-color: $border;
+        border-style: solid;
+        display: inline-block; 
+        z-index: 900;
+
+        input{
+
+        }
+    }    
+}
+
+@include breakpoint(small only) {
+
+    .search-container-results  {
+        position: relative;
+        form{
+
+            height: 29px; 
+            left: 5;
+            margin-left: auto;
+            margin-right: auto;
+            overflow: hidden;
+            position: relative;
+            right: -5px;            
+            button{
+                float:right;
+                margin-right: -4px;
+            }
+        }
+
+    }
+}
+/**
+* Medium & Up Styles
+*/
+@include breakpoint(medium up) {
+    
+    .search-container-results  {
+        position: relative;
+        form{
+
+            height: 29px; 
+            left: 0;
+            margin-left: auto;
+            margin-right: auto;
+            overflow: hidden;
+            right: 0;
+            position: relative;
+            right: -5px;            
+            button{
+                float:right;
+                margin-right: -4px;
+                margin-top: 0px; /*-24px;*/
+            }
+        }
+
+    }
+
+}
+
+
+/**
+* Large & Up Styles
+*/
+@include breakpoint(large up) {
+    .search-container-results  {
+        form{
+           // position: absolute;
+        }
+
+    }  
+}

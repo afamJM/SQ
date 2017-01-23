@@ -1,0 +1,586 @@
+/******************************************************************
+
+Stylesheet: Login Stylesheet
+
+This stylesheet is loaded is only on the login page. This way you can style
+the login page. It won't affect any other page, admin or front-end.
+
+Make sure functions/admin.php is activated in your functions.php file.
+
+This stylesheet is turned off by default.
+
+For more info, check out the codex:
+http://codex.wordpress.org/Creating_Admin_Themes
+
+******************************************************************/
+
+@import "../settings";
+
+
+
+
+
+
+
+
+
+
+#menu-main-1 {
+    li{
+        flex-grow: 1;
+        text-transform: uppercase;
+        a{
+            color: #1a2433;
+            display: block;
+            line-height: 12px;
+            font-family: 'CeraPRO-Medium';
+        }
+    }
+
+
+    & > .menu-item > a:first-child{
+        height:56px;
+        font-size:$font-size-standard-header;
+        font-family: 'CeraPRO-Medium';
+        position: relative;
+    }
+
+
+    .ibiza-menu > .menus > .menu-item-has-children > a:first-child
+        {
+        color:$white;
+        display:inline-block;
+        width: auto;
+        margin-bottom:10px;
+        background:$brand-color;
+        padding:10px;
+        -webkit-transition: background-color 100ms linear;
+        -moz-transition: background-color 100ms linear;
+        -o-transition: background-color 100ms linear;
+        -ms-transition: background-color 100ms linear;
+        transition: background-color 100ms linear;
+        &:hover{
+            background:$brand-color-alt;
+
+        }
+
+    }
+
+    .ibiza-menu > ul > li > ul > li.menu-item a{
+        border-left: 5px solid $black;
+        height: auto;
+        margin: 0 0 10px 0;
+        padding-left: 7px;
+        font-family: "CeraPRO-Medium";
+    }
+
+    .ibiza-menu > ul > li > ul > li.menu-item .menu-item a{
+
+
+        border-left: none;
+        font-weight:normal;
+    }
+
+
+    .ibiza-menu {
+
+
+        ul{
+
+            list-style: none;
+            margin-left:0;
+
+
+            ul{
+                ul{
+                    ul{
+                        a{
+                            margin:0;
+                            padding:0;
+                            color:$brand-color;
+                        }
+                    }
+                }
+
+            }
+
+            ul  a{
+                font-weight:normal;
+                background:$white;
+                font-size:$font-size-standard;
+
+            }
+
+            .menu-item-28297 ,.menu-item-28293{
+                float: left;
+                width: 50%;
+                padding:10px;
+                ul{
+                    .menu-item-has-children{
+                        float: left;
+                        width: 45%;
+                        margin-bottom: 25px;
+                    }
+                }
+            }
+
+
+            .menu-item-has-children{
+                margin-bottom:10px;
+                a{
+
+                }
+                .menu-item-has-children{
+
+                    margin-bottom: 60px;
+                }
+
+            }
+
+
+        }
+
+        &:hover {
+            display:block;
+        }
+
+
+        column:last-child:not(:first-child), .ibiza-menu .columns:last-child:not(:first-child)
+            {
+            float:left;
+        }
+
+        li.large-3 , li.medium-3 {
+            width:15%;
+        }
+
+
+        border-top: 2px solid $brand-color-alt;
+        display: none;
+        left: 0;
+        right: 0;
+        margin-left: auto;
+        margin-right: auto;
+        margin-left: auto;
+        margin-right: auto;
+        position: absolute;
+        top: 79px;
+        max-width: 1336px;
+        padding:20px;
+        background:$white;
+        z-index: 999999;
+
+
+    }
+
+
+
+}
+#top-bar-menu li:hover > a {
+    color: $brand-color-alt;
+
+}
+.menu{
+    .top-bar{
+
+        background-color: $white;
+        padding: 0;
+        #menu-main-1 {
+
+            &:first-child {
+                a{
+                    &:hover + div.ibiza-menu {
+
+                        display: block;
+                        z-index: 4101;
+                    }
+
+                    &:hover {
+                        position: relative;
+                        z-index: 9999999;
+                    }
+                }
+
+            }
+
+            ul {
+                background-color: $white;
+            }
+
+
+        }
+    }
+}
+
+
+
+.menus.row {
+    padding:30px 30px 0 0;
+    border-top: 2px solid $brand-color;
+    min-height: 650px;
+}
+
+
+
+.menu-item{
+    #tri{
+
+        left: 0;
+        right: 50%;
+        margin-left:auto;
+
+    }
+}
+
+#tri{
+    border-color: transparent transparent $brand-color-alt;
+    border-style: solid;
+    border-width: 0 18px 20px;
+    height: 0;
+    width: 18px;
+    z-index: -1;
+    margin-top: 13px;
+    display:block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+
+.large-push-1 .header-container{
+    z-index: 9999;
+}
+
+
+.header-container{
+
+
+    height:48px;
+    
+    @include breakpoint(large up){
+        position: relative;
+    }
+    
+    .go-basket{
+        font-size:$font-size-bigger-header;
+        background: $brand-color-alt;
+        clear: both;
+        display: block;
+        height: 47.5px;
+        line-height: 47.5px;
+        margin: 0 auto;
+        width: 96%;
+        color:$white;
+    }
+
+    #basket-con{
+
+        .basket-data{
+            position: relative;
+        }
+
+        .increment {
+            height: 25px;
+            line-height: 25px;
+        }
+
+        p{
+            margin: 0;
+        }
+
+
+        .sub-total{
+            p{
+                font-size:$font-size-small;
+                margin:0;
+            }
+        }
+
+        display:none;
+        background: $white none repeat scroll 0 0;
+        border-top: 2px solid $brand-color-alt;
+        height: auto;
+        padding-bottom: 15px;
+        padding-top: 25px;
+
+    }
+
+    #basket-count{
+
+        background: $brand-color-alt none repeat scroll 0 0;
+        border-radius: 25px;
+        color: $white;
+        font-size: $font-size-small;
+        height: 15px;
+        left: 30px;
+        line-height: 11px;
+        position: absolute;
+        text-align: center;
+        top: -2px;
+        vertical-align: middle;
+        width: 16px;
+
+    }
+
+
+
+    #tri{
+
+        border-color: transparent transparent $brand-color-alt;
+        border-style: solid;
+        height: 0;
+        margin: 8px auto auto;
+        position: absolute;
+        width: 0;
+        z-index: 1;
+    }
+
+
+    
+
+    a{
+        color:$black;
+    }
+
+    a.active{
+        color:$brand-color-alt;
+    }
+
+    .basket-link{
+        padding-bottom: 27px;
+        padding-top: 1px;
+        position: relative;
+        span.outter{
+
+
+            &:before{
+                @extend .icon;
+                content:'';
+
+                background-position: -434px -69px;
+                width:40px;
+                height:35px;
+                display:inline-block;
+                vertical-align: middle;
+            }
+
+        }
+        #tri{
+            left: 0;
+            right: 0;
+            bottom:0px;
+            @include breakpoint(small only) {
+                bottom:-4px;
+
+            }
+        }
+
+    }
+    .basket-link.active,.basket-link:hover{
+        color:$brand-color-alt;
+        span.outter{
+
+            &:before{
+                background-position: -434px -105px;
+            }
+        }
+    }
+
+    .search-link{
+
+        position: relative;
+        padding-bottom: 27px;
+        padding-top: 1px;
+
+        @include breakpoint(large up) {
+            margin-right: 20%;
+        }
+        span.outter{
+
+
+            &:before{
+                @extend .icon;
+                content:'';
+                background-position: -388px -68px;
+                width:35px;
+                height:35px;
+                display:inline-block;
+                vertical-align: middle;
+            }
+
+        }
+
+
+        #tri{
+
+            left: 50%;
+            right: 50%;
+            bottom:0px;
+            @include breakpoint(small only) {
+                bottom:-4px;
+
+            }
+        }
+
+    }
+    .search-link.active,.search-link:hover{
+
+
+        span.outter{
+
+            color:$brand-color-alt;
+            &:before{
+                background-position: -388px -103px;
+
+            }
+
+
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+.main-nav__backdrop {
+    background: rgba(0, 0, 0, 0.1) none repeat scroll 0 0;
+    display: block;
+    height: 10000px;
+    left: 0;
+    position: fixed;
+    top: 0;
+    visibility: hidden;
+    width: 100%;
+    z-index: 1;
+
+}
+
+
+
+
+#content{
+    /*    box-shadow: 0 7px 7px -7px #313131 inset;*/
+    overflow: hidden;
+}
+
+.swiper-container-products{
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+
+.large-4.small-6.columns.ng-scope {
+    height: 485px;
+}
+
+
+input.search-submit{
+    display:none;
+}
+
+
+/*.header .menu a{
+    height:auto;
+
+}*/
+.header .menu  a:hover{
+    color:$brand-color-alt;
+}
+
+#top-bar-menu{
+    margin-top:23px;
+}
+
+
+//#top-bar-menu li:hover > a
+
+#top-bar-menu li  a:hover {
+    color: $brand-color-alt;
+
+}
+
+
+@include breakpoint(small only) {
+
+    .header-container #basket-con{
+        left: 0;
+        position: fixed;
+        top: 109px;
+        width: 100%;
+        z-index: 999999;
+    }
+    .add-basket-margin{
+        margin-top:-34px;
+    }
+
+    .menu-item-28166 .menu.vertical > li {
+        border-bottom: 1px solid;
+        color: #00bcb4;
+        display: block;
+        overflow: hidden;
+        padding-bottom: 10px;
+    }
+
+    .nav-menu-icon div {
+        font-size: $font-size-small;
+        padding: 10% 0;
+    }
+
+
+}
+
+@include breakpoint(medium only){
+
+    .header-container #basket-con{
+        left: 0;
+        position: fixed;
+        top: 115px;
+        width: 100%;
+        z-index: 999999;
+    }
+    .add-basket-margin{
+        margin-top:-36px;
+    }
+
+}
+
+
+@include breakpoint(large up){
+    .header-container #basket-con{
+        position: absolute;
+        left: -252px;
+        top: 54px;
+        width: 450px;
+        z-index: 999999;
+    }
+    .add-basket-margin{
+        margin-top:2px;
+    }
+
+
+}
+
+.sticky {
+    .header-container{
+        @include breakpoint(medium up){
+            #tri{
+                bottom: -2px;
+            }
+        }
+    }
+    .header-container{
+        @include breakpoint(small only){
+            #tri{
+                bottom: -6px;
+            }
+        }
+    }
+}

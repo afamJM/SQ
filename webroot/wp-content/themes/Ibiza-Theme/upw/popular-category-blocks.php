@@ -133,18 +133,18 @@ if($rowArrs)
     
         <?php if (current_theme_supports('post-thumbnails') && $instance['show_thumbnail'] && has_post_thumbnail()) : ?>    
 
-              <article <?php post_class($current_post); ?>  style="    height: 100%;background-size:cover;background-image:url(<?php the_post_thumbnail_url($instance['thumb_size']); ?>); border: 1px solid #ddd; padding: 17px;" >
+              <article <?php post_class($current_post .  ' widget-style'); ?>  style="background-image:url(<?php the_post_thumbnail_url($instance['thumb_size']); ?>);" >
 
         <?php else:?>
                   
-            <article <?php post_class($current_post); ?> style="    height: 100%;background-size:cover;background-image:url(<?php echo $rowArrTitles[trim(get_the_title())]['image'];; ?>); border: 1px solid #ddd; padding: 17px;" >
+            <article <?php post_class($current_post .  ' widget-style'); ?> style="background-image:url(<?php echo $rowArrTitles[trim(get_the_title())]['image'];; ?>);" >
         
         <?php endif; ?>    
     
         
           <?php if (get_the_title() && $instance['show_title'] && $rowArrTitles[trim(get_the_title())]['title']) : ?>
             <header>    
-              <h4 class="entry-title"><a href="<?php echo $rowArrTitles[trim(get_the_title())]['url']; ?>"><?php echo $rowArrTitles[trim(get_the_title())]['title']; ?></a></h4>
+                <h4 class="entry-title"><a href="<?php echo $rowArrTitles[trim(get_the_title())]['url']; ?>" title="<?php echo $rowArrTitles[trim(get_the_title())]['title']; ?>"><?php echo $rowArrTitles[trim(get_the_title())]['title']; ?></a></h4>
             </header>
           <?php endif; ?>
 
@@ -153,7 +153,7 @@ if($rowArrs)
               <p>
                 <?php echo get_the_excerpt(); ?>
                 <?php if ($instance['show_readmore']) : ?>
-                  <a href="<?php the_permalink(); ?>" class="more-link"><?php echo $instance['excerpt_readmore']; ?></a>
+                  <a href="<?php the_permalink(); ?>" class="more-link" title=""><?php echo $instance['excerpt_readmore']; ?></a>
                 <?php endif; ?>
               </p>
             </div>

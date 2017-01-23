@@ -1,0 +1,234 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 11-Nov-2016, 15:25:06
+    Author     : Ryan.Blake
+*/ 
+
+footer {
+
+    nav {
+        a{
+            color:$black;
+        }
+    }
+
+
+    li.menu-item {
+        display: block;
+
+        a{
+            margin:0;
+            padding:0;  
+            font-family: 'CeraPRO-Medium';
+            padding: 0.7rem 0;
+        }
+    }
+
+}
+
+
+.signup-button
+{
+    height: 37px
+}
+
+.signup-submit{
+    vertical-align: top;
+}
+
+.footer{
+
+    nav{
+        a{
+            text-transform: uppercase;
+        }
+    }
+
+    background:$white;
+    border-top: 5px solid $brand-color;
+    padding:35px 0;
+    margin:0;
+
+    input{
+        background: #efefef none repeat scroll 0 0;
+        border: 1px solid #efefef;
+        font-size: $font-size-small;
+        text-indent: 10px;
+        display: inline; 
+    }
+
+    button{
+        background: $brand-color;
+        height: 37px;   
+        text-transform: uppercase;
+        height: 32px;
+        line-height: 32px;       
+         padding: 0 0.85rem;
+        
+         vertical-align: top;
+    }    
+
+
+} 
+
+ 
+
+.copyright{
+    font-size:$font-size-small;
+    margin-left:26px;
+}  
+
+.commuity{
+    position: relative;
+}
+
+
+.social{
+
+    @include breakpoint(medium only){
+
+        
+        text-align: right;
+
+    }
+
+    @include breakpoint(small only){
+
+
+    }
+
+    clear:both;
+    margin:10px 0;
+    img{
+        margin: 0 0 0 3px;
+    }
+
+}
+
+
+/**
+* Small & Up Styles
+*/
+@include breakpoint(small up) {
+
+
+    .footer{
+
+        input{
+            height: 32px !important;
+            font-size:14px;
+        }
+
+    }
+
+
+}
+
+/**
+* Small Only
+*/
+@include breakpoint(small only) {
+
+
+    .footer{
+
+
+        .social-icon{
+            padding-left:0;
+            padding-right:0;
+        }
+        
+        input{
+
+            width:75%;
+
+        }    
+
+        button{
+            width:25%;
+        }
+
+    }
+}
+/**
+* Medium & Up Styles
+*/
+@include breakpoint(medium up){
+
+
+    #inner-footer .large-1{
+        padding-top: 6px;
+    }    
+
+    .footer{
+
+
+        input{
+
+            width: 60%;
+
+        }    
+
+    }    
+
+}
+
+/**
+* Medium Only
+*/
+@include breakpoint(medium only){
+
+
+}
+
+
+/**
+* Large & Up Styles
+*/
+@include breakpoint(large up){
+
+
+        .social-icon{
+            padding-left:0;
+            padding-right:0;
+        }
+}
+
+/**
+* Large Only
+*/
+@include breakpoint(xlarge only){
+
+
+}
+
+
+/**
+* xLarge & Up Styles
+*/
+@include breakpoint(xlarge up){
+
+
+}
+
+/**
+* xLarge Only
+*/
+@include breakpoint(xlarge only){
+
+
+}
+
+
+/**
+* xLarge & Up Styles
+*/
+@include breakpoint(xxlarge up){
+
+
+}
+

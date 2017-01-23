@@ -1,0 +1,885 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 11-Nov-2016, 15:00:35
+    Author     : Ryan.Blake
+*/
+
+/* Basic font */
+
+@import "../settings";
+
+html, body {
+    
+    font-size: 16px;
+    font-family: 'CeraPRO-Regular';
+    color: $black;
+    font-weight: 400;
+    line-height: 1.25rem;
+    
+}
+
+#inner_content{
+    background:$white;
+}
+
+.full-width-bg{
+    background:$white;
+}
+
+.ibiza-menu ul img{
+    width: 100%;
+}
+
+
+.ibiza-menu ul li img{
+    width: auto;
+}
+
+.off-canvas-wrapper{
+    overflow: hidden;
+}
+
+#off-canvas-menu-content > ul > li{
+
+    border-bottom: solid 2px $brand-color;
+    adding-top: 10px;
+    padding-bottom: 10px;
+    background: none;
+    
+}
+
+.is-accordion-submenu-parent  > li   > a{
+        color:$brand-color;
+
+}
+
+li > ul > li > ul > li.menu-item > a {
+  color: $black !important;
+  border-left: 5px solid $black;
+  height: auto;
+  margin: 0 0 10px 0;
+  padding-left: 7px;
+  padding-top:0px;
+  padding-bottom:0px;
+}
+
+li > ul > li > ul > li.menu-item > a:hover {
+  color: #ea516c !important;
+}
+
+li > ul > li > ul > li.menu-item {
+  background-image: none !important;
+  padding-left:20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+
+// random
+
+.page-template-template-products{
+    
+    #content{
+        
+        background:$white;
+        
+    }
+    
+}
+
+
+#menu-item  li  a {
+
+    color:$black;
+
+}
+
+.menu.vertical > li {
+    background: url(../images/border.gif) repeat-x bottom center #fefefe;
+    display: block;
+    color:$black;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.menu.vertical > li:last-child {
+  background: none;
+}
+
+#off-canvas{
+    padding-top:10px;
+    background: transparent url(../images/bg.png) repeat scroll 0% 0%;
+    .menu li > a{
+        color:$brand-color;
+    }    
+    li:last-child {
+        border:0;
+    }  
+   
+    
+    ul{
+        background: $white none repeat scroll 0 0;
+        margin: 18px;
+        
+      
+
+        li{
+            
+
+            
+            
+            a{
+                
+                text-transform: uppercase;
+
+            }
+            a:hover {
+                color: #ea516c;
+            }
+        
+            .is-accordion-submenu{
+                padding:0;
+                margin:0; 
+                
+                a{
+                    color:$black;
+                    
+                }
+                a:hover {
+                    color: #ea516c;
+                }
+                
+                li:last-child {
+                   border:0;
+                }
+                
+            }
+        
+        }
+    }
+    
+}
+
+
+
+ 
+ 
+h2 {
+    font-size: $font-size-large;
+    color: $brand-color;
+    font-family: 'CeraPRO-Regular', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
+    line-height: 2.5rem;
+}
+
+h4{
+    font-size: $font-size-standard-header;
+    font-family: 'CeraPRO-Medium';
+    &.green{
+        color: $brand-color;
+    }
+}
+/*
+h5 {
+    
+}
+
+h6 {
+    
+}
+*/
+
+p {
+    
+    line-height: 1.25;
+    
+}
+
+.no-padding {
+    
+    padding: 0;
+    
+}
+
+#off-canvas-left {
+    
+    background: rgba(0, 0, 0, 0) url("../images/bg.png") repeat scroll 0 0;
+    
+    ul{
+        background: $white;
+    }
+    
+    .sidebar{
+        background:$white;
+        padding: 30px;
+        text-align: left;
+    }    
+    
+} 
+
+
+.off-canvas-content, .off-canvas-content {
+    
+    box-shadow: none;
+    
+}
+
+
+.large-push-1-xtra {
+    @extend .large-push-1;
+    left:4%;
+}
+
+.large-12-xtra {
+    @extend .large-12;
+    width: 1335px;
+}
+
+
+.upw-posts article {
+    margin-bottom: 0;
+}
+
+.upw-posts .entry-title {
+    margin-bottom: 0;
+}
+
+a:hover{
+    color:$brand-color-alt;
+}
+.no-padding{
+    padding:0;
+}
+body.no-margin{
+    margin:0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.fullwidth-only{
+    width:100%;
+}
+
+.fullwidth {
+    width: 100%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: initial;
+}    
+   
+.clear{
+    clear:both;
+}
+.clear-left{
+    clear:left;
+}
+
+.clear-right{
+    clear:right;
+}
+
+
+
+.font-small{
+    font-size: $font-size-xsmall;
+    margin: 0;
+    padding: 0;
+}
+
+.upper{
+    text-transform: uppercase;
+}
+
+.separator{
+    padding:rem-calc( 0 6 );
+}
+
+.right{
+    float:right;
+}
+
+.left{
+    float:left;
+}
+
+
+.padding-1{
+    padding:0px;
+    padding-top:0px;
+}
+
+#result , .full{
+    background:$white;
+}
+
+p.ng-binding {
+    line-height: 31px;
+    margin: 0;
+    overflow: hidden;
+    text-align: center;
+}
+ 
+
+fieldset {
+    border: 1px solid $brand-color;
+    margin: initial;
+    padding: 0 0 10px 15px;
+    input{
+        border:0;
+        border-bottom:1px solid $black;
+        width:95%;
+        margin: 0 0 15px 0;
+        font-size:$font-size-small;
+    }
+    
+    p{
+        font-size:$font-size-small;
+    }    
+    
+    legend {
+        
+        span{
+           background: rgba(0, 0, 0, 0) url("../images/mail-icon.png") no-repeat scroll 0 0;
+           display: inline-block;
+           margin: 0 7px;
+           text-indent: 33px;
+           vertical-align: -moz-middle-with-baseline;
+           font-size:$font-size-small;
+       }
+        
+    }  
+}
+ 
+
+.submit{
+    background: $brand-color;
+    border:0;
+    color:$white;
+    font-size:$font-size-small;
+    padding:10px 20px;
+    margin:0;
+}
+
+.sq-border {
+    
+    .product-title , .product-price, .arrow{
+        font-size:$font-size-small;
+        margin:0;
+    }    
+}
+.upw-posts{
+    
+    .columns{
+        overflow:hidden;    
+    }
+    
+    article {
+        overflow: hidden;
+    }    
+
+}
+
+
+
+/* misc style */
+.rating-text{
+    
+    line-height: 32px;
+    
+    img{
+        vertical-align: text-bottom;
+    }
+    
+    span{
+        margin: rem-calc(0 0 0 8);
+        color:$white;
+    }    
+}
+
+
+.blog  #content .medium-12{
+    background:$white;
+}
+
+.breadcrumbs.show-for-small-only{
+    display:none;
+}
+
+
+.upsells{
+    background:$white;
+}
+
+/* misc style */
+
+.brand-bg{
+
+    background:$brand-color;
+    color: $white;
+    display: inline-block;
+    margin: 10px 0;
+    padding: 10px;
+}
+
+.fp-player{
+    @extend .icon;
+    background-position: 0 99.9%;
+    background-repeat: no-repeat;
+    background-size: 193% auto;    
+}
+
+#dvVideoHolderHome{
+    
+    
+    
+    position: relative;
+}
+.n-l-p{
+    padding-left: 0;
+}
+
+.n-r-p{
+    padding-right: 0;
+}
+
+ul.breadcrumbs {
+    margin: 20px 0;
+    padding: 0;
+}
+
+.header-row{
+    line-height: 1;
+    padding: 0 0 10px;
+}
+
+#basket-item{
+    display:none;
+}
+
+
+.quick_search
+{
+
+    background:white;
+    padding:5px;
+    clear:left
+    
+}
+
+.quick_search_howtos{
+    background:white;
+    padding:20px;
+    clear:left
+    img {  
+        float:left;
+           margin-right:10px;
+    }
+}
+
+
+.quick_search_cats{
+    background:white;
+    padding:20px;
+    clear:left
+    img {  
+        float:left;
+        margin-right:10px;
+    }
+}
+
+
+ .button{
+    font-family: 'CeraPRO-Medium';
+ }
+ 
+ .button_tv_products
+ {
+ background: #00B109
+
+ }
+
+ .dark-header{
+     color:$black;
+ }
+ .light-background{
+     background:$white;
+ }
+ 
+ .dark-background{
+     background:$black;
+ }
+ 
+ .pointer{
+     cursor: pointer;
+ }
+ 
+ .hidden{
+     display:none;
+ }
+ 
+ .block-el{
+     display:block;
+ }
+ 
+ .no-margin{
+     margin: 0;
+ }
+ 
+ .remove-padding-margin{
+     padding: 0;
+     margin : 0;
+ }
+ .tv-icon{
+     height:33px;
+     
+ }
+ .watch-online{
+     @include breakpoint(medium u) {
+     height:55px;
+     }
+     margin-top: 15px;
+     
+ }
+ .tv-schedule-main{
+     
+     
+     
+     
+     .entry-content{
+         @include breakpoint(medium up) {
+              margin:35px 0 70px 0;
+         padding:30px;
+         }
+         @include breakpoint(small only) {
+         padding:30px 0;
+          margin:35px 0 30px 0;
+         }
+        
+         background:rgba(0, 0, 0, 0) url("../images/bg.png") repeat scroll 0 0
+     }
+     .swiper-container-tv-schedule{
+         padding:30px 0px 30px 20px;
+         position: relative;
+         overflow: hidden; 
+         background:rgba(255,255,255,0.75);
+         
+         .swiper-button-prev,.swiper-button-next{
+             position: static;
+         }
+         
+         .swiper-slide{
+             .schedule-time{
+                position: absolute; 
+                left: 0px; 
+                right: 35px; 
+                @include breakpoint(medium up) {
+                top: -125px;
+                }
+                @include breakpoint(small only) {
+                    top: -50px;
+                }
+             }
+             .tv-schedule-con{
+                 margin-bottom:10px;
+                 margin-left: 0
+             }
+             p{
+                 width:80%
+             }
+             
+         }
+         
+     }
+ }
+ 
+ .widget-style{
+      padding: 17px;
+      height: 100%;
+      border: 1px solid #ddd;
+      background-size:cover;
+ }
+ .cat-sc{
+      height:250px
+ }
+ 
+ 
+ /*|L*/
+body .add-to-basket{
+    background: $brand-color-alt;
+    border: none;
+    color: white;
+    font-family: 'CeraPRO-Medium';
+    font-size: $font-size-bigger-header;
+    padding: 0.6rem 1rem;
+}
+ 
+ 
+    
+#back_to_top{
+    
+@include breakpoint(medium down) {
+
+right:10px;
+}    
+    
+    
+    background: $white none repeat scroll 0 0;
+    border-radius: 30px;
+    height: 60px;
+    line-height: 60px;
+    position: fixed;
+    text-align: center;
+    width: 60px;
+    z-index: 2;
+    bottom:20px;
+    cursor:pointer;
+    opacity:0.5;
+    transition: opacity .25s ease-in-out;
+    -moz-transition: opacity .25s ease-in-out;
+    -webkit-transition: opacity .25s ease-in-out;    
+    &:hover{
+        opacity:1!important;
+    }
+    
+    div{
+        display: inline-block;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 0 12.5px 21.7px 12.5px;
+        border-color: transparent transparent $brand-color transparent;
+        line-height: 0px;
+        _border-color: #000000 #000000 $brand-color  #000000;
+        
+    }
+}
+
+/**
+* Small & Up Styles
+*/
+@include breakpoint(small up) {
+
+    #basket-count{
+        display:none;
+    }
+    
+    
+.sticky {
+  position: fixed;
+  z-index: 9999;
+  width: 100%;
+  background:$white;
+}    
+    
+    #triangle-outter{
+
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 0 14px 11px 14px;
+        border-color: transparent transparent $white transparent;
+        line-height: 0px;
+        _border-color: $black $black $brand-color $black;
+            
+        right           : 50%;
+        top             : -11px;
+        z-index         : 8;
+        position        : absolute;
+        display         : none;        
+
+    }
+    
+    #triangle{
+
+
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 0 14px 11px 14px;
+        border-color: transparent transparent $brand-color transparent;
+        line-height: 0px;
+        _border-color: $black $black $brand-color $black;
+        
+        right: 50%;
+        top: -9px;
+        z-index         : 9;
+        position        : absolute;
+        display         : none;
+    }    
+    
+}
+
+.basket-remove-item{
+    background: transparent url(../images/Btn_Cancel_Black) repeat scroll 0% 0%; 
+    display: block; 
+    position: absolute; 
+    height: 23px; 
+    top: -7px; 
+    width: 23px; 
+    left: -10px;
+}
+
+.basket-item-image{
+    background:grey;
+    height:84px;
+    width:84px;
+    position: relative;
+}
+
+
+.page-template-tv-schedule{
+    h2{
+        color:$black;
+        
+        &.small-12{
+            font-size: $font-size-bigger-header;
+        }
+        
+    }
+}
+
+
+/**
+* Small Only
+*/
+@include breakpoint(small only) {
+    
+    .small-text-left{
+        text-align: left;
+    }
+     .small-text-right{
+        text-align: right;
+    }
+    h1.slogan{
+ 
+    }   
+}
+/**
+* Medium & Up Styles
+*/
+@include breakpoint(medium up){
+
+    
+}
+
+/**
+* Medium Only
+*/
+@include breakpoint(medium only){
+    
+    h1.slogan{
+        position: absolute;
+        left:0;
+        right:0;
+    }    
+    
+     article.featured_categories {
+      padding: 17px 17px 0 17px;
+      height: 350px;
+    }
+
+    .medium-top-margin-push { 
+        padding-top: 2%;
+    }
+       
+}
+
+
+/**
+* Large & Up Styles
+*/
+@include breakpoint(large up){
+
+    //temp fix
+    .is-open-left {
+        transform: translateX(30%)!important;
+    }
+    .off-canvas.position-left {
+        left: -30%!important;
+        top: 0;
+        width: 30%!important;
+    }    
+    // temp fix
+    
+    #fill-me-up{
+        
+        .product-price{
+            font-family: 'CeraPRO-Medium';
+            font-size: $font-size-bigger-header;
+        }
+        .tabs-title{
+            position:relative;
+            span{
+                margin:0;
+                padding:0;
+                border:0;
+                font-size:$font-size-standard-header;
+                color:$brand-color;
+                text-transform:uppercase;
+            }            
+            
+        }
+        
+        .is-active{
+            span{
+                color:$black;
+            }
+            .tri {
+                border-color: $black transparent transparent;
+                 border-style: solid;
+                 border-width: 8px 6px 0;
+                 height: 0;
+                 left: 50%;
+                 margin: 3px 14px 0 0;
+                 position: absolute;
+                 text-align: center
+            }            
+        }
+        
+    }
+    
+    
+}
+
+/**
+* Large Only
+*/
+@include breakpoint(xlarge only){
+    
+    
+}
+
+
+/**
+* xLarge & Up Styles
+*/
+@include breakpoint(xlarge up){
+
+    
+}
+
+/**
+* xLarge Only
+*/
+@include breakpoint(xlarge only){
+    
+    
+}
+
+
+/**
+* xLarge & Up Styles
+*/
+@include breakpoint(xxlarge up){
+
+    
+}    
+
+
+
+ 

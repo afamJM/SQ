@@ -151,20 +151,20 @@ function so_13997743_custom_template($template) {
                 $template = plugin_dir_path(__FILE__) . 'howto.php';
                 break;
             default:
-                
-                if( ( $segments[0] == 'search' && (isset($segments[1]) || isset($_GET['q']) ) ) ){
+
+                if (( $segments[0] == 'search' && (isset($segments[1]) || isset($_GET['q']) ))) {
                     $template = plugin_dir_path(__FILE__) . 'template-search.php';
                 }
-                
-                if ( ( $segments[0] == 'product-list' && (isset($segments[1]) || isset($_GET['q']) ) ) || ($segments[0] == 'how-to-guides' && isset($segments[1]) )) {
+
+                if (( $segments[0] == 'product-list' && (isset($segments[1]) || isset($_GET['q']) ) ) || ($segments[0] == 'how-to-guides' && isset($segments[1]) )) {
                     $template = plugin_dir_path(__FILE__) . 'template-products-list.php';
                 }
-                
 
-                if( $segments[0] ==  'how-to-guides' && isset($segments[1]) && isset($segments[2])  ){
-                    $template = plugin_dir_path(__FILE__) . 'template-howto.php';        
-                }else if( $segments[0] ==  'how-to-guides' ){
-                    $template = plugin_dir_path(__FILE__) . 'template-howto-categories.php';        
+
+                if ($segments[0] == 'how-to-guides' && isset($segments[1]) && isset($segments[2])) {
+                    $template = plugin_dir_path(__FILE__) . 'template-howto.php';
+                } else if ($segments[0] == 'how-to-guides') {
+                    $template = plugin_dir_path(__FILE__) . 'template-howto.php';
                 }
         }
 
@@ -264,12 +264,12 @@ function crumb($id, $status = 'publish', $output_arr = array(), $page = '') {
         }
 
         if ($page != '') {
-            $output_arr[] = '<li ' . $class . '><a href="#">' . $page . '</a></li>';
+            $output_arr[] = '<li ' . $class . '><a href="#" title="' . $page . '">' . $page . '</a></li>';
             $class = '';
         }
 
 
-        $output_arr[] = '<li ' . $class . '><a href="' . $myrows[0]->meta_value . '">' . $myrows[0]->post_title . '</a></li>';
+        $output_arr[] = '<li ' . $class . '><a href="' . $myrows[0]->meta_value . '" title="' . $myrows[0]->post_title . ' link">' . $myrows[0]->post_title . '</a></li>';
 
         $i++;
         return crumb($myrows[0]->pid, $status = 'publish', $output_arr);
@@ -289,8 +289,8 @@ function crumb($id, $status = 'publish', $output_arr = array(), $page = '') {
             $title = $myrows[0]->post_title;
         }
 
-        $output_arr[$myrows[0]->post_title] = '<li><a href="' . $url . '">' . $title . '</a></li>';
-        $output_arr[] = '<li><a href="/">Home page </a></li>';
+        $output_arr[$myrows[0]->post_title] = '<li><a href="' . $url . '" title="' . $title . ' link">' . $title . '</a></li>';
+        $output_arr[] = '<li><a href="/" title="Home page link">Home page </a></li>';
 
         return $output_arr;
         // top level add homepage link
@@ -315,16 +315,61 @@ function sanitize($string, $force_lowercase = true, $anal = false) {
 
 function get_product_by_mongo_product_code($product_code) {
     global $ibiza_api;
-    return reset(json_decode(file_get_contents($ibiza_api::api_location . '/ProductCatalog.Api/api/document/data.productcode/' . $product_code)));
+    return reset(json_decode(getSslPage($ibiza_api::$end_points['product'] . $product_code)));
 }
 
 function get_product_by_mongo_id($mongo_id) {
     global $ibiza_api;
-    $data = @json_decode(file_get_contents($ibiza_api::api_location . '/ProductCatalog.Api/api/document/' . $mongo_id));
+    return json_decode(getSslPage($ibiza_api::$end_points['mongo'] . $mongo_id));
+}
 
-    return $data;
+function getSslPage($url) {
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+    curl_setopt($ch, CURLOPT_HEADER, false);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 1000);
+    curl_setopt($ch, CURLOPT_REFERER, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+    $result = curl_exec($ch);
 
+    if ($errno = curl_errno($ch)) {
 
+        if(0){
+                    echo $url;
 
-    return reset(json_decode(file_get_contents($ibiza_api::api_location . '/ProductCatalog.Api/api/document/' . $mongo_id)));
+        $error_message = curl_strerror($errno);
+        echo "<br />cURL error ({$errno}):\n {$error_message}";
+        var_dump(debug_backtrace());
+        die;
+        }
+
+    }
+
+    curl_close($ch);
+    return $result;
+}
+
+function get_cache($name, $callback) {
+
+    if (false === ( $results = get_transient($name) )) {
+        
+        if( $callback !==null ){
+            return $callback($name);
+        }
+        
+        return null;
+        
+    }
+    return $results;
+}
+
+function create_cache($name, $data) {
+    set_transient($name, $data, 60 * 60);
+}
+
+function remove_cache($name) {
+    delete_transient($name);
 }

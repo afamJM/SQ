@@ -1,5 +1,4 @@
 <?php
-
 include_once('IbizaBannerPlugin_LifeCycle.php');
 
 class IbizaBannerPlugin_Plugin extends IbizaBannerPlugin_LifeCycle {
@@ -40,6 +39,7 @@ class IbizaBannerPlugin_Plugin extends IbizaBannerPlugin_LifeCycle {
     }
 
     protected function getMainPluginFileName() {
+
         return 'ibiza-banner-plugin.php';
     }
 
@@ -80,13 +80,16 @@ class IbizaBannerPlugin_Plugin extends IbizaBannerPlugin_LifeCycle {
 
     public function addActionsAndFilters() {
 
-        add_action('init', array( $this ,'register_post_type_banner' ) );
-        add_action('widgets_init', array( $this , 'wp_banner_load_widget' ) );
+        //  if( is_admin() ){
+        add_action('init', array($this, 'register_post_type_banner'));
 
+        //  }
+
+        add_action('widgets_init', array($this, 'wp_banner_load_widget'));
     }
 
     function register_post_type_banner() {
-        
+
         // creating (registering) the custom type 
         register_post_type('banner', /* (http://codex.wordpress.org/Function_Reference/register_post_type) */
                 // let's now add all the options for this post type
@@ -105,26 +108,24 @@ class IbizaBannerPlugin_Plugin extends IbizaBannerPlugin_LifeCycle {
                 'not_found_in_trash' => __('Nothing found in Trash', 'jointswp'), /* This displays if there is nothing in the trash */
                 'parent_item_colon' => ''
             ), /* end of arrays */
-            'description'           => __('This is the example custom post type', 'jointswp'), /* Custom Type Description */
-            'public'                => true,
-            'publicly_queryable'    => true,
-            'exclude_from_search'   => false,
-            'show_ui'               => true,
-            'query_var'             => true,
-            'menu_position'         => 8, /* this is what order you want it to appear in on the left hand side menu */
-            'menu_icon'             => 'dashicons-book', /* the icon for the custom post type menu. uses built-in dashicons (CSS class name) */
-            'rewrite'               => array('slug' => 'site', 'with_front' => false), /* you can specify its url slug */
-            'capability_type'       => 'post',
-            'hierarchical'          => false,
-            'taxonomies'            => array('category', 'Test'),
+            'description' => __('This is the example custom post type', 'jointswp'), /* Custom Type Description */
+            'public' => true,
+            'publicly_queryable' => true,
+            'exclude_from_search' => false,
+            'show_ui' => true,
+            'query_var' => true,
+            'menu_position' => 0, /* this is what order you want it to appear in on the left hand side menu */
+            'menu_icon' => 'dashicons-book', /* the icon for the custom post type menu. uses built-in dashicons (CSS class name) */
+            'rewrite' => array('slug' => 'site', 'with_front' => false), /* you can specify its url slug */
+            'capability_type' => 'post',
+            'hierarchical' => false,
+            'taxonomies' => array('category', 'Test'),
             /* the next one is important, it tells what's enabled in the post editor */
-            'supports'              => array('title', 'editor', 'thumbnail', 'custom-fields', 'revisions', 'taxonomies')
+            'supports' => array('title', 'editor', 'excerpt', 'thumbnail', 'custom-fields', 'revisions', 'taxonomies')
                 ) /* end of options */
         ); /* end of register post type */
-        
     }
 
-    
     // Class wpb_widget ends here
     // Register and load the widget
     function wp_banner_load_widget() {
@@ -133,37 +134,61 @@ class IbizaBannerPlugin_Plugin extends IbizaBannerPlugin_LifeCycle {
 
 }
 
-
-
 // Creating the widget 
 class IbizaBanner_Widget extends WP_Widget {
-    
+
     function __construct() {
-        
+
         parent::__construct(
-            // Base ID of your widget
-            'wpb_widget_banner_widget',
-            // Widget name will appear in UI
-            __('Banner Widget', 'wpb_banner_widget'),
-            // Widget description
-            array('description' => __('Sample widget based on WPBeginner Tutorial', 'wpb_widget_domain'),)
+                // Base ID of your widget
+                'wpb_widget_banner_widget',
+                // Widget name will appear in UI
+                __('Banner Widget', 'wpb_banner_widget'),
+                // Widget description
+                array('description' => __('Sample widget based on WPBeginner Tutorial', 'wpb_widget_domain'),)
         );
     }
 
     // Creating widget front-end
     // This is where the action happens
     public function widget($args, $instance) {
-        
-        $query = new WP_Query(array(
-            'post_type' => 'banner',
-            'post_status' => 'publish'
-        ));
-              
-        
+
+
+        $the_cache = 'sq_banner';
+        $cb = function($the_cache) {
+            $query = new WP_Query(array(
+                'post_type' => 'banner',
+                'post_status' => 'publish'
+            ));
+
+            if ($query->have_posts())
+                while ($query->have_posts()) {
+$query->the_post();
+                $image = wp_get_attachment_image_src(get_post_thumbnail_id(get_the_ID()), 'single-post-thumbnail');
+                    $mobile_image = '';
+                    if (class_exists('Dynamic_Featured_Image')) {
+                        global $dynamic_featured_image;
+                        $featured_images = $dynamic_featured_image->get_featured_images(get_the_ID());
+                        $mobile_image = $featured_images[0]['full'];
+                        //print_r($image);
+                        //DIE;
+                    }
+                    $data[] = array('image' => $image[0], 'mobile_image' => $mobile_image , 'url'=>  get_the_excerpt(  ) );
+                }
+
+            unset($query);
+
+            create_cache($the_cache, $data);
+            return $data;
+        };
+        $images = get_cache($the_cache, $cb);
+
+        remove_cache($the_cache, $cb);
+
         wp_enqueue_script('banner', plugins_url('/js/banner.js', __FILE__));
-        wp_enqueue_style('banner', plugins_url('/css/banner.css', __FILE__));        
-        
-        
+        //wp_enqueue_style('banner', plugins_url('/css/banner.css', __FILE__));        
+
+
         $title = apply_filters('widget_title', $instance['title']);
         // before and after widget arguments are defined by themes
         echo $args['before_widget'];
@@ -175,22 +200,20 @@ class IbizaBanner_Widget extends WP_Widget {
 
         <div class="swiper-container-banner">
             <!-- Additional required wrapper -->
-            <div class="swiper-wrapper" style="box-sizing: border-box;">
+            <div class="swiper-wrapper">
                 <!-- Slides -->
-                <?php 
-                foreach($query->posts as $post):
-                    $image      = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'single-post-thumbnail' );
-                    $css_class  = get_post_meta( $post->ID,  'css-class'  );
-                    $inline_css = get_post_meta( $post->ID,  'inline-css'  );
-                ?>
-                <div class="swiper-slide" style="background-image: url('<?php echo $image[0]; ?>');background-size:cover;">
-                    <div  class="<?php echo isset($css_class[0]) ?$css_class[0]:'large-6   text-center'; ?>" style="<?php echo isset( $inline_css[0] ) ? $inline_css[0] : '' ?>" >
-                        <h4><?php echo $post->post_title ?></h4>
-                        <p><?php echo trim($post->post_content) ?></p>
+        <?php
+        foreach ($images as $image):
+
+            //$css_class  = get_post_meta( $post->ID,  'css-class'  );
+            //$inline_css = get_post_meta( $post->ID,  'inline-css'  );
+            ?>
+                <div onclick="window.location.href='<?php echo $image['url'] ; ?>'" class="swiper-slide small-12 columns" style="background-image: url('<?php echo $image['image']; ?>');background-size:cover; background-position: center center;">
+<!--                        <img class="show-for-medium" src="<?php echo $image['image']; ?>" title="Banner image" alt="Banner image" />-->
+                        <!--<img class="show-for-small hide-for-large" src="<?php/* echo $image['mobile_image']; */?>" title="Banner image" alt="Banner image" />-->
                     </div>
-                </div>
-                <?php 
-                endforeach; 
+                    <?php
+                endforeach;
                 ?>
 
             </div>

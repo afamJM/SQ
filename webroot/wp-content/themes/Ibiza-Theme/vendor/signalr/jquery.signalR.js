@@ -1,6 +1,6 @@
 /* jquery.signalR.core.js */
 /*global window:false */
-/*!
+/*!  
  * ASP.NET SignalR JavaScript Library v2.2.1
  * http://signalr.net/
  *

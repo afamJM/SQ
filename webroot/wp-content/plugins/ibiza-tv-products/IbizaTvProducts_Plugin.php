@@ -176,7 +176,7 @@ class IbizaTvProductsPlugin_Widget extends WP_Widget {
                     <div  class="column large-9 small-9">
                         <p id="productName_<?php echo $i; ?>"><a href=""></a></p>
                         <p id="productPrice_<?php echo $i; ?>"></p>
-                        <button style="background: #00B109" data-toggle="example-dropdown2" type="button" class="button" class="add-basket" aria-controls="example-dropdown2" data-is-focus="false" data-yeti-box="example-dropdown2" aria-haspopup="true" aria-expanded="false">Add to basket</button>
+                        <button class="button_tv_products" data-toggle="example-dropdown2" type="button" class="button" class="add-basket" aria-controls="example-dropdown2" data-is-focus="false" data-yeti-box="example-dropdown2" aria-haspopup="true" aria-expanded="false">Add to basket</button>
                     </div>
                 </div>
             </div>

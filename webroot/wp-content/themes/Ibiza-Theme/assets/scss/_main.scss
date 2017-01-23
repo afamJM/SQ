@@ -95,7 +95,7 @@ POSTS & CONTENT STYLES
 *********************/
 #content {
 	#inner-content {
-		padding: 1rem 0rem;
+		//padding: 1rem 0rem;
 	}
 }
 
@@ -339,7 +339,7 @@ COMMENT STYLES
 			left: 10px;
 			padding: 2px;
 			border: 1px solid #cecece;
-			background: #fff;
+			background: $white;
 		}
 
 	} // end .commentlist .vcard  
@@ -413,7 +413,7 @@ COMMENT FORM STYLES
 			line-height: 1.5em;
 
 			&:focus {
-				background: #fff;
+				background: $white;
 			}
 
 			// form validation  

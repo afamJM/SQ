@@ -8,37 +8,73 @@ and open the template in the editor.
     Author     : Ryan.Blake
 */
 
-
-.product-list-container {
-    
-    .large-3 {
-        
-        img{
-            border:1px solid #414141;
-        }
+#loading_container2{
+    overflow: hidden; left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    background: $white none repeat scroll 0% 0%; 
+    height: 100%; z-index: 99999; 
+    position: absolute; 
+    width: 100%; 
+    img{
+        margin: 0px;
+        position: absolute; 
+        top: 50%; 
+        left: 50%; 
+        transform: translate(-50%, -50%); 
+        width: 100px;
     }
-    
-    h5{
-        margin:15px 0;
-        font-size:14px;
-        height:60px;
-    }
-    
-    
 }
 
- 
+
+#loading_container{
+    overflow: hidden; left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    background: $white none repeat scroll 0% 0%; 
+    height: 100%; z-index: 99999; 
+    position: absolute; 
+    width: 100%;
+}
+
+
+.category-banner{
+    height:200px;
+    overflow: hidden;
+}
+
+.panel{
+    h5{
+        height:auto;
+    }
+}
+.product-list-container {
+    h5{
+        margin:15px 0;
+        font-size:$font-size-standard;
+    }
+
+    .panel > a{
+        display:block;
+        overflow: hidden;
+        border:1px solid $border;
+    }
+
+}
+
 
 #side-facets {
 
     margin:rem-calc(35) 0;
 
     h3 {
-        background: rgba(0, 0, 0, 0) url("../images/Icon_Accordian.png") no-repeat scroll right center;
-        font-size: 16px;
+        background: transparent  url("../images/Icon_Accordian.png") no-repeat scroll right center;
+        font-size: $font-size-standard;
         cursor: pointer;
         &:hover{
-            color:#ea516c;
+            color:$brand-color-alt;
         }
     }
 
@@ -62,12 +98,12 @@ and open the template in the editor.
         width:240px; 
         position: relative;
         overflow: hidden;
-        
+
         /* Caption Common Style */
         .caption {
             background-color: rgba(0,0,0,0.8);
             position: absolute;
-            color: #fff;
+            color: $white;
             z-index: 100;
             -webkit-transition: all 300ms ease-out;
             -moz-transition: all 300ms ease-out;
@@ -85,7 +121,7 @@ and open the template in the editor.
             line-height: 25pt;
             text-align: center;
         }        
-        
+
         img {
             position: absolute;
             left: 0;
@@ -95,13 +131,13 @@ and open the template in the editor.
             -ms-transition: all 300ms ease-out;	
             transition: all 300ms ease-out;
         }          
-        
-        
-        
+
+
+
     }
-    
-  
-    
+
+
+
 }
 
 
@@ -209,7 +245,7 @@ and open the template in the editor.
 
 /** Slide Caption :hover Behaviour **/
 #main .box:hover .slide-caption {
-    background-color: rgba(0,0,0,1) !important;
+    background-color:$black;
     -moz-transform: translateX(-100%);
     -o-transform: translateX(-100%);
     -webkit-transform: translateX(-100%);
@@ -226,7 +262,7 @@ and open the template in the editor.
 
 /** Rotate Caption :hover Behaviour **/
 #main .box:hover .rotate {
-    background-color: rgba(0,0,0,1) !important;
+    background-color:$black;
     -moz-transform: rotate(-180deg);
     -o-transform: rotate(-180deg);
     -webkit-transform: rotate(-180deg);
@@ -249,9 +285,9 @@ and open the template in the editor.
 }
 
 .add_facets {
-    
+
     margin-left: 0px;
-    
+
     li{
         cursor: pointer;
         list-style: none;
@@ -259,13 +295,24 @@ and open the template in the editor.
 }
 
 .product-list-container {
-    background-color: #fff;
+    background-color: $white;
 }
 .product-list-container #inner-content-product-list{
     padding-top:rem-calc(35);
 }
+.product-list-container{
+
+    #main .small-text-center p{
+        text-align: center;
+        @include breakpoint(medium down) {
+            margin-top:35px;
+        }
+    }
+
+}
+
 .arrow{
-    background: rgba(0, 0, 0, 0) url("../images/arrow.png") no-repeat scroll 0 center;
+    background: transparent url("../images/arrow.png") no-repeat scroll 0 center;
 }
 
 .applied-filters {
@@ -278,37 +325,41 @@ and open the template in the editor.
 }
 
 #reset-filter {
-    background: #00bcb4 none repeat scroll 0 0;
+    background: $brand-color none repeat scroll 0 0;
     margin:0;
     padding:3px 15px;
     img{
         vertical-align: text-bottom;
     }
     &:hover{
-        background: #ea516c;
+        background: $brand-color-alt;
     }
 }
- 
+
 
 
 #sort_order {
-    border: 1px solid #01BCB3;
-    font-weight: bold;
+    border: 1px solid $brand-color;
     text-align: center;
     margin:0;
+    height:40px;
 }
 
+#main{
 
-
-li.refine-results{
-    display: block;
-    text-align: center;
-    text-transform: uppercase;
-    width: 100%;
+    li.refine-results{
+        display: block;
+        text-align: center;
+        text-transform: uppercase;
+        width: 100%;
+        a{
+            padding-left:0;
+            padding-right:0;
+        }
+    }
 }
-
 .refine-results a, .previous-segement {
-    background: #00bcb4 none repeat scroll 0 0;
+    background: $brand-color none repeat scroll 0 0;
     color: #fefefe;
     text-decoration: none;
 }
@@ -316,56 +367,61 @@ li.refine-results{
     padding: 0.6em;
 }
 
- 
- 
+
+
 
 
 .pager {
+
+    .arrow{
+        line-height: ($font-size-large * 0.8);
+        font-size: $font-size-large;
+    }
     
     list-style: none;
     margin: 0px;
     display:inline-block;
-    
+
     p.ng-scope {
 
         list-style: none;
         cursor: pointer;
-        font-size: 0.9rem;
+        font-size: $font-size-standard;
         text-align: center;
         width: 30px;
         float: left;
         line-height: 2.5em;
     }    
-    
-    
+
+
     .page-count {
         float: left;
         list-style: none;
         text-align: center;
         line-height: 1;
-        font-size: 0.9rem;   
+        font-size:$font-size-standard;   
         margin: 0 0 1rem;
         padding: 0.85em 3em;
     }    
-    
-    
+
+
     li {
-        
+
         a {
             float: left;
             height: 100%;
             width: 100%;
             padding:0;
         }     
-        
+
     }  
-    
+
 }
 
 
 .sq-border{
     background: transparent url("../images/border.gif") repeat-x scroll 0 bottom;
-    padding: 10px 0 10px;
+    margin: 10px 0 10px;
 }
 
 #product_name span{
@@ -376,4 +432,46 @@ li.refine-results{
 
 .icon_text{
     margin:0 50px 0 10px;
+}
+
+.pagination-bottom{
+    li:not(.thispage){
+        margin-top: 1px;
+    }
+    li:first-of-type, li:last-of-type{
+        margin-top: 0px;
+        background: $brand-color;
+        a{
+            color: $white;
+            span{
+                line-height: $font-size-large;
+                font-size: $font-size-large;
+            }
+        }
+    }
+    li:first-of-type{ margin-right: $font-size-small; }
+    li:last-of-type{ margin-left: $font-size-small; }
+    li{
+        display: inline-block;
+        vertical-align: top;
+        &.unavailable{
+            opacity: 0.35;
+        }
+        &.thispage{
+            border: 1px solid $brand-color;
+        }
+        a{
+            font-size: $font-size-standard;
+            padding: 0;
+            span{
+                height: $font-size-large;
+                width: $font-size-large;
+                line-height: $font-size-large;
+                display: inline-block;
+            }
+            &:hover{
+                color: $white;
+            }
+        }
+    }
 }

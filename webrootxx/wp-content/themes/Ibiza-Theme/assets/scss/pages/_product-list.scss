@@ -1,0 +1,379 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 14-Nov-2016, 10:10:01
+    Author     : Ryan.Blake
+*/
+
+
+.product-list-container {
+    
+    .large-3 {
+        
+        img{
+            border:1px solid #414141;
+        }
+    }
+    
+    h5{
+        margin:15px 0;
+        font-size:14px;
+        height:60px;
+    }
+    
+    
+}
+
+ 
+
+#side-facets {
+
+    margin:rem-calc(35) 0;
+
+    h3 {
+        background: rgba(0, 0, 0, 0) url("../images/Icon_Accordian.png") no-repeat scroll right center;
+        font-size: 16px;
+        cursor: pointer;
+        &:hover{
+            color:#ea516c;
+        }
+    }
+
+    ul {
+        list-style: none;
+        margin: 0;
+    }    
+    ul li label {
+        cursor: pointer;
+    }    
+
+
+}
+
+
+/* Image Box Style */
+#main{ 
+    .box {
+        cursor: pointer;
+        height: 240px;
+        width:240px; 
+        position: relative;
+        overflow: hidden;
+        
+        /* Caption Common Style */
+        .caption {
+            background-color: rgba(0,0,0,0.8);
+            position: absolute;
+            color: #fff;
+            z-index: 100;
+            -webkit-transition: all 300ms ease-out;
+            -moz-transition: all 300ms ease-out;
+            -o-transition: all 300ms ease-out;
+            -ms-transition: all 300ms ease-out;	
+            transition: all 300ms ease-out;
+            left: 0;
+        }        
+        /** Caption 1: Simple **/
+        .simple-caption {
+            height: 30px;
+            width: 200px;
+            display: block;
+            bottom: -30px;
+            line-height: 25pt;
+            text-align: center;
+        }        
+        
+        img {
+            position: absolute;
+            left: 0;
+            -webkit-transition: all 300ms ease-out;
+            -moz-transition: all 300ms ease-out;
+            -o-transition: all 300ms ease-out;
+            -ms-transition: all 300ms ease-out;	
+            transition: all 300ms ease-out;
+        }          
+        
+        
+        
+    }
+    
+  
+    
+}
+
+
+/** Caption 2: Full Width & Height **/
+#main .box .full-caption {
+    width: 240px;
+    height: 240px;	
+    top: -200px;
+    text-align: left;
+    //padding: 15px;
+}
+
+/** Caption 3: Fade **/
+#main .box .fade-caption, #main .box .scale-caption  {
+    box-sizing: border-box;
+    height: 100%;
+    opacity: 0;
+    padding: 21px;
+    text-align: left;
+    width: 100%;
+}
+
+/** Caption 4: Slide **/
+#main .box .slide-caption {
+    width: 170px;
+    height: 170px;	
+    text-align: left;
+    padding: 15px;
+    left: 200px;
+}
+
+/** Caption 5: Rotate **/
+#main #box-5.box .rotate-caption {
+    width: 170px;
+    height: 170px;	
+    text-align: left;
+    padding: 15px;
+    top: 200px;
+    -moz-transform: rotate(-180deg);
+    -o-transform: rotate(-180deg);
+    -webkit-transform: rotate(-180deg);
+    transform: rotate(-180deg);
+}
+
+#main .box .rotate {
+    width: 200px;
+    height: 400px;
+    -webkit-transition: all 300ms ease-out;
+    -moz-transition: all 300ms ease-out;
+    -o-transition: all 300ms ease-out;
+    -ms-transition: all 300ms ease-out;	
+    transition: all 300ms ease-out;
+}
+
+/** Caption 6: Scale **/
+#main .box .scale-caption h3, #main .box .scale-caption p {
+    position: relative;
+    left: -200px;
+    width: 170px;
+    -webkit-transition: all 300ms ease-out;
+    -moz-transition: all 300ms ease-out;
+    -o-transition: all 300ms ease-out;
+    -ms-transition: all 300ms ease-out;	
+    transition: all 300ms ease-out;
+}
+
+#main .box .scale-caption h3 {
+    -webkit-transition-delay: 300ms;
+    -moz-transition-delay: 300ms;
+    -o-transition-delay: 300ms;
+    -ms-transition-delay: 300ms;	
+    transition-delay: 300ms;
+}
+
+#main .box .scale-caption p {
+    -webkit-transition-delay: 500ms;
+    -moz-transition-delay: 500ms;
+    -o-transition-delay: 500ms;
+    -ms-transition-delay: 500ms;	
+    transition-delay: 500ms;
+}
+
+/** Simple Caption :hover Behaviour **/
+#main .box:hover .simple-caption {
+    -moz-transform: translateY(-100%);
+    -o-transform: translateY(-100%);
+    -webkit-transform: translateY(-100%);
+    opacity: 1;
+    transform: translateY(-100%);
+}
+
+/** Full Caption :hover Behaviour **/
+#main .box:hover .full-caption {
+    -moz-transform: translateY(100%);
+    -o-transform: translateY(100%);
+    -webkit-transform: translateY(100%);
+    opacity: 1;
+    transform: translateY(100%);
+}
+
+/** Fade Caption :hover Behaviour **/
+#main .box:hover .fade-caption, #main .box:hover .scale-caption  {
+    opacity: 1;
+}
+
+/** Slide Caption :hover Behaviour **/
+#main .box:hover .slide-caption {
+    background-color: rgba(0,0,0,1) !important;
+    -moz-transform: translateX(-100%);
+    -o-transform: translateX(-100%);
+    -webkit-transform: translateX(-100%);
+    opacity: 1;
+    transform: translateX(-100%);
+}
+#main .box:hover img#image-4 {
+    -moz-transform: translateX(-100%);
+    -o-transform: translateX(-100%);
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+    opacity: 1;
+}
+
+/** Rotate Caption :hover Behaviour **/
+#main .box:hover .rotate {
+    background-color: rgba(0,0,0,1) !important;
+    -moz-transform: rotate(-180deg);
+    -o-transform: rotate(-180deg);
+    -webkit-transform: rotate(-180deg);
+    transform: rotate(-180deg);
+}
+
+/** Scale Caption :hover Behaviour **/
+#main .box:hover #image-6 {
+    -moz-transform: scale(1.4);
+    -o-transform: scale(1.4);
+    -webkit-transform: scale(1.4);
+    transform: scale(1.4);
+}
+
+#main .box:hover .scale-caption h3, #main .box:hover .scale-caption p {
+    -moz-transform: translateX(200px);
+    -o-transform: translateX(200px);
+    -webkit-transform: translateX(200px);
+    transform: translateX(200px);
+}
+
+.add_facets {
+    
+    margin-left: 0px;
+    
+    li{
+        cursor: pointer;
+        list-style: none;
+    }
+}
+
+.product-list-container {
+    background-color: #fff;
+}
+.product-list-container #inner-content-product-list{
+    padding-top:rem-calc(35);
+}
+.arrow{
+    background: rgba(0, 0, 0, 0) url("../images/arrow.png") no-repeat scroll 0 center;
+}
+
+.applied-filters {
+    border: 1px solid #e3e3e3;
+    padding: 15px;
+}
+
+.bold,#side-facets h3{
+    font-family: 'CeraPRO-Medium';
+}
+
+#reset-filter {
+    background: #00bcb4 none repeat scroll 0 0;
+    margin:0;
+    padding:3px 15px;
+    img{
+        vertical-align: text-bottom;
+    }
+    &:hover{
+        background: #ea516c;
+    }
+}
+ 
+
+
+#sort_order {
+    border: 1px solid #01BCB3;
+    font-weight: bold;
+    text-align: center;
+    margin:0;
+}
+
+
+
+li.refine-results{
+    display: block;
+    text-align: center;
+    text-transform: uppercase;
+    width: 100%;
+}
+
+.refine-results a, .previous-segement {
+    background: #00bcb4 none repeat scroll 0 0;
+    color: #fefefe;
+    text-decoration: none;
+}
+.previous-segement {
+    padding: 0.6em;
+}
+
+ 
+ 
+
+
+.pager {
+    
+    list-style: none;
+    margin: 0px;
+    display:inline-block;
+    
+    p.ng-scope {
+
+        list-style: none;
+        cursor: pointer;
+        font-size: 0.9rem;
+        text-align: center;
+        width: 30px;
+        float: left;
+        line-height: 2.5em;
+    }    
+    
+    
+    .page-count {
+        float: left;
+        list-style: none;
+        text-align: center;
+        line-height: 1;
+        font-size: 0.9rem;   
+        margin: 0 0 1rem;
+        padding: 0.85em 3em;
+    }    
+    
+    
+    li {
+        
+        a {
+            float: left;
+            height: 100%;
+            width: 100%;
+            padding:0;
+        }     
+        
+    }  
+    
+}
+
+
+.sq-border{
+    background: transparent url("../images/border.gif") repeat-x scroll 0 bottom;
+    padding: 10px 0 10px;
+}
+
+#product_name span{
+
+    color:#ababab;
+
+}
+
+.icon_text{
+    margin:0 50px 0 10px;
+}

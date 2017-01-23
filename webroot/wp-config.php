@@ -17,9 +17,11 @@
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
 
+//define('WP_CACHE', true); //Added by WP-Cache Manager
+define( 'WPCACHEHOME', '/vagrant/webroot/wp-content/plugins/wp-super-cache/' ); //Added by WP-Cache Manager
 define('DB_NAME', 'ibiza');
+define('ENV', 'dev');
 
- 
 
 if( $_SERVER['SERVER_ADDR'] == '192.168.56.101' ){
 
@@ -34,8 +36,10 @@ if( $_SERVER['SERVER_ADDR'] == '192.168.56.101' ){
 
     /** Database Charset to use in creating database tables. */
     define('DB_CHARSET', 'utf8mb4');
-    
-    define('API_URL', 'http://ibizaschemas.product');
+    //define('API', 'https://WIN-TJQNJCJFA8B');
+    define('API', 'https://api.sewingquarter.com' );
+    define('API_LEG', 'https://legacy.sewingquarter.com' );
+    define('API_URL', API );
     
     
 
@@ -51,8 +55,9 @@ if( $_SERVER['SERVER_ADDR'] == '192.168.56.101' ){
                         
     /** Database Charset to use in creating database tables. */
     define('DB_CHARSET', 'utf8mb4');
+    define('API', 'https://WIN-TJQNJCJFA8B');
+    define('API_URL',  API );
     
-    define('API_URL', 'http://ibizaschemas.product.uat');
     
 }else if ($_SERVER['SERVER_ADDR'] == '127.0.0.1') {
 	/** MySQL database username */
@@ -67,23 +72,35 @@ if( $_SERVER['SERVER_ADDR'] == '192.168.56.101' ){
     /** Database Charset to use in creating database tables. */
     define('DB_CHARSET', 'utf8mb4');
     
-    define('API_URL', 'http://ibizaschemas.product');
+    
+    define('API', 'https://win-tjqnjcjfa8b');
+    define('API_URL', API );
+    
+    
 }
 else{
     
-    /** MySQL database username */
-    define('DB_USER', 'ibiza');
+define('ENV', 'dev');
 
-    /** MySQL database password */
-    define('DB_PASSWORD', 'ibizawp!');
+define('DB_NAME', 'sq-wordpress-db');
 
-    /** MySQL hostname */
-    define('DB_HOST', 'ibiza-front-end-wordpress-db.cbextfa9fu28.eu-west-1.rds.amazonaws.com');
+/** MySQL database username */
+define('DB_USER', 'admin');
 
-    /** Database Charset to use in creating database tables. */
-    define('DB_CHARSET', 'utf8mb4');    
+/** MySQL database password */
+define('DB_PASSWORD', '5ew1ngQuart3r');
+
+/** MySQL hostname */
+define('DB_HOST', 'sq-wordpress-db.cbextfa9fu28.eu-west-1.rds.amazonaws.com');
+
+
+    define('API', 'https://api.sewingquarter.com' );
+    define('API_LEG', 'https://legacy.sewingquarter.com' );
+    define('API_URL', API );
+
+
+
     
-    define('API_URL', 'http://ibizaschemas.product');
     
 }
 

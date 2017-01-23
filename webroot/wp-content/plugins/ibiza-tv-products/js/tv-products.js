@@ -7,7 +7,7 @@
 var mySwiperTvProducts = null;
 
 function doPoll() {
-    jQuery.getJSON(api_location + '/ProductCatalog.api/api/productsontv/6', function (data) {
+    jQuery.getJSON(api_location + 'ProductCatalog.Api/productsontv/6', function (data) {
         jQuery.each(data, function (i, l) {
             if (data.length - 1 == i) {
                 var slide = jQuery('.swiper-container-tv-products .swiper-slide').last().clone();

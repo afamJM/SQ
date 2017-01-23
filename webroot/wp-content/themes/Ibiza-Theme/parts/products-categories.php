@@ -1,17 +1,41 @@
 <?php
 
 global $ibiza_api;
+
+ 
+
 ?>
                             
-
 
             <!-- Thumbnails -->
             <main id="main" class="large-10 product-category-page columns" role="main" >
 
-                <section class="row" id="second-band">
+                <section id="second-band">
+                    
+                    
+                    <?php
+                    
+                    
+                    
+                    foreach ($catss as $cat):
 
+                        $seg                    = explode('/', $cat->url);
+                        $cat_data               = get_post_meta($cat->ID);
+                        $cat_data_ob            = json_decode($cat_data['cat-' . $seg[3]][0]);
+                        $cat_data_arr[$cat->ID] = $cat_data_ob;                        
+                        $end = $count>=$total_cats?'end':''; 
+                    ?>
+                        <div class=" large-3 small-6 columns home-cats <?php echo $end;?>">
+                            <article class="post-26859 featured_categories type-featured_categories status-publish has-post-thumbnail hentry category-c1 category-featured-products" style="background-size:cover;background-image:url(<?php echo $cat_data_ob->image; ?>);">
+                                <header>
+                                    <h4 class="entry-title"><a href="<?php echo $cat->url; ?>" title="<?php echo $cat->title; ?> page"><?php echo $cat->title; ?></a></h4>
+                                </header>
+                            </article>
+                        </div>                    
+                    <?php endforeach; ?>
+                    
+                    
                     <?php if (is_active_sidebar('pop-cat-blocks') ) : ?>
-
                     <article class="small-12 category-boxes catLargeRight columns">
 
                         <?php dynamic_sidebar('pop-cat-blocks'); ?>
@@ -24,7 +48,7 @@ global $ibiza_api;
       
                 </section>
 
-                <section class="row the-prod-slider">
+                <section class="the-prod-slider">
                     <article class="large-12 columns no-padding">
                         <?php dynamic_sidebar('featured-products'); ?>
                     </article>
@@ -32,8 +56,9 @@ global $ibiza_api;
 
                 <!-- End Thumbnails -->
             </main>
-    <script type="text/javascript">
-    //Shareef don't like it
+<?php                 
+wp_add_inline_script( 'site-js',"
+    //Shareef don't like it, damn straight
     function moveTheSidebar(){
         if(jQuery(window).width() <= 1023){
             jQuery('.category-list').insertAfter('#main');
@@ -62,6 +87,7 @@ global $ibiza_api;
         //heightMatcher('.catLarge','.catLargeRight');
         //Put a minimum screen size in here where it is all reset to auto
         moveTheSidebar();
-    });
+    });");
+    ?>
     </script>
     

@@ -13,7 +13,7 @@ and open the template in the editor.
     
     
     h2{
-        color: #00bcb4;
+        color: $brand-color;
         font-family: "CeraPRO-Regular";
         font-weight: normal;        
     }
@@ -48,24 +48,37 @@ and open the template in the editor.
     }
     
     div{
-        border-top:1px solid #e1e1e1;
+        border-top:1px solid $border;
     }
     
     a{
-        font-size:rem-calc( 14 );
+        color:$black;
+        font-size:$font-size-standard;
         &.active{
-            color:#00bcb4;
+            color:$brand-color;
         }
         
     }
     
 }
+.search-container 
+{
+    .search-field{
+    background: transparent none repeat scroll 0% 0%;
+    }
+}
 
+.search-page #second-band h1.widgettitle ,.search-page .widgettitle ,.search-page .upw-before{
+    display:none;
+}
 
+.search-page #second-band{
+      padding-top: 20px;
+}
 /**
 * Small & Up Styles
 */
-@media #{$small-up} {
+@include breakpoint(small up) {
     
     
     .product-list-container #inner-content-product-list{
@@ -89,8 +102,16 @@ and open the template in the editor.
     
     .menu > li > a {
         padding: 0.7rem 1rem;
+        
     }    
     
+    .vertical{
+        
+        a{
+            overflow: hidden;
+        }
+        
+    }
     
     
     div.cat-desc{
@@ -120,14 +141,14 @@ and open the template in the editor.
 /**
 * Small Only
 */
-@media #{$small-only} {
+@include breakpoint(small only) {
     
     
 }
 /**
 * Medium & Up Styles
 */
-@media #{$medium-up} {
+@include breakpoint(medium up){
 
     
 }
@@ -135,7 +156,7 @@ and open the template in the editor.
 /**
 * Medium Only
 */
-@media #{$medium-only} {
+@include breakpoint(medium only){
     
 
 }
@@ -144,7 +165,7 @@ and open the template in the editor.
 /**
 * Large & Up Styles
 */
-@media #{$large-up} {
+@include breakpoint(large up){
 
 
     
@@ -153,7 +174,7 @@ and open the template in the editor.
 /**
 * Large Only
 */
-@media #{$xlarge-only} {
+@include breakpoint(xlarge only){
     
     
 }
@@ -162,7 +183,7 @@ and open the template in the editor.
 /**
 * xLarge & Up Styles
 */
-@media #{$xlarge-up} {
+@include breakpoint(xlarge up){
 
     
 }
@@ -170,7 +191,7 @@ and open the template in the editor.
 /**
 * xLarge Only
 */
-@media #{$xlarge-only} {
+@include breakpoint(xlarge only){
     
     
 }
@@ -179,7 +200,7 @@ and open the template in the editor.
 /**
 * xLarge & Up Styles
 */
-@media #{$xxlarge-up} {
+@include breakpoint(xxlarge up){
 
     
 }    

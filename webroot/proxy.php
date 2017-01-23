@@ -33,7 +33,7 @@ require('wp-config.php');
     return $ipaddress;
 }
 
-$url            = API_URL . '/ProductCatalog.api/api/legacy/addTobasket';
+$url            = API_URL . '/addTobasket';
 $ch             = curl_init( $url );
 $cookieStr      = $_COOKIE['nsec'];
 $quantity       = $_GET['quantity'];
@@ -64,7 +64,8 @@ $data_string =  '{
 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
 curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-//curl_setopt($ch, CURLOPT_HTTPHEADER, array("Cookie: test=cookie"));
+curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
 curl_setopt($ch, CURLOPT_HTTPHEADER, array(
     'Content-Type: application/json',
     'Content-Length: ' . strlen($data_string)));

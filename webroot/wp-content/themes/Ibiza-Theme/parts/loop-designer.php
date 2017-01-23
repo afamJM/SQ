@@ -22,51 +22,51 @@
 				<?php the_content(); ?>
 			</div>
 			<div class="designer-slider large-6 medium-6 columns">
-				<div class="swiper-container-banner">
+				<div class="swiper-container-designer">
 
-					<div class="swiper-container">
 					    <!-- Additional required wrapper -->
-					    <div class="swiper-wrapper" style="box-sizing: border-box;">
-							<?php 
-							   if( class_exists('Dynamic_Featured_Image') ) {
-							       global $dynamic_featured_image;
-							       $featured_images = $dynamic_featured_image->get_featured_images();
-							       for ($i=0; $i < count($featured_images); $i++) { 
-							       	?>
-									<div class="swiper-slide" style="background-image: url('<?php echo $featured_images[$i]['full'] ?>');background-size:cover;background-position: center center;">
-									    <div class="<?php echo isset($css_class[0]) ?$css_class[0]:'large-6   text-center'; ?>" style="<?php echo isset( $inline_css[0] ) ? $inline_css[0] : '' ?>" >
-									    </div>
-									</div>
-							       	<?php
-							       }
-							   }
-							?>
-						</div>
+					    <div class="swiper-wrapper">
+                                            <?php 
+                                               if( class_exists('Dynamic_Featured_Image') ) {
+                                                   global $dynamic_featured_image;
+                                                   $featured_images = $dynamic_featured_image->get_featured_images();
+                                                   for ($i=0; $i < count($featured_images); $i++) { 
+                                                ?>
+                                                <div class="swiper-slide">
+                                                    <img src="<?php echo $featured_images[$i]['full'] ?>" alt="Designer Photo" title="Designer Photo" />
+                                                </div>
+                                                <?php
+                                                   }
+                                               }
+                                            ?>
+                                            </div>
 					    <!-- If we need pagination -->
 					    <div class="swiper-pagination"></div>
 
 					    <!-- If we need navigation buttons -->
 					    <div class="swiper-button-prev"></div>
 					    <div class="swiper-button-next"></div>
-					</div>
 
 				</div>
 			</div>
 		</div>
-
-		<script type="text/javascript">
-			jQuery(document).ready(function () {
-				var mySwiper = new Swiper('.swiper-container', {
-				    // Optional parameters
-			        loop                : true ,
-			        pagination          : '.swiper-pagination',
-			        paginationClickable : true ,
-			        slidesPerView       : 1 ,
-			        nextButton : '.swiper-button-next',
-			        prevButton : '.swiper-button-prev'
-				});
-			});
-		</script>
+        
+                <?php 
+                
+                wp_add_inline_script( 'site-js', 			
+                                        "jQuery(document).ready(function () {   
+                                            var mySwiper = new Swiper('.swiper-container-designer', {
+                                                // Optional parameters
+                                            loop                : true ,
+                                            pagination          : '.swiper-pagination',
+                                            paginationClickable : true ,
+                                            slidesPerView       : 1 ,
+                                            nextButton : '.swiper-button-next',
+                                            prevButton : '.swiper-button-prev'
+                                            });
+                                        });"  , 'after'
+                                    );
+                ?>
 
 	</section> <!-- end article section -->
 													

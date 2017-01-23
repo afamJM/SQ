@@ -15,87 +15,23 @@ http://codex.wordpress.org/Creating_Admin_Themes
 ******************************************************************/
 /* Liams aution/watch styles  */
 /* Liams home styles  */
-/*|L*/
-.add-to-basket {
-  background: #EA516C;
-  border: none;
-  color: white;
-  font-family: 'CeraPRO-Medium';
-  font-size: 1.2rem;
-  padding: 0.6rem 1rem; }
-
 #menu-main-1 li {
   flex-grow: 1;
   text-transform: uppercase; }
   #menu-main-1 li a {
     color: #1a2433;
     display: block;
-    line-height: 12px !important; }
-
-.menus.row {
-  padding: 30px 30px 0 0;
-  border-top: 2px solid #00bcb4;
-  min-height: 650px; }
-
-.top-bar {
-  padding: 0 !important; }
-
-.top-bar .menu:first-child a:hover + .ibiza-menu {
-  display: block;
-  z-index: 4101; }
-.top-bar .menu:first-child a:hover {
-  position: relative;
-  z-index: 9999999; }
-
-/*
-.top-bar ul.menu li:hover > a {
-    background-color: #fff;
-    position:relative;
-    z-index: 9999999;
-    color:#000!important;
-}
-*/
-.top-bar, .top-bar ul {
-  background-color: #fff !important; }
-
+    line-height: 12px; }
 #menu-main-1 > .menu-item > a:first-child {
   height: 56px;
   font-size: 1.125rem;
   font-family: 'CeraPRO-Medium';
   position: relative; }
-
-.ibiza-menu > ul > li > ul > li.menu-item a {
-  border-left: 5px solid #000;
-  height: auto;
-  margin: 0 10px 10px 0;
-  padding-left: 7px; }
-
-.ibiza-menu > ul > li > ul > li.menu-item .menu-item a {
-  border-left: none;
-  font-weight: normal; }
-
-.menu-item #tri {
-  left: 0;
-  right: 50%;
-  margin-left: auto; }
-
-#tri {
-  border-color: transparent transparent #e95968;
-  border-style: solid;
-  border-width: 0 23px 25px;
-  height: 0;
-  width: 23px;
-  z-index: -1;
-  margin-top: 8px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto; }
-
-.ibiza-menu > .menus > .menu-item-has-children > a:first-child {
+#menu-main-1 .ibiza-menu > .menus > .menu-item-has-children > a:first-child {
   font-weight: bold;
-  color: #fff !important;
-  display: inline-block !important;
-  width: auto !important;
+  color: #fefefe;
+  display: inline-block;
+  width: auto;
   margin-bottom: 10px;
   background: #00bcb4;
   padding: 10px;
@@ -104,11 +40,18 @@ http://codex.wordpress.org/Creating_Admin_Themes
   -o-transition: background-color 100ms linear;
   -ms-transition: background-color 100ms linear;
   transition: background-color 100ms linear; }
-  .ibiza-menu > .menus > .menu-item-has-children > a:first-child:hover {
-    background: #e95968; }
-
-.ibiza-menu {
-  border-top: 2px solid #e95968;
+  #menu-main-1 .ibiza-menu > .menus > .menu-item-has-children > a:first-child:hover {
+    background: #ea516c; }
+#menu-main-1 .ibiza-menu > ul > li > ul > li.menu-item a {
+  border-left: 5px solid #0a0a0a;
+  height: auto;
+  margin: 0 10px 10px 0;
+  padding-left: 7px; }
+#menu-main-1 .ibiza-menu > ul > li > ul > li.menu-item .menu-item a {
+  border-left: none;
+  font-weight: normal; }
+#menu-main-1 .ibiza-menu {
+  border-top: 2px solid #ea516c;
   display: none;
   left: 0;
   right: 0;
@@ -120,29 +63,59 @@ http://codex.wordpress.org/Creating_Admin_Themes
   top: 79px;
   width: 1334px;
   padding: 20px;
-  background: #fff;
+  background: #fefefe;
   z-index: 999999; }
-  .ibiza-menu ul {
+  #menu-main-1 .ibiza-menu ul {
     list-style: none;
     margin-left: 0; }
-    .ibiza-menu ul ul a {
+    #menu-main-1 .ibiza-menu ul ul a {
       font-weight: normal;
-      background: #fff;
+      background: #fefefe;
       font-size: 14px; }
-    .ibiza-menu ul .menu-item-has-children {
+    #menu-main-1 .ibiza-menu ul .menu-item-has-children {
       margin-bottom: 10px; }
-      .ibiza-menu ul .menu-item-has-children .menu-item-has-children {
+      #menu-main-1 .ibiza-menu ul .menu-item-has-children .menu-item-has-children {
         margin-bottom: 60px; }
-  .ibiza-menu:hover {
+  #menu-main-1 .ibiza-menu:hover {
     display: block; }
-  .ibiza-menu column:last-child:not(:first-child), .ibiza-menu .ibiza-menu .columns:last-child:not(:first-child) {
+  #menu-main-1 .ibiza-menu column:last-child:not(:first-child), #menu-main-1 .ibiza-menu .ibiza-menu .columns:last-child:not(:first-child) {
     float: left; }
-  .ibiza-menu li.large-3, .ibiza-menu li.medium-3 {
+  #menu-main-1 .ibiza-menu li.large-3, #menu-main-1 .ibiza-menu li.medium-3 {
     width: 15%; }
 
-.top-bar .ibiza-menu .row {
-  margin: 0 auto !important;
-  max-width: 84rem; }
+.menu .top-bar {
+  background-color: #fefefe;
+  padding: 0; }
+  .menu .top-bar #menu-main-1:first-child a:hover + div.ibiza-menu {
+    display: block;
+    z-index: 4101; }
+  .menu .top-bar #menu-main-1:first-child a:hover {
+    position: relative;
+    z-index: 9999999; }
+  .menu .top-bar #menu-main-1 ul {
+    background-color: #fefefe; }
+
+.menus.row {
+  padding: 30px 30px 0 0;
+  border-top: 2px solid #00bcb4;
+  min-height: 650px; }
+
+.menu-item #tri {
+  left: 0;
+  right: 50%;
+  margin-left: auto; }
+
+#tri {
+  border-color: transparent transparent #ea516c;
+  border-style: solid;
+  border-width: 0 23px 25px;
+  height: 0;
+  width: 23px;
+  z-index: -1;
+  margin-top: 8px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto; }
 
 .large-push-1 .header-container {
   z-index: 9999; }
@@ -151,18 +124,18 @@ http://codex.wordpress.org/Creating_Admin_Themes
   height: 48px;
   position: relative; }
   .header-container .go-basket {
-    background: #e95968;
+    background: #ea516c;
     clear: both;
     display: block;
     height: 47.5px;
     line-height: 47.5px;
     margin: 0 auto;
     width: 96%;
-    color: #fff; }
+    color: #fefefe; }
   .header-container #basket-con {
     display: none;
-    background: #fff none repeat scroll 0 0;
-    border-top: 2px solid #e95968;
+    background: #fefefe none repeat scroll 0 0;
+    border-top: 2px solid #ea516c;
     height: auto;
     padding-bottom: 15px;
     padding-top: 25px; }
@@ -177,9 +150,9 @@ http://codex.wordpress.org/Creating_Admin_Themes
       font-size: 0.75rem;
       margin: 0; }
   .header-container #basket-count {
-    background: #ee7467 none repeat scroll 0 0;
+    background: #ea516c none repeat scroll 0 0;
     border-radius: 25px;
-    color: #fff;
+    color: #fefefe;
     font-size: 11px;
     height: 15px;
     left: 30px;
@@ -190,7 +163,7 @@ http://codex.wordpress.org/Creating_Admin_Themes
     vertical-align: middle;
     width: 16px; }
   .header-container #tri {
-    border-color: transparent transparent #e95968;
+    border-color: transparent transparent #ea516c;
     border-style: solid;
     height: 0;
     margin: 4px auto auto;
@@ -198,11 +171,11 @@ http://codex.wordpress.org/Creating_Admin_Themes
     width: 0;
     z-index: 1; }
   .header-container a {
-    color: #000; }
+    color: #0a0a0a; }
   .header-container a.active {
-    color: #e95968; }
+    color: #e95 968; }
   .header-container .basket-link {
-    background: transparent url(../images/Icon_Basket_Black.png) no-repeat scroll 0px 0px;
+    background: transparent url(../images/Icon_Basket_Black.svg) no-repeat scroll 0px 0px;
     padding-bottom: 35px;
     padding-left: 45px;
     padding-top: 1px;
@@ -213,10 +186,10 @@ http://codex.wordpress.org/Creating_Admin_Themes
       left: 0;
       right: 0; }
   .header-container .basket-link.active, .header-container .basket-link:hover {
-    background-image: url(../images/Icon_Basket_Raspberry.png);
-    color: #e95968; }
+    background-image: url(../images/Icon_Basket_Raspberry.svg);
+    color: #ea516c; }
   .header-container .search-link {
-    background: transparent url(../images/Icon_Search_Black.png) no-repeat scroll 0px 0px;
+    background: transparent url(../images/Icon_Search_Black..svg) no-repeat scroll 0px 0px;
     padding-bottom: 34px;
     padding-left: 45px;
     padding-top: 1px;
@@ -225,8 +198,8 @@ http://codex.wordpress.org/Creating_Admin_Themes
       left: 50%;
       right: 50%; }
   .header-container .search-link.active, .header-container .search-link:hover {
-    background-image: url(../images/Icon_Search_Raspberry.png);
-    color: #e95968; }
+    background-image: url(../images/Icon_Search_Raspberry.svg);
+    color: #ea516c; }
 
 .main-nav__backdrop {
   background: rgba(0, 0, 0, 0.1) none repeat scroll 0 0;
@@ -262,17 +235,17 @@ input.search-submit {
   height: auto; }
 
 .header .menu a:hover {
-  color: #e95968; }
+  color: #ea516c; }
 
 #top-bar-menu {
   margin-top: 23px; }
 
 #top-bar-menu li:hover > a {
-  color: #e95968; }
+  color: #ea516c; }
 
-#top-bar-menu li:hover > a div {
-  z-index: 1 !important; }
-
+/*#top-bar-menu li:hover > a div{
+    z-index: 1!important;rm 1242 28122016
+}*/
 @media screen and (max-width: 39.9375em) {
   .header-container #basket-con {
     left: 0;

@@ -2,9 +2,7 @@
 /*
   Template Name: Home Template
  */
-?>
-
-<?php get_header(); ?>
+?><?php get_header(); ?>
 
 <div id="content">
     
@@ -14,7 +12,7 @@
 
         <?php if (is_front_page()): ?>
 
-            <main id="main" class="large-6 medium-12 columns" role="main" style="position: relative;">
+            <main id="main" class="large-6 medium-12 columns main" role="main">
 
             <?php else: ?>
 
@@ -38,17 +36,19 @@
                 
                         <!-- Temp style -->
                         
-                <div id="dvVideoHolderHome" style="background-color:white;">
+                <div id="dvVideoHolderHome" class="light-background">
+
+                    
                 </div>
                         
                         
                         <!-- temp inline as design not final -->
                 <div class="text-center tv-options-1 small-12 show-for-medium-up hide-for-small-only" id="tv-options">
                     <div class="large-6 small-6 columns option-1">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/home-icon-bo.png" /> <a href="/watch/" class="upper">WATCH AND BUY ONLINE</a>
+                        <a href="/watch/" class="upper" title="Watch online page link"><span class="icon"></span>Watch and buy online</a>
                     </div>
                     <div class="large-6 small-6 columns option-2">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/home-icon-pg.png" /> <a href="tv-schedule/" class="upper">PROGRAMME GUIDE</a>
+                        <a href="tv-schedule/" class="upper" title="Programme guide page"><span class="icon"></span>Programme guide</a>
                     </div>
                 </div> 
 
@@ -58,8 +58,7 @@
                         <div class="block">
                             <div class="centered">
                         
-                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/home-icon-bo.png" /> 
-                                <a href="/tv-schedule/" class="upper">View the TV Schedule</a>
+                                <a href="/tv-schedule/" class="upper" title="TV schedule page"><span class="icon"></span>View the TV Schedule</a>
                         
                             </div>
                         </div>
@@ -70,19 +69,13 @@
                         <div class="block">
                             <div class="centered">
                         
-                                <img  src="<?php echo get_template_directory_uri(); ?>/assets/images/home-icon-pg.png" />
-                                <a href="/tv-schedule/" class="upper">View all products from Today</a>
+                                <a href="/tv-schedule/" class="upper" title="View all products from Today"><span class="icon"></span>View all products from Today</a>
                                 
                             </div>
                         </div>
                     </div>
                 </div>
-
-                
-                
             </main> <!-- end #main -->
-
-            
             
             <?php if (is_active_sidebar('homepagebelowmaincontent_left1')) : ?>
                 <div class="large-6 medium-12 columns">
@@ -90,16 +83,8 @@
                 </div>
 
             <?php endif; ?>
-            
-            
-            
 
     </div> <!-- end #inner-content -->
-    
-    
-    
-
-    
     
 </div> <!-- end #content -->
 
@@ -178,43 +163,42 @@
 
 
 
-    <section class="row" id="third-band">
+<section class="row" id="third-band">
 
-        <?php if (is_active_sidebar('homepagebelowmaincontent_full2')) : ?>
+    <?php if (is_active_sidebar('homepagebelowmaincontent_full2')) : ?>
 
-        <article class="">
+    <article class="">
 
-            <?php dynamic_sidebar('homepagebelowmaincontent_full2'); ?>
+        <?php dynamic_sidebar('homepagebelowmaincontent_full2'); ?>
 
-        </article>
+    </article>
 
-        <?php endif; ?>
+    <?php endif; ?>
 
-    </section>
+</section>
 
 
-<script type="text/javascript">
+
+
+<?php         wp_enqueue_script('video-js',  'http://www.jewellerymaker.com/global/js/vendor/plugins/flowplayer/flowplayer.min.js', array('jquery'), '', true); ?>
+<?php         wp_enqueue_script('video1-js',   'http://www.jewellerymaker.com/global/js/vendor/plugins/hls/hls.min.js', array('jquery'), '', true); ?>
+<?php         wp_enqueue_script('video2-js', get_template_directory_uri() . '/assets/js//video.js', array('jquery'), '', true); ?>
+        
+        <script type="text/javascript">
     function resizeSlider(){
-        if(jQuery(window).width() <= 1023){
+
+        if (jQuery(window).width() > 1006) {
+
+
             jQuery('.swiper-slide').each(function(){
-                jQuery(this).height(500);
-            });
-        }else{
-            jQuery('.swiper-slide').each(function(){
-                jQuery(this).height('auto');
-            });
-            jQuery('.swiper-slide').each(function(){
-                jQuery(this).height(jQuery(this).parents('#inner-content').height());
+                jQuery(this).height(jQuery('#main').height());
             });
         }
     };
 
     jQuery(function () {
 
-
         
-
-
         jQuery('[id$="dvVideoHolderHome"]').Video({
             container: 'dvVideoHolderHome',
             channel: 'JEWELLERYMAKER',
@@ -225,38 +209,14 @@
             pageIdentifier: 'homepage',
             edge: '',
          });
-
-
-       jQuery('#add-basket').click( function( e ){
-
-           var quantity    = 1;
-
-           jQuery.ajax({
-               dataType  : 'json' ,
-               url: 'http://<?php echo $_SERVER['SERVER_NAME']; ?>/proxy.php?auctionID=-1&productCode=<?php echo 'WTTY01'; //$response['_source']['legacyCode']; ?>&productDetailID=<?php echo '361247'; //$response['_source']['product']['productDetailId']; ?>&quantity=' + quantity
-           }).done(function( data ) {
-
-               jQuery('#basket-total').text('£' +  data.BasketTotal );
-               jQuery('#basket-description').text('£' +  data.Description );                    
-               window.location = 'https://secure.<?php echo $_SERVER['SERVER_NAME']; ?>/basket.aspx';
-
-             });
-        });              
-
-       //hero slider height
-        jQuery('.swiper-slide').each(function(){
-            resizeSlider();
-        });
-
+         resizeSlider();
+         
     });
-
     jQuery(window).resize(function(){
         resizeSlider();
     });
 
+
 </script>
 
 <?php get_footer(); ?>
-<script src="http://www.jewellerymaker.com/global/js/vendor/plugins/flowplayer/flowplayer.min.js"></script>
-<script type="text/javascript" src="http://www.jewellerymaker.com/global/js/vendor/plugins/hls/hls.min.js"></script>
-<script type="text/javascript" src="//cdn.jewellerymaker.com/global/js/video.js"></script>

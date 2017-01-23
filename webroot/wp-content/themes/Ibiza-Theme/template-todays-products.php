@@ -6,7 +6,7 @@
 
 global $ibiza_api;
 
-$todaysProducts = json_decode(file_get_contents($ibiza_api::api_location . '/ProductCatalog.api/api/legacy/todaysproducts'));
+$todaysProducts = json_decode( getSslPage( $ibiza_api::$end_points['todaysproducts'] ));
 ?>
 
 <?php get_header(); ?>
@@ -17,18 +17,18 @@ $todaysProducts = json_decode(file_get_contents($ibiza_api::api_location . '/Pro
         <div class="large-12 columns">
             <nav aria-label="You are here:" role="navigation">
                 <ul class="breadcrumbs show-for-medium">
-                    <li><a href="/">Home page </a></li>
-                    <li><a href="/tv-schedule/">Products From Today's Show</a></li>
+                    <li><a href="/" title="Home page">Home page </a></li>
+                    <li><a <?php /* href="/tv-schedule/"*/ ?> title="Products From Today's Show">Products From Today's Show</a></li>
                 </ul>
                 <ul class="breadcrumbs show-for-small-only">
-                    <a href="/product-list/fabric/" class="previous-segement">&lt; BACK</a>
+                    <a href="/" class="previous-segement upper" title="Go back to the homepage">&lt; Back</a>
                 </ul>
             </nav>  
 
             <h3 class="hide-for-medium-down">Products From Today's Show</h3>
         </div>          
 
-        <section id="dvDayShowProducts" class="row">
+        <section id="dvDayShowProducts">
             <!--Built using Javascript-->
         </section>
     </div>

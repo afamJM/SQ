@@ -1,0 +1,152 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+
+
+/* 
+    Created on : 16-Jan-2017
+    Author     : Anthony.Freeman
+*/
+
+
+/* Liams aution/watch styles  */
+
+
+/* Liams home styles  */
+
+#promotions-tabs {
+    padding-top: 25px;
+    background: transparent url(../images/bg.png) repeat scroll 0% 0%;
+}
+
+#promotions-tabs .tabs-title {
+    float: left;
+    list-style: none;
+    margin-bottom: 0 !important;
+    position: relative;
+    padding-left: 8px;
+}
+
+#promotions-tabs .tabs-title a {
+    display: block;
+    background-color: #00bcb4;
+    color: #fefefe;
+    font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif !important;
+    font-size: 0.88889rem;
+    padding-top: 0.88889rem;
+    padding-left: 2px;
+    width: 170px;
+    height: 65px;
+    text-align: center;
+    -webkit-border-top-left-radius: 10px;
+    border-top-left-radius: 10px;
+    -webkit-border-top-right-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+#promotions-tabs .tabs-title a img {
+    object-fit: none;
+    object-position: 0 -43px;
+    width: 120px;
+    height: 43px;
+}
+
+#promotions-tabs .tabs-title a:hover {
+    background-color: #ea516c;
+}
+
+#promotions-tabs .tabs-title a[aria-selected='true'] {
+    background-color: #fefefe;
+    color: #0a0a0a;
+}
+
+#promotions-tabs .tabs-title a[aria-selected='true'] img {
+    object-position: 0 0 !important;
+}
+
+#promotions-tabs-content {
+    margin-bottom: 1.33333rem;
+    width: 100%;
+    padding-top: 20px;
+    overflow: auto;
+    background: transparent url(../images/promotions/Image_BGBrick_Desktop.png) no-repeat scroll 0px center;
+}
+
+#promotions-tabs-content .layout-button {
+    font-family: 'CeraPRO-Medium', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
+    background: #00bcb4;
+    color: #fefefe;
+    clear: both;
+    display: inline-block;
+    margin: 30px auto 0;
+    padding: 10px 35px;
+    text-align: center;
+}
+
+#promotions-tabs-content .layout-button:hover {
+    background-color: #ea516c;
+}
+
+#promotions-tabs-content #promotionImagePage {
+    background: none;
+}
+
+@media screen and (max-width: 63.9375em) {
+    #promotions-tabs-content #promotionImagePage {
+        background: transparent url(../images/promotions/Image_BGBrick_Mobile.png) no-repeat scroll 0px right;
+    }
+}
+
+@media print,
+screen and (min-width: 64em) {
+    #promotions-tabs-content #promotionImagePage {
+        background: none;
+        /*background: transparent url(../images/promotions/Image_BGBrick_Desktop.png) no-repeat scroll 0px bottom;*/
+    }
+}
+
+@media screen and (max-width: 63.9375em) {
+    #promotions-tabs-content {
+        background: none;
+    }
+}
+
+@media print,
+screen and (min-width: 64em) {
+    #promotions-tabs-content {
+        background: transparent url(../images/promotions/Image_BGBrick_Desktop.png) no-repeat scroll 0px bottom;
+    }
+}
+
+#promotions-tabs-content h2 {
+    color: #0a0a0a;
+}
+
+#promotions-tabs-content h3 {
+    color: #0a0a0a;
+    margin-bottom: 0px;
+}
+
+#promotions-tabs-content h4 {
+    color: #0a0a0a;
+}
+
+.cookie-policy__table {
+    border-collapse: collapse;
+}
+
+.cookie-policy__table table,
+.cookie-policy__table td,
+.cookie-policy__table th {
+    border: 1px solid #cccccc;
+    padding: 10px;
+}
+
+.font-color--accent {
+    color: #00bcb4;
+}
+
+
+/*# sourceMappingURL=_promotions.css.map */

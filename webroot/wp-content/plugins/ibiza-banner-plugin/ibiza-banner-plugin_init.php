@@ -40,7 +40,7 @@ function IbizaBannerPlugin_init($file) {
 
     // Add callbacks to hooks
     $aPlugin->addActionsAndFilters();
-
+    
     if (!$file) {
         $file = __FILE__;
     }

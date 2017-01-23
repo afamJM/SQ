@@ -8,4 +8,7 @@
             <node name="CodeStyle"/>
         </module>
     </preferences>
+    <spellchecker-wordlist xmlns="http://www.netbeans.org/ns/spellchecker-wordlist/1">
+        <word>fskill</word>
+    </spellchecker-wordlist>
 </auxiliary-configuration>

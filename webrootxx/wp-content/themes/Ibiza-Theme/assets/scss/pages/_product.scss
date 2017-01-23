@@ -1,0 +1,247 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 11-Nov-2016, 16:31:56
+    Author     : Ryan.Blake
+*/
+
+
+#loading_container2{
+    overflow: hidden; left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    background: white none repeat scroll 0% 0%; 
+    height: 100%; z-index: 99999; 
+    position: absolute; 
+    width: 100%; 
+}
+
+
+#loading_container{
+    overflow: hidden; left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    background: #fff none repeat scroll 0% 0%; 
+    height: 100%; z-index: 99999; 
+    position: absolute; 
+    width: 100%;
+}
+
+
+li.dimension{
+    display: none;
+    float: left;
+    list-style: outside none none;
+    margin-left: 1.22222rem;
+    cursor: pointer;
+    width: 25px;
+}  
+    
+div.product-meta1 div.columns{
+    padding:0;
+}
+ 
+#quantity,.quantity{
+    border:1px solid $brand-color;
+    width:38px;
+    height:25px;
+    margin: 0;
+    padding: 0;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.increment{
+    background:$brand-color;
+    text-align: center;
+    padding:0;
+    
+    a{
+        color:#fff;
+        height:25px;
+        width:25px;
+    }    
+    
+}
+
+ 
+
+.tabs{
+
+    margin: 0 0 10px 0;
+
+}
+
+li.tabs-title a{
+    background: transparent!important;
+    padding:0 0 0 0 ;
+}
+
+.tabs-panel{
+    padding:0;
+}
+
+#panel2-label span{
+    border:0;
+}
+
+.tabs-title{
+    
+    span{
+        border-right: 1px solid $black;
+        margin      : 0 10px 0 0;
+        padding     : 0 10px 0 0;
+    }    
+    
+}
+
+.tabs, .tabs-content{
+    border: 0 none !important;
+}
+.is-active{
+    
+    span{
+        font-weight:bold;
+    }       
+    
+} 
+
+.attr_template{
+    padding:0;
+}
+
+
+#prodcut_main  h2{
+    color:$brand-color;
+}
+
+#product_name{
+    color:$black;
+    margin-bottom:10px;
+}
+
+#product_images_container{
+    
+    margin: 10px 0 10px 0;
+    
+}
+
+
+/**
+* Small & Up Styles
+*/
+@media #{$small-up} {
+    
+    
+    #loading_container2{
+        top: 107px;
+    }
+    
+    
+}
+
+/**
+* Small Only
+*/
+@media #{$small-only} {
+    
+    #prodcut_main{
+        position: relative;
+        padding-top:10rem;
+    }
+
+    #title-area {
+        left: 0px; 
+        position: absolute; 
+        top: 0px;
+    }    
+
+    .zoomContainer{
+        display:none;
+
+    }    
+    
+    
+}
+/**
+* Medium & Up Styles
+*/
+@media #{$medium-up} {
+
+    
+}
+
+/**
+* Medium Only
+*/
+@media #{$medium-only} {
+    
+    #prodcut_main{
+        position: relative;
+        padding-top:10rem;
+    }
+
+    #title-area {
+        left: 0px; 
+        position: absolute; 
+        top: 0px;
+    }      
+    
+}
+
+
+/**
+* Large & Up Styles
+*/
+@media #{$large-up} {
+
+    
+    #loading_container2{
+        top:119px;
+    }
+    
+    div#title-area {
+        position: static; 
+        float:none;
+    }    
+    
+}
+
+/**
+* Large Only
+*/
+@media #{$xlarge-only} {
+    
+    
+}
+
+
+/**
+* xLarge & Up Styles
+*/
+@media #{$xlarge-up} {
+
+    
+}
+
+/**
+* xLarge Only
+*/
+@media #{$xlarge-only} {
+    
+    
+}
+
+
+/**
+* xLarge & Up Styles
+*/
+@media #{$xxlarge-up} {
+
+    
+}    
